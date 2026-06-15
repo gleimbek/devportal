@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 11 — Creating Visual Effects and Animation</title>
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+.demo-anim-box{width:80px;height:80px;background:#1d4ed8;border-radius:8px;margin:16px auto;animation:spin 2s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.demo-pulse{width:80px;height:80px;background:#7c3aed;border-radius:50%;margin:16px auto;animation:pulse 1.2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.3);opacity:.6;}}
+.demo-slide{width:100px;height:40px;background:#0891b2;border-radius:6px;margin:16px auto;animation:slideIn 1.5s ease forwards;}
+@keyframes slideIn{from{transform:translateX(-120px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 11: <em>Visual Effects</em> and Animation</h2>
+    <p>Bring your pages to life with CSS transitions, keyframe animations, transforms, and motion design principles.</p>
+    <span class="tag">transition</span><span class="tag">@keyframes</span><span class="tag">animation</span>
+    <span class="tag">transform</span><span class="tag">will-change</span><span class="tag">prefers-reduced-motion</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">✨</span>
+    <div><h3>CSS Transitions</h3><p>Smooth property changes on state changes like :hover.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>transition — The Basics</h3>
+    <div class="code-block"><span class="cmt">/* transition: property duration timing-function delay */</span>
+<span class="prop">.btn</span> {
+  <span class="attr">background</span>: <span class="val">#1d4ed8</span>;
+  <span class="attr">color</span>: <span class="val">#fff</span>;
+  <span class="attr">padding</span>: <span class="val">12px 28px</span>;
+  <span class="attr">border-radius</span>: <span class="val">8px</span>;
+  <span class="attr">transition</span>: <span class="val">background 0.3s ease, transform 0.2s ease</span>;
+}
+<span class="prop">.btn:hover</span> {
+  <span class="attr">background</span>: <span class="val">#1e40af</span>;
+  <span class="attr">transform</span>: <span class="val">translateY(-2px)</span>;
+}
+
+<span class="cmt">/* Transition all properties (use carefully) */</span>
+<span class="prop">.card</span> {
+  <span class="attr">transition</span>: <span class="val">all 0.25s ease-in-out</span>;
+}
+
+<span class="cmt">/* Timing functions */</span>
+<span class="cmt">/* ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier() */</span>
+<span class="prop">.smooth</span> { <span class="attr">transition-timing-function</span>: <span class="val">cubic-bezier(0.34, 1.56, 0.64, 1)</span>; }</div>
+
+    <h3>CSS Transforms</h3>
+    <div class="code-block"><span class="cmt">/* 2D Transforms */</span>
+<span class="prop">.move</span>    { <span class="attr">transform</span>: <span class="val">translate(50px, 20px)</span>; }
+<span class="prop">.rotate</span>  { <span class="attr">transform</span>: <span class="val">rotate(45deg)</span>; }
+<span class="prop">.scale</span>   { <span class="attr">transform</span>: <span class="val">scale(1.5)</span>; }
+<span class="prop">.skew</span>    { <span class="attr">transform</span>: <span class="val">skew(10deg, 5deg)</span>; }
+
+<span class="cmt">/* Combine transforms */</span>
+<span class="prop">.combo</span> { <span class="attr">transform</span>: <span class="val">translateY(-4px) scale(1.02)</span>; }
+
+<span class="cmt">/* 3D Transforms */</span>
+<span class="prop">.flip</span> { <span class="attr">transform</span>: <span class="val">rotateY(180deg)</span>; }
+<span class="prop">.perspective-card</span> {
+  <span class="attr">transform-style</span>: <span class="val">preserve-3d</span>;
+  <span class="attr">perspective</span>: <span class="val">1000px</span>;
+}</div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Animation topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m11-t1" onclick="switchTab(this,'m11-t1','m11-tabs')">@keyframes</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m11-t2" onclick="switchTab(this,'m11-t2','m11-tabs')">Animation Properties</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m11-t3" onclick="switchTab(this,'m11-t3','m11-tabs')">Accessibility</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m11-t4" onclick="switchTab(this,'m11-t4','m11-tabs')">Live Examples</button>
+  </div>
+  <div id="m11-tabs">
+    <div id="m11-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎬 @keyframes Animation</h4>
+      <div class="code-block"><span class="cmt">/* Define the animation steps */</span>
+@<span class="kw">keyframes</span> <span class="val">fadeInUp</span> {
+  <span class="attr">from</span> {
+    <span class="attr">opacity</span>: <span class="val">0</span>;
+    <span class="attr">transform</span>: <span class="val">translateY(30px)</span>;
+  }
+  <span class="attr">to</span> {
+    <span class="attr">opacity</span>: <span class="val">1</span>;
+    <span class="attr">transform</span>: <span class="val">translateY(0)</span>;
+  }
+}
+
+<span class="cmt">/* Multi-step animation */</span>
+@<span class="kw">keyframes</span> <span class="val">bounce</span> {
+  <span class="attr">0%, 100%</span> { <span class="attr">transform</span>: <span class="val">translateY(0)</span>; }
+  <span class="attr">50%</span>       { <span class="attr">transform</span>: <span class="val">translateY(-30px)</span>; }
+}
+
+<span class="cmt">/* Apply the animation */</span>
+<span class="prop">.hero-text</span> {
+  <span class="attr">animation</span>: <span class="val">fadeInUp 0.6s ease-out both</span>;
+}
+<span class="prop">.icon</span> {
+  <span class="attr">animation</span>: <span class="val">bounce 1s ease infinite</span>;
+}</div>
+    </div>
+    <div id="m11-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">⚙️ Animation Properties</h4>
+      <div class="code-block"><span class="prop">.element</span> {
+  <span class="attr">animation-name</span>:            <span class="val">fadeInUp</span>;
+  <span class="attr">animation-duration</span>:        <span class="val">0.6s</span>;
+  <span class="attr">animation-timing-function</span>: <span class="val">ease-out</span>;
+  <span class="attr">animation-delay</span>:           <span class="val">0.2s</span>;
+  <span class="attr">animation-iteration-count</span>: <span class="val">1</span>;      <span class="cmt">/* or infinite */</span>
+  <span class="attr">animation-direction</span>:       <span class="val">normal</span>;  <span class="cmt">/* reverse | alternate */</span>
+  <span class="attr">animation-fill-mode</span>:       <span class="val">both</span>;    <span class="cmt">/* forwards | backwards | both */</span>
+  <span class="attr">animation-play-state</span>:      <span class="val">running</span>; <span class="cmt">/* paused on hover */</span>
+
+  <span class="cmt">/* Shorthand */</span>
+  <span class="attr">animation</span>: <span class="val">fadeInUp 0.6s ease-out 0.2s 1 normal both</span>;
+}
+
+<span class="cmt">/* Performance tip: animate only transform & opacity */</span>
+<span class="prop">.gpu</span> { <span class="attr">will-change</span>: <span class="val">transform, opacity</span>; }</div>
+    </div>
+    <div id="m11-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">♿ Respecting Motion Preferences</h4>
+      <div class="code-block"><span class="cmt">/* Some users experience motion sickness.
+   Disable animations for them! */</span>
+
+@<span class="kw">media</span> (<span class="attr">prefers-reduced-motion</span>: <span class="val">reduce</span>) {
+  <span class="prop">*, *::before, *::after</span> {
+    <span class="attr">animation-duration</span>: <span class="val">0.01ms</span> <span class="kw">!important</span>;
+    <span class="attr">animation-iteration-count</span>: <span class="val">1</span> <span class="kw">!important</span>;
+    <span class="attr">transition-duration</span>: <span class="val">0.01ms</span> <span class="kw">!important</span>;
+  }
+}
+
+<span class="cmt">/* Or opt-in approach — only animate if user is OK with it */</span>
+@<span class="kw">media</span> (<span class="attr">prefers-reduced-motion</span>: <span class="val">no-preference</span>) {
+  <span class="prop">.animate-on-scroll</span> {
+    <span class="attr">animation</span>: <span class="val">fadeInUp 0.5s ease both</span>;
+  }
+}</div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p>Always include a <code>prefers-reduced-motion</code> media query. It's a small addition that makes a big difference for users with vestibular disorders.</p>
+      </div>
+    </div>
+    <div id="m11-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">▶ Live Animation Demos</h4>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">These animations are running with pure CSS:</p>
+      <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;justify-content:center;">
+        <div style="text-align:center">
+          <div class="demo-anim-box"></div>
+          <code style="font-size:.75rem">rotate (linear)</code>
+        </div>
+        <div style="text-align:center">
+          <div class="demo-pulse"></div>
+          <code style="font-size:.75rem">pulse (ease-in-out)</code>
+        </div>
+        <div style="text-align:center;overflow:hidden;width:140px;">
+          <div class="demo-slide"></div>
+          <code style="font-size:.75rem">slideIn (ease forwards)</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Animation Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">animations.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m11-editor" rows="26">&lt;style&gt;
+  body { font-family: sans-serif; padding: 30px; background: #0f172a; display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 8px #3b82f6; }
+    50%       { box-shadow: 0 0 30px #3b82f6, 0 0 60px #3b82f6; }
+  }
+
+  .card {
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 24px 28px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    animation: fadeInUp 0.6s ease both;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    min-width: 160px; text-align: center;
+  }
+  .card:nth-child(2) { animation-delay: 0.15s; }
+  .card:nth-child(3) { animation-delay: 0.30s; }
+  .card:hover { transform: translateY(-6px); animation: glow 1.5s ease infinite; }
+  .card h3 { font-size: 2rem; margin: 0 0 8px; }
+  .card p  { color: #94a3b8; font-size: .85rem; margin: 0; }
+&lt;/style&gt;
+
+&lt;div class="card"&gt;&lt;h3&gt;✨&lt;/h3&gt;&lt;p&gt;Hover me!&lt;/p&gt;&lt;/div&gt;
+&lt;div class="card"&gt;&lt;h3&gt;🚀&lt;/h3&gt;&lt;p&gt;Staggered&lt;/p&gt;&lt;/div&gt;
+&lt;div class="card"&gt;&lt;h3&gt;🎨&lt;/h3&gt;&lt;p&gt;CSS only&lt;/p&gt;&lt;/div&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m11-editor','m11-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m11-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — Which CSS rule defines the steps of a CSS animation?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m11q1" data-val="a" onclick="checkMC('m11q1','a','c','@media is used for responsive breakpoints, not animations.')"><span class="option-icon">○</span> @media</button></li>
+      <li><button class="option-btn" data-q="m11q1" data-val="b" onclick="checkMC('m11q1','b','c','@import is for importing CSS files.')"><span class="option-icon">○</span> @import</button></li>
+      <li><button class="option-btn" data-q="m11q1" data-val="c" onclick="checkMC('m11q1','c','c','Correct! @keyframes defines the animation steps with from/to or percentage-based waypoints.')"><span class="option-icon">○</span> @keyframes</button></li>
+      <li><button class="option-btn" data-q="m11q1" data-val="d" onclick="checkMC('m11q1','d','c','@font-face loads custom fonts, not animations.')"><span class="option-icon">○</span> @font-face</button></li>
+    </ul>
+    <div id="m11q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — Which animation-fill-mode value keeps the final state after the animation ends?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m11q2" data-val="a" onclick="checkMC('m11q2','a','b','backwards applies the first keyframe during the delay period.')"><span class="option-icon">○</span> backwards</button></li>
+      <li><button class="option-btn" data-q="m11q2" data-val="b" onclick="checkMC('m11q2','b','b','Correct! forwards keeps the last keyframe state after the animation completes.')"><span class="option-icon">○</span> forwards</button></li>
+      <li><button class="option-btn" data-q="m11q2" data-val="c" onclick="checkMC('m11q2','c','b','alternate reverses direction on every other iteration.')"><span class="option-icon">○</span> alternate</button></li>
+      <li><button class="option-btn" data-q="m11q2" data-val="d" onclick="checkMC('m11q2','d','b','infinite makes it loop forever, not control fill mode.')"><span class="option-icon">○</span> infinite</button></li>
+    </ul>
+    <div id="m11q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What media feature detects if the user prefers reduced motion?</h4>
+      <div class="attempts-info" id="m11q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m11q3-in" placeholder="prefers-...">
+      <button class="fill-btn" onclick="checkFill('m11q3','prefers-reduced-motion','prefers-reduced-motion is a CSS media feature that detects system-level motion settings. Always respect it!','Hint: prefers-___-motion')">Submit</button>
+      <div id="m11q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — Which CSS property hints the browser to optimize rendering for GPU compositing?</h4>
+      <div class="attempts-info" id="m11q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m11q4-in" placeholder="property">
+      <button class="fill-btn" onclick="checkFill('m11q4','will-change','will-change: transform tells the browser to promote the element to its own GPU layer before the animation starts, reducing jank.','Hint: will-___')">Submit</button>
+      <div id="m11q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module10.html" style="margin-right:12px">← Module 10</a>
+    <a class="back-btn" href="../html-css-course/module12.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 12 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 16 — Testing and Improving Performance</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 16: <em>Testing and Improving</em> Performance</h2>
+    <p>Ship fast, accessible websites. Use DevTools and Lighthouse to audit, then apply proven techniques: image optimization, lazy loading, minification, and Core Web Vitals.</p>
+    <span class="tag">DevTools</span><span class="tag">Lighthouse</span><span class="tag">Core Web Vitals</span>
+    <span class="tag">lazy loading</span><span class="tag">minification</span><span class="tag">caching</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🔬</span>
+    <div><h3>Chrome DevTools &amp; Lighthouse</h3><p>Your built-in performance lab — no installs required.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Opening DevTools</h3>
+    <div class="code-block"><span class="cmt">/* Open Chrome DevTools */</span>
+<span class="out">Windows / Linux : F12  or  Ctrl + Shift + I</span>
+<span class="out">macOS           : Cmd  + Option + I</span>
+<span class="out">Right-click any element → "Inspect"</span>
+
+<span class="cmt">/* Key panels for performance */</span>
+<span class="out">Elements   — inspect &amp; live-edit HTML/CSS</span>
+<span class="out">Console    — JS errors, logs, quick tests</span>
+<span class="out">Network    — see every file loaded, size, timing</span>
+<span class="out">Performance— record and profile page runtime</span>
+<span class="out">Lighthouse — automated audit: perf, a11y, SEO, PWA</span></div>
+
+    <h3 style="margin-top:20px">Running a Lighthouse Audit</h3>
+    <div class="code-block"><span class="cmt">/* DevTools → Lighthouse tab */</span>
+<span class="out">1. Open DevTools  (F12)</span>
+<span class="out">2. Click "Lighthouse" tab</span>
+<span class="out">3. Choose: Mobile or Desktop</span>
+<span class="out">4. Select categories: Performance ✓ Accessibility ✓ SEO ✓</span>
+<span class="out">5. Click "Analyze page load"</span>
+<span class="out">6. Review scores (0-100) and fix "Opportunities"</span>
+
+<span class="cmt">/* Or run from the command line */</span>
+<span class="out">npx lighthouse https://example.com --view</span></div>
+
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p>Run Lighthouse in <strong>Incognito mode</strong> for accurate results — browser extensions inflate load times and can skew scores.</p>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-btns" role="tablist" aria-label="Performance topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m16-t1" onclick="switchTab(this,'m16-t1','m16-tabs')">Core Web Vitals</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m16-t2" onclick="switchTab(this,'m16-t2','m16-tabs')">Image Optimization</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m16-t3" onclick="switchTab(this,'m16-t3','m16-tabs')">CSS &amp; JS Tricks</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m16-t4" onclick="switchTab(this,'m16-t4','m16-tabs')">Caching &amp; Fonts</button>
+  </div>
+  <div id="m16-tabs">
+
+    <div id="m16-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">⚡ Core Web Vitals (CWV)</h4>
+      <div class="code-block"><span class="cmt">/* Google's user-experience metrics — affect search ranking */</span>
+
+<span class="out">LCP  — Largest Contentful Paint</span>
+<span class="out">       When the biggest visible element loads.</span>
+<span class="out">       ✅ Good: &lt; 2.5 s   ⚠️ Needs work: 2.5-4 s   ❌ Poor: &gt; 4 s</span>
+<span class="out">       Fix: optimize hero images, use fetchpriority="high"</span>
+
+<span class="out">INP  — Interaction to Next Paint  (replaced FID in 2024)</span>
+<span class="out">       Responsiveness to clicks, taps, key presses.</span>
+<span class="out">       ✅ Good: &lt; 200 ms   ⚠️ Needs work: 200-500 ms   ❌ Poor: &gt; 500 ms</span>
+<span class="out">       Fix: reduce long JS tasks, avoid layout thrashing</span>
+
+<span class="out">CLS  — Cumulative Layout Shift</span>
+<span class="out">       How much page content shifts unexpectedly.</span>
+<span class="out">       ✅ Good: &lt; 0.1   ⚠️ Needs work: 0.1-0.25   ❌ Poor: &gt; 0.25</span>
+<span class="out">       Fix: always set width &amp; height on &lt;img&gt; and &lt;video&gt;</span></div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p>CLS is most often caused by images without dimensions. <strong>Always add <code>width</code> and <code>height</code> attributes</strong> to every <code>&lt;img&gt;</code> — the browser reserves the space before the image loads.</p>
+      </div>
+    </div>
+
+    <div id="m16-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🖼️ Image Optimization</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- 1. Choose the right format --&gt;</span>
+<span class="out">Photos         → AVIF &gt; WebP &gt; JPEG</span>
+<span class="out">Transparency   → WebP &gt; PNG</span>
+<span class="out">Icons / logos  → SVG (infinitely scalable, tiny file)</span>
+<span class="out">Animation      → WebM video (much smaller than GIF!)</span>
+
+<span class="cmt">&lt;!-- 2. Serve the right size --&gt;</span>
+&lt;<span class="tag-name">img</span>
+  <span class="attr">src</span>=<span class="str">"hero-800.webp"</span>
+  <span class="attr">srcset</span>=<span class="str">"hero-400.webp 400w, hero-800.webp 800w, hero-1200.webp 1200w"</span>
+  <span class="attr">sizes</span>=<span class="str">"(max-width:600px) 100vw, 800px"</span>
+  <span class="attr">width</span>=<span class="str">"800"</span> <span class="attr">height</span>=<span class="str">"450"</span>
+  <span class="attr">loading</span>=<span class="str">"lazy"</span>
+  <span class="attr">decoding</span>=<span class="str">"async"</span>
+  <span class="attr">alt</span>=<span class="str">"Hero image"</span>
+&gt;
+
+<span class="cmt">&lt;!-- 3. Prioritize the hero / LCP image --&gt;</span>
+&lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"hero.webp"</span> <span class="attr">fetchpriority</span>=<span class="str">"high"</span> <span class="attr">loading</span>=<span class="str">"eager"</span> <span class="attr">alt</span>=<span class="str">"..."</span>&gt;
+
+<span class="cmt">/* 4. Target file sizes */</span>
+<span class="out">Above-the-fold hero  → &lt; 200 KB</span>
+<span class="out">Thumbnails / cards   → &lt; 50 KB</span>
+<span class="out">Icons (SVG)          → &lt; 5 KB</span></div>
+    </div>
+
+    <div id="m16-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">⚙️ CSS &amp; JavaScript Performance</h4>
+      <div class="code-block"><span class="cmt">/* CSS — render-blocking by default, so keep it lean */</span>
+
+<span class="cmt">/* ✅ Load non-critical CSS asynchronously */</span>
+&lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"preload"</span> <span class="attr">href</span>=<span class="str">"styles.css"</span> <span class="attr">as</span>=<span class="str">"style"</span>
+      <span class="attr">onload</span>=<span class="str">"this.rel='stylesheet'"</span>&gt;
+
+<span class="cmt">/* ✅ Inline critical CSS (above-the-fold styles) in &lt;head&gt; */</span>
+&lt;<span class="tag-name">style</span>&gt;
+  body { margin:0; font-family:sans-serif; }
+  header { background:#1e293b; color:#fff; }
+&lt;/<span class="tag-name">style</span>&gt;
+
+<span class="cmt">/* ✅ will-change: hint the browser to promote element to GPU */</span>
+<span class="prop">.animated-card</span> { <span class="attr">will-change</span>: <span class="val">transform</span>; }
+
+<span class="cmt">/* ❌ Avoid triggering layout thrash */</span>
+<span class="cmt">/* Don't read offsetHeight then set height in a loop — batch reads/writes */</span>
+
+<span class="cmt">/* JavaScript */</span>
+<span class="cmt">&lt;!-- ✅ defer: load after HTML parsed, execute after DOM ready --&gt;</span>
+&lt;<span class="tag-name">script</span> <span class="attr">src</span>=<span class="str">"app.js"</span> <span class="attr">defer</span>&gt;&lt;/<span class="tag-name">script</span>&gt;
+
+<span class="cmt">&lt;!-- ✅ async: download in parallel, execute immediately --&gt;</span>
+&lt;<span class="tag-name">script</span> <span class="attr">src</span>=<span class="str">"analytics.js"</span> <span class="attr">async</span>&gt;&lt;/<span class="tag-name">script</span>&gt;</div>
+    </div>
+
+    <div id="m16-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📦 Caching &amp; Font Loading</h4>
+      <div class="code-block"><span class="cmt">/* HTTP Cache headers — set on the server */</span>
+<span class="out">Cache-Control: max-age=31536000, immutable   ← versioned assets (JS, CSS)</span>
+<span class="out">Cache-Control: no-cache                      ← HTML (always revalidate)</span>
+<span class="out">ETag: "abc123"                               ← fingerprint for validation</span>
+
+<span class="cmt">/* Font loading best practices */</span>
+
+<span class="cmt">&lt;!-- 1. Preconnect to font CDN early --&gt;</span>
+&lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"preconnect"</span> <span class="attr">href</span>=<span class="str">"https://fonts.googleapis.com"</span>&gt;
+&lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"preconnect"</span> <span class="attr">href</span>=<span class="str">"https://fonts.gstatic.com"</span> <span class="attr">crossorigin</span>&gt;
+
+<span class="cmt">/* 2. Use font-display: swap — show text immediately in fallback */</span>
+@<span class="kw">font-face</span> {
+  <span class="attr">font-family</span>: <span class="val">'Inter'</span>;
+  <span class="attr">src</span>: <span class="val">url('inter.woff2') format('woff2')</span>;
+  <span class="attr">font-display</span>: <span class="val">swap</span>;  <span class="cmt">/* prevents invisible text (FOIT) */</span>
+}
+
+<span class="cmt">/* 3. Subset fonts — only include needed characters */</span>
+<span class="out">Google Fonts does this automatically via ?subset=latin</span>
+<span class="out">Self-hosted: use pyftsubset or glyphhanger CLI tools</span></div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p><code>font-display: swap</code> prevents the "Flash of Invisible Text" (FOIT) — instead of hiding text while the font loads, the browser shows it in a system fallback font and swaps when the custom font is ready.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NETWORK TAB CONCEPT CARD -->
+  <div class="concept-card">
+    <h3>🌐 Reading the Network Tab</h3>
+    <div class="code-block"><span class="cmt">/* DevTools → Network tab: what to look for */</span>
+
+<span class="out">Waterfall  — each row is a file; long rows = slow resource</span>
+<span class="out">Size       — "(from cache)" = good! means browser cached it</span>
+<span class="out">Time       — TTFB (Time To First Byte) &gt; 600ms = slow server</span>
+<span class="out">Initiator  — what triggered the request (HTML, JS, CSS)</span>
+<span class="out">Status     — 200 ✅  301/302 redirect ⚠️  404 not found ❌</span>
+
+<span class="cmt">/* Quick wins you can spot in Network tab */</span>
+<span class="out">Large unoptimized images   → convert to WebP, add srcset</span>
+<span class="out">Missing cache headers       → add Cache-Control to server</span>
+<span class="out">Render-blocking CSS/JS      → add defer / preload</span>
+<span class="out">Too many HTTP requests       → bundle files or use HTTP/2</span>
+<span class="out">Slow TTFB                   → upgrade hosting or use a CDN</span></div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="section-header">
+    <span class="section-icon">✏️</span>
+    <div><h3>Live Sandbox</h3><p>Simulated performance audit dashboard.</p></div>
+  </div>
+  <div class="sandbox">
+    <h4>✏️ Lighthouse Score Simulator</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">performance-audit.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m16-editor" rows="80">&lt;style&gt;
+  body { font-family: sans-serif; padding: 24px; background: #f8fafc; color: #1e293b; margin: 0; }
+  h2 { margin-top: 0; }
+  .audit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .score-ring { text-align: center; background: #fff; border-radius: 12px; padding: 20px 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .ring { width: 80px; height: 80px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+  .ring.green  { border: 6px solid #22c55e; color: #15803d; }
+  .ring.orange { border: 6px solid #f97316; color: #c2410c; }
+  .ring.red    { border: 6px solid #ef4444; color: #b91c1c; }
+  .score-label { font-size: .8rem; font-weight: 700; color: #64748b; }
+
+  .opportunity { background: #fff; border-left: 4px solid #f97316; border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .opp-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .opp-body h4 { margin: 0 0 4px; font-size: .95rem; }
+  .opp-body p  { margin: 0; font-size: .83rem; color: #64748b; }
+  .opp-save { font-size: .75rem; font-weight: 700; color: #f97316; background: #fff7ed; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+
+  .passed { background: #fff; border-left: 4px solid #22c55e; border-radius: 0 8px 8px 0; padding: 10px 16px; margin-bottom: 6px; font-size: .88rem; color: #15803d; font-weight: 600; }
+  .metric-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: .88rem; }
+  .metric-row:last-child { border: none; }
+  .good  { color: #16a34a; font-weight: 700; }
+  .warn  { color: #d97706; font-weight: 700; }
+  .poor  { color: #dc2626; font-weight: 700; }
+  .badge { font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+  .badge.green  { background: #dcfce7; color: #15803d; }
+  .badge.orange { background: #fff7ed; color: #c2410c; }
+  .badge.red    { background: #fee2e2; color: #b91c1c; }
+  .section-title { font-size: .8rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: .07em; margin: 20px 0 10px; }
+  select, input[type=range] { margin: 0 8px; }
+  .controls { background: #fff; border-radius: 10px; padding: 16px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .controls label { font-size: .85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  button.audit-btn { background: #1d4ed8; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-weight: 700; cursor: pointer; font-size: .95rem; }
+  button.audit-btn:hover { background: #1e40af; }
+&lt;/style&gt;
+
+&lt;h2&gt;⚡ Lighthouse Audit Simulator&lt;/h2&gt;
+
+&lt;div class="controls"&gt;
+  &lt;p style="margin:0 0 12px;font-size:.85rem;color:#64748b"&gt;Adjust settings to simulate different page conditions:&lt;/p&gt;
+  &lt;label&gt;Images optimized?
+    &lt;select id="img-opt"&gt;
+      &lt;option value="no"&gt;❌ No (raw JPEGs, no srcset)&lt;/option&gt;
+      &lt;option value="yes" selected&gt;✅ Yes (WebP, srcset, lazy)&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/label&gt;
+  &lt;label&gt;JS loading strategy?
+    &lt;select id="js-opt"&gt;
+      &lt;option value="blocking"&gt;❌ Blocking (no defer)&lt;/option&gt;
+      &lt;option value="defer" selected&gt;✅ defer attribute&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/label&gt;
+  &lt;label&gt;img width/height attributes?
+    &lt;select id="cls-opt"&gt;
+      &lt;option value="no"&gt;❌ Missing (causes layout shift)&lt;/option&gt;
+      &lt;option value="yes" selected&gt;✅ Present (no layout shift)&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/label&gt;
+  &lt;label&gt;Font loading?
+    &lt;select id="font-opt"&gt;
+      &lt;option value="block"&gt;❌ font-display: block (FOIT)&lt;/option&gt;
+      &lt;option value="swap" selected&gt;✅ font-display: swap&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/label&gt;
+  &lt;button class="audit-btn" onclick="runAudit()" style="margin-top:8px"&gt;▶ Run Audit&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id="results" style="display:none"&gt;
+
+  &lt;div class="section-title"&gt;Scores&lt;/div&gt;
+  &lt;div class="audit-grid" id="scores-grid"&gt;&lt;/div&gt;
+
+  &lt;div class="section-title"&gt;Core Web Vitals&lt;/div&gt;
+  &lt;div style="background:#fff;border-radius:10px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:16px"&gt;
+    &lt;div id="cwv-rows"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="section-title"&gt;Opportunities&lt;/div&gt;
+  &lt;div id="opportunities"&gt;&lt;/div&gt;
+
+  &lt;div class="section-title"&gt;Passed Audits&lt;/div&gt;
+  &lt;div id="passed"&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+function runAudit() {
+  const imgOk  = document.getElementById('img-opt').value === 'yes';
+  const jsOk   = document.getElementById('js-opt').value === 'defer';
+  const clsOk  = document.getElementById('cls-opt').value === 'yes';
+  const fontOk = document.getElementById('font-opt').value === 'swap';
+
+  const perfScore = Math.round(40 + (imgOk?25:0) + (jsOk?15:0) + (clsOk?10:0) + (fontOk?5:0) + (Math.random()*5));
+  const a11yScore = 92;
+  const seoScore  = 95;
+  const bpScore   = Math.round(75 + (imgOk?10:0) + (jsOk?8:0) + (fontOk?4:0));
+
+  function ringClass(s) { return s >= 90 ? 'green' : s >= 50 ? 'orange' : 'red'; }
+
+  document.getElementById('scores-grid').innerHTML = [
+    ['⚡','Performance', perfScore],
+    ['♿','Accessibility', a11yScore],
+    ['✅','Best Practices', bpScore],
+    ['🔍','SEO', seoScore]
+  ].map(([icon, label, score]) => `
+    &lt;div class="score-ring"&gt;
+      &lt;div class="ring ${ringClass(score)}"&gt;${score}&lt;/div&gt;
+      &lt;div class="score-label"&gt;${icon} ${label}&lt;/div&gt;
+    &lt;/div&gt;
+  `).join('');
+
+  const lcpVal  = imgOk && jsOk ? '1.8 s' : jsOk ? '3.2 s' : '4.7 s';
+  const lcpCls  = imgOk && jsOk ? 'good' : jsOk ? 'warn' : 'poor';
+  const lcpBadge= imgOk && jsOk ? 'green' : jsOk ? 'orange' : 'red';
+  const inpVal  = jsOk ? '140 ms' : '380 ms';
+  const inpCls  = jsOk ? 'good' : 'warn';
+  const inpBadge= jsOk ? 'green' : 'orange';
+  const clsVal  = clsOk ? '0.02' : '0.31';
+  const clsCls  = clsOk ? 'good' : 'poor';
+  const clsBadge= clsOk ? 'green' : 'red';
+
+  document.getElementById('cwv-rows').innerHTML = `
+    &lt;div class="metric-row"&gt;&lt;span&gt;LCP — Largest Contentful Paint&lt;/span&gt;&lt;span&gt;&lt;span class="badge ${lcpBadge}"&gt;${lcpVal}&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="metric-row"&gt;&lt;span&gt;INP — Interaction to Next Paint&lt;/span&gt;&lt;span&gt;&lt;span class="badge ${inpBadge}"&gt;${inpVal}&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="metric-row"&gt;&lt;span&gt;CLS — Cumulative Layout Shift&lt;/span&gt;&lt;span&gt;&lt;span class="badge ${clsBadge}"&gt;${clsVal}&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+  `;
+
+  const opps = [];
+  if (!imgOk) opps.push(['🖼️','Serve images in next-gen formats','Convert JPEGs to WebP/AVIF and use srcset for responsive sizing.','Save ~1.2 MB']);
+  if (!jsOk)  opps.push(['📜','Eliminate render-blocking resources','Add defer or async to &lt;script&gt; tags to stop JS from blocking HTML parsing.','Save ~0.9 s']);
+  if (!clsOk) opps.push(['📐','Image elements have explicit width &amp; height','Add width and height attributes to every &lt;img&gt; to prevent layout shifts (CLS).','CLS: 0.31 → 0.02']);
+  if (!fontOk)opps.push(['🔤','Ensure text remains visible during webfont load','Use font-display: swap to show fallback text while your custom font loads.','Eliminates FOIT']);
+
+  document.getElementById('opportunities').innerHTML = opps.length
+    ? opps.map(([icon, title, desc, save]) => `
+        &lt;div class="opportunity"&gt;
+          &lt;div class="opp-icon"&gt;${icon}&lt;/div&gt;
+          &lt;div class="opp-body"&gt;
+            &lt;h4&gt;${title} &lt;span class="opp-save"&gt;${save}&lt;/span&gt;&lt;/h4&gt;
+            &lt;p&gt;${desc}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `).join('')
+    : '&lt;div class="passed"&gt;🎉 No opportunities — all checks passed!&lt;/div&gt;';
+
+  const passedItems = [];
+  if (imgOk)  passedItems.push('✅ Images use modern formats (WebP/AVIF) with srcset');
+  if (jsOk)   passedItems.push('✅ JavaScript loads with defer — no render blocking');
+  if (clsOk)  passedItems.push('✅ All &lt;img&gt; elements have explicit width &amp; height');
+  if (fontOk) passedItems.push('✅ font-display: swap prevents invisible text');
+  passedItems.push('✅ Document uses HTTPS');
+  passedItems.push('✅ &lt;html&gt; element has a lang attribute');
+  passedItems.push('✅ Page has a meta description');
+  passedItems.push('✅ Links have descriptive text');
+
+  document.getElementById('passed').innerHTML = passedItems
+    .map(t => `&lt;div class="passed"&gt;${t}&lt;/div&gt;`).join('');
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+&lt;/script&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m16-editor','m16-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m16-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render the interactive audit simulator.</em>
+    </div>
+  </div>
+
+  <!-- QUICK-WINS CONCEPT CARD -->
+  <div class="concept-card">
+    <h3>🏆 Performance Quick-Win Checklist</h3>
+    <div class="code-block"><span class="cmt">/* HTML */</span>
+<span class="out">✅ Add width &amp; height to every &lt;img&gt;                  → fixes CLS</span>
+<span class="out">✅ Add loading="lazy" to below-fold images             → faster LCP</span>
+<span class="out">✅ Add fetchpriority="high" to hero image              → faster LCP</span>
+<span class="out">✅ Add defer to &lt;script&gt; tags                          → unblocks parsing</span>
+<span class="out">✅ Minify HTML (remove comments &amp; whitespace)          → smaller file</span>
+
+<span class="cmt">/* CSS */</span>
+<span class="out">✅ Inline critical (above-fold) CSS in &lt;head&gt;          → no render block</span>
+<span class="out">✅ Remove unused CSS (PurgeCSS, DevTools Coverage tab) → smaller file</span>
+<span class="out">✅ Use will-change: transform on animated elements      → GPU layer</span>
+<span class="out">✅ Prefer CSS animations over JS for motion            → smoother 60fps</span>
+
+<span class="cmt">/* Images */</span>
+<span class="out">✅ Convert to WebP / AVIF                              → 30-80% smaller</span>
+<span class="out">✅ Use srcset + sizes for responsive delivery          → right size per screen</span>
+<span class="out">✅ Compress with Squoosh, TinyPNG, or Sharp            → less bandwidth</span>
+
+<span class="cmt">/* Fonts */</span>
+<span class="out">✅ Preconnect to font CDN                              → faster DNS</span>
+<span class="out">✅ Use font-display: swap                              → no FOIT</span>
+<span class="out">✅ Limit font weights (e.g. 400 &amp; 700 only)           → fewer requests</span>
+
+<span class="cmt">/* Server / Hosting */</span>
+<span class="out">✅ Enable Gzip / Brotli compression                    → 60-80% smaller transfers</span>
+<span class="out">✅ Set Cache-Control headers                           → repeat visits instant</span>
+<span class="out">✅ Use a CDN (Cloudflare, Vercel, Netlify)             → global fast delivery</span></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — Which Core Web Vital measures how much page content unexpectedly shifts during load?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m16q1" data-val="a" onclick="checkMC('m16q1','a','c','LCP measures when the largest content element becomes visible — not layout stability.')"><span class="option-icon">○</span> LCP (Largest Contentful Paint)</button></li>
+      <li><button class="option-btn" data-q="m16q1" data-val="b" onclick="checkMC('m16q1','b','c','INP measures responsiveness to user interactions, not visual stability.')"><span class="option-icon">○</span> INP (Interaction to Next Paint)</button></li>
+      <li><button class="option-btn" data-q="m16q1" data-val="c" onclick="checkMC('m16q1','c','c','Correct! CLS (Cumulative Layout Shift) measures visual stability — how much content jumps around as the page loads. Target: &lt; 0.1.')"><span class="option-icon">○</span> CLS (Cumulative Layout Shift)</button></li>
+      <li><button class="option-btn" data-q="m16q1" data-val="d" onclick="checkMC('m16q1','d','c','TTFB is Time To First Byte — a server speed metric, not a Core Web Vital.')"><span class="option-icon">○</span> TTFB (Time To First Byte)</button></li>
+    </ul>
+    <div id="m16q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — What &lt;script&gt; attribute downloads the file in parallel with HTML parsing and executes it after the DOM is fully parsed?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m16q2" data-val="a" onclick="checkMC('m16q2','a','b','async downloads in parallel but executes immediately when ready — before DOM parsing finishes. That can break scripts that need the DOM.')"><span class="option-icon">○</span> async</button></li>
+      <li><button class="option-btn" data-q="m16q2" data-val="b" onclick="checkMC('m16q2','b','b','Correct! defer downloads the script while HTML is parsed, then executes after parsing is complete — the safest choice for most scripts.')"><span class="option-icon">○</span> defer</button></li>
+      <li><button class="option-btn" data-q="m16q2" data-val="c" onclick="checkMC('m16q2','c','b','preload is a &lt;link&gt; hint, not a script attribute. It fetches early but does not execute.')"><span class="option-icon">○</span> preload</button></li>
+      <li><button class="option-btn" data-q="m16q2" data-val="d" onclick="checkMC('m16q2','d','b','lazy is used on &lt;img&gt; elements, not scripts.')"><span class="option-icon">○</span> lazy</button></li>
+    </ul>
+    <div id="m16q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What CSS font-display value shows fallback text immediately while the custom font loads, then swaps it in?</h4>
+      <div class="attempts-info" id="m16q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m16q3-in" placeholder="font-display: ___">
+      <button class="fill-btn" onclick="checkFill('m16q3','swap','font-display: swap prevents FOIT (Flash of Invisible Text) by rendering a fallback font instantly and swapping to the custom font when it is ready.','Hint: it means to exchange one thing for another.')">Submit</button>
+      <div id="m16q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What &lt;img&gt; attribute value defers loading until the image is near the viewport, improving initial page speed?</h4>
+      <div class="attempts-info" id="m16q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m16q4-in" placeholder='loading="___"'>
+      <button class="fill-btn" onclick="checkFill('m16q4','lazy','loading=&quot;lazy&quot; is a native browser feature — no JavaScript needed! It defers off-screen images, reducing the initial page weight significantly.','Hint: the opposite of eager.')">Submit</button>
+      <div id="m16q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <!-- COURSE COMPLETE BANNER -->
+  <div class="concept-card" style="background:linear-gradient(135deg,#eff6ff,#e0e7ff);border:2px solid var(--accent2);text-align:center;padding:36px 24px;">
+    <div style="font-size:3rem;margin-bottom:12px">🎓</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:8px">Course Complete!</h3>
+    <p style="color:var(--muted);max-width:480px;margin:0 auto 20px">You've finished all 16 modules of the HTML &amp; CSS Interactive Course. You now know everything from document structure to responsive design, animations, forms, SEO, and performance optimization.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px">
+      <span class="tag">HTML5 ✅</span>
+      <span class="tag">CSS3 ✅</span>
+      <span class="tag">Flexbox ✅</span>
+      <span class="tag">Grid ✅</span>
+      <span class="tag">Responsive ✅</span>
+      <span class="tag">Animation ✅</span>
+      <span class="tag">Forms ✅</span>
+      <span class="tag">Media ✅</span>
+      <span class="tag">JS Basics ✅</span>
+      <span class="tag">Social ✅</span>
+      <span class="tag">SEO ✅</span>
+      <span class="tag">Performance ✅</span>
+    </div>
+    <a class="back-btn" href="index.html" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:1rem;padding:12px 32px;">
+      🏠 Back to Course Home
+    </a>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module15.html" style="margin-right:12px">← Module 15</a>
+    <a class="back-btn" href="index.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">🏠 Course Home</a>
+  </div>
+
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

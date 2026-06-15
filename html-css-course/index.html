@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML &amp; CSS — Complete Interactive Course</title>
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+body{background:linear-gradient(135deg,#eff6ff 0%,#f0f4ff 60%,#e0e7ff 100%);min-height:100vh;}
+#top-bar{justify-content:center;}
+#top-bar h1{font-size:1.3rem;}
+
+.hero{text-align:center;padding:60px 24px 40px;max-width:780px;margin:0 auto;}
+.hero h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);color:var(--text);margin-bottom:16px;}
+.hero h2 em{color:var(--accent);}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:560px;margin:0 auto 28px;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;}
+.hero-tag{background:#fff;border:1px solid var(--accent2);color:var(--accent);padding:5px 16px;border-radius:20px;font-size:.85rem;font-weight:700;}
+
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:980px;margin:0 auto 60px;padding:0 20px;}
+.module-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;text-decoration:none;color:inherit;display:block;}
+.module-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(29,78,216,.15);border-color:var(--accent2);}
+.module-card .mod-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent2);font-weight:700;letter-spacing:.06em;margin-bottom:6px;}
+.module-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:8px;}
+.module-card p{color:var(--muted);font-size:.85rem;line-height:1.5;}
+.module-card .mod-icon{font-size:2rem;margin-bottom:10px;}
+.mod-num-badge{display:inline-block;background:var(--accent);color:#fff;border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-weight:800;font-size:.8rem;margin-right:8px;}
+
+.section-title{text-align:center;font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--text);margin:40px 0 20px;padding:0 20px;}
+.section-title span{color:var(--accent);}
+
+.course-stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;padding:0 20px;}
+.stat-pill{background:#fff;border:1px solid var(--border);border-radius:20px;padding:10px 22px;font-weight:700;font-size:.9rem;color:var(--muted);}
+.stat-pill strong{color:var(--accent);}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<header id="top-bar" role="banner">
+	<div style="text-align:center;margin:40px 0 20px;">
+		<a class="back-btn" href="../index.html" style="margin-right:12px" data-en="← Home" data-es="← Inicio">← Home</a>
+    </div>
+  
+	<h1
+	  data-en="🌐 HTML &amp; CSS — Complete Interactive Course"
+	  data-es="🌐 HTML &amp; CSS — Curso Interactivo Completo">
+	  🌐 HTML &amp; CSS — Complete Interactive Course
+	</h1>
+
+	<div id="score-display"
+		 data-en="Score: <span id='score-num'>0</span> / 110"
+		 data-es="Puntuación: <span id='score-num'>0</span> / 110">
+	  Score: <span id="score-num">0</span> / 110
+	</div>
+
+	<button id="lang-toggle"
+			onclick="toggleLang()"
+			aria-label="Switch language">
+	  🌐 Español
+	</button>
+</header>
+
+<main id="main-content">
+
+<div class="hero">
+  <h2
+	data-en="Master <em>HTML &amp; CSS</em><br>from Zero to Pro"
+	data-es="Domina <em>HTML &amp; CSS</em><br>desde Cero hasta Profesional">
+	Master <em>HTML &amp; CSS</em><br>from Zero to Pro
+  </h2>
+  <p
+	data-en="16 interactive modules covering everything from basic document structure to responsive design."
+	data-es="16 módulos interactivos que cubren todo, desde la estructura básica de documentos hasta el diseño responsivo.">
+	16 interactive modules covering everything from basic document structure to responsive design.
+   </p>
+  <div class="hero-tags">
+    <span class="hero-tag">HTML5</span>
+    <span class="hero-tag">CSS3</span>
+    <span class="hero-tag">Responsive</span>
+    <span class="hero-tag">Flexbox</span>
+    <span class="hero-tag">Grid</span>
+    <span class="hero-tag">Animation</span>
+    <span class="hero-tag">Forms</span>
+    <span class="hero-tag">SEO</span>
+  </div>
+</div>
+
+<div class="course-stats">
+  <div class="stat-pill"
+	data-en="<strong>16</strong> Modules"
+	data-es="<strong>16</strong> Módulos">
+	<strong>16</strong> Modules
+   </div>
+  <div class="stat-pill"
+	data-en="<strong>160+</strong> Interactive exercises"
+	data-es="<strong>160+</strong> Ejercicios Interactivos">
+	<strong>160+</strong> Interactive exercises
+  </div>
+  <div class="stat-pill"><strong>Bilingual</strong> EN / ES</div>
+  <div class="stat-pill"
+	data-en="<strong>Live</strong>code previews"
+	data-es="<strong>Vistas previas</strong> de código en vivo">
+    <strong>Live</strong> code previews
+   </div>
+</div>
+
+<h2 class="section-title"
+	data-en="<span>🏗️</span> HTML Foundations"
+	data-es="<span>🏗️</span> Fundamentos de HTML">
+	<span>🏗️</span> HTML Foundations
+</h2>
+<div class="modules-grid">
+
+  <a class="module-card" href="module01.html">
+    <div class="mod-icon">📄</div>
+    <div class="mod-num"
+		data-en="MODULE 01"
+		data-es="MÓDULO 01">
+	    MODULE 01
+	</div>
+	<h3
+		data-en="Getting Started with HTML"
+		data-es="Introducción a HTML">
+		Getting Started with HTML
+	</h3>
+	<p
+		data-en="Document structure, DOCTYPE, tags, attributes, and your first web page."
+		data-es="Estructura del documento, DOCTYPE, etiquetas, atributos y tu primera página web.">
+		Document structure, DOCTYPE, tags, attributes, and your first web page.
+	</p>
+  </a>
+
+  <a class="module-card" href="module02.html">
+    <div class="mod-icon">🏛️</div>
+    <div class="mod-num"
+		data-en="MODULE 02"
+		data-es="MÓDULO 02">
+	    MODULE 02
+	</div>
+    <h3
+		data-en="Structuring Content in a Web Document"
+		data-es="Estructuración del contenido en un documento web">
+		Structuring Content in a Web Document
+	</h3>
+    <p
+		data-en="Headings, paragraphs, semantic elements, sections, articles, and accessibility."
+		data-es="Encabezados, párrafos, elementos semánticos, secciones, artículos y accesibilidad.">
+		Headings, paragraphs, semantic elements, sections, articles, and accessibility.</p>
+  </a>
+
+  <a class="module-card" href="module06.html">
+    <div class="mod-icon">🔗</div>
+    <div class="mod-num"
+		data-en="MODULE 06"
+		data-es="MÓDULO 06">
+		MODULE 06
+	</div>
+    <h3
+		data-en="Inserting and Working with Links"
+		data-es="Insertar y trabajar con vínculos">
+		Inserting and Working with Links
+	</h3>
+    <p
+		data-en="Anchor tags, relative vs absolute paths, navigation, and link accessibility."
+		data-es="Etiquetas de anclaje, rutas relativas frente a absolutas, navegación y accesibilidad de los enlaces.">
+		Anchor tags, relative vs absolute paths, navigation, and link accessibility.
+	</p>
+  </a>
+
+  <a class="module-card" href="module07.html">
+    <div class="mod-icon">🖼️</div>
+    <div class="mod-num"
+		data-en="MODULE 07"
+		data-es="MÓDULO 07">
+		MODULE 07
+	</div>
+    <h3
+		data-en="Inserting and Working with Images"
+		data-es="Insertar y trabajar con imágenes">
+		Inserting and Working with Images
+	</h3>
+    <p
+		data-en="img element, alt text, srcset, picture element, and image optimization."
+		data-es="Elemento img, texto alternativo, srcset, elemento picture y optimización de imágenes.">
+		img element, alt text, srcset, picture element, and image optimization.</p>
+  </a>
+
+  <a class="module-card" href="module08.html">
+    <div class="mod-icon">📋</div>
+    <div class="mod-num"
+		data-en="MODULE 08"
+		data-es="MÓDULO 08">
+		MODULE 08
+	</div>
+    <h3
+		data-en="Organizing Content with Lists and Tables"
+		data-es="Organización del Contenido con Listas y Tablas">
+		Organizing Content with Lists and Tables
+	</h3>
+	<p
+		data-en="Ordered, unordered, and definition lists; table structure and accessibility."
+		data-es="Listas ordenadas, desordenadas y de definición; estructura de tablas y accesibilidad.">
+		Ordered, unordered, and definition lists; table structure and accessibility.
+	</p>
+  </a>
+
+  <a class="module-card" href="module10.html">
+    <div class="mod-icon">📝</div>
+    <div class="mod-num"
+		data-en="MODULE 10"
+		data-es="MÓDULO 10">
+		MODULE 10
+	</div>
+    <h3
+		data-en="Creating and Processing Web Forms"
+		data-es="Creación y Procesamiento de Formularios Web">
+		Creating and Processing Web Forms
+	</h3>
+	<p
+		data-en="Input types, validation, labels, fieldsets, and form submission."
+		data-es="Tipos de entrada, validación, etiquetas, grupos de campos y envío de formularios.">
+		Input types, validation, labels, fieldsets, and form submission.
+	</p>
+  </a>
+
+  <a class="module-card" href="module12.html">
+    <div class="mod-icon">🎬</div>
+    <div class="mod-num"
+		data-en="MODULE 12"
+		data-es="MÓDULO 12">
+		MODULE 12
+	</div>
+    <h3
+		data-en="Incorporating Video and Audio"
+		data-es="Incorporación de Video y Audio">
+		Incorporating Video and Audio
+	</h3>
+	<p
+		data-en="HTML5 media elements, sources, controls, captions, and embedding."
+		data-es="Elementos multimedia HTML5, fuentes, controles, subtítulos e incrustación.">
+		HTML5 media elements, sources, controls, captions, and embedding.
+	</p>
+  </a>
+
+</div>
+
+<h2 class="section-title"
+    data-en="<span>🎨</span> CSS Styling"
+    data-es="<span>🎨</span> Estilos CSS">
+    <span>🎨</span> CSS Styling
+</h2>
+<div class="modules-grid">
+
+  <a class="module-card" href="module03.html">
+    <div class="mod-icon">🎨</div>
+    <div class="mod-num"
+		data-en="MODULE 03"
+		data-es="MÓDULO 03">
+		MODULE 03
+	</div>
+    <h3
+		data-en="Getting Started with CSS"
+		data-es="Introducción a CSS">
+		Getting Started with CSS
+	</h3>
+	<p
+		data-en="Selectors, the cascade, specificity, colors, and the box model."
+		data-es="Selectores, cascada, especificidad, colores y modelo de caja.">
+		Selectors, the cascade, specificity, colors, and the box model.
+	</p>
+  </a>
+
+  <a class="module-card" href="module04.html">
+    <div class="mod-icon">📐</div>
+    <div class="mod-num"
+		data-en="MODULE 04"
+		data-es="MÓDULO 04">
+		MODULE 04
+	</div>
+    <h3
+		data-en="Laying Out Elements With CSS"
+		data-es="Diseñando la Distribución con CSS">
+		Laying Out Elements With CSS
+	</h3>
+	<p
+		data-en="Flexbox, CSS Grid, positioning, float, and modern layout techniques."
+		data-es="Flexbox, CSS Grid, posicionamiento, float y técnicas modernas de diseño.">
+		Flexbox, CSS Grid, positioning, float, and modern layout techniques.
+	</p>
+  </a>
+
+  <a class="module-card" href="module05.html">
+    <div class="mod-icon">✍️</div>
+    <div class="mod-num"
+		data-en="MODULE 05"
+		data-es="MÓDULO 05">
+		MODULE 05
+	</div>
+    <h3
+		data-en="Formatting Text with CSS"
+		data-es="Formato de Texto con CSS">
+		Formatting Text with CSS
+	</h3>
+	<p
+		data-en="Font properties, Google Fonts, line-height, spacing, and web typography."
+		data-es="Propiedades de fuente, Google Fonts, altura de línea, espaciado y tipografía web.">
+		Font properties, Google Fonts, line-height, spacing, and web typography.
+	</p>
+  </a>
+
+  <a class="module-card" href="module09.html">
+    <div class="mod-icon">📱</div>
+    <div class="mod-num"
+		data-en="MODULE 09"
+		data-es="MÓDULO 09">
+		MODULE 09
+	</div>
+    <h3
+		data-en="Implementing Responsive Design"
+		data-es="Implementación de Diseño Responsivo">
+		Implementing Responsive Design
+	</h3>
+	<p
+		data-en="Media queries, mobile-first approach, fluid layouts, and viewport units."
+		data-es="Media queries, enfoque mobile-first, diseños fluidos y unidades viewport.">
+		Media queries, mobile-first approach, fluid layouts, and viewport units.
+	</p>
+  </a>
+
+  <a class="module-card" href="module11.html">
+    <div class="mod-icon">✨</div>
+    <div class="mod-num"
+		data-en="MODULE 11"
+		data-es="MÓDULO 11">
+		MODULE 11
+	</div>
+    <h3
+		data-en="Creating Visual Effects and Animation"
+		data-es="Creación de Efectos Visuales y Animaciones">
+		Creating Visual Effects and Animation
+	</h3>
+	<p
+		data-en="CSS transitions, keyframe animations, transforms, and motion design."
+		data-es="Transiciones CSS, animaciones con keyframes, transformaciones y diseño de movimiento.">
+		CSS transitions, keyframe animations, transforms, and motion design.
+	</p>
+  </a>
+
+</div>
+
+<h2 class="section-title"
+    data-en="<span>🚀</span> Advanced & Integration"
+    data-es="<span>🚀</span> Avanzado e Integración">
+    <span>🚀</span> Advanced & Integration
+</h2>
+<div class="modules-grid">
+
+  <a class="module-card" href="module13.html">
+    <div class="mod-icon">⚙️</div>
+    <div class="mod-num"
+		data-en="MODULE 13"
+		data-es="MÓDULO 13">
+		MODULE 13
+	</div>
+    <h3
+		data-en="Programming Web Pages with JavaScript"
+		data-es="Programación de Páginas Web con JavaScript">
+		Programming Web Pages with JavaScript
+	</h3>
+	<p
+		data-en="DOM manipulation, events, interactivity, and connecting JS with HTML/CSS."
+		data-es="Manipulación del DOM, eventos, interactividad y conexión de JavaScript con HTML y CSS.">
+		DOM manipulation, events, interactivity, and connecting JS with HTML/CSS.
+	</p>
+  </a>
+
+  <a class="module-card" href="module14.html">
+    <div class="mod-icon">📲</div>
+    <div class="mod-num"
+		data-en="MODULE 14"
+		data-es="MÓDULO 14">
+		MODULE 14
+	</div>
+    <h3
+		data-en="Integrating Social Media"
+		data-es="Integración con Redes Sociales">
+		Integrating Social Media
+	</h3>
+	<p
+		data-en="Open Graph meta tags, share buttons, embeds, and social media previews."
+		data-es="Meta etiquetas Open Graph, botones para compartir, contenido incrustado y vistas previas sociales.">
+		Open Graph meta tags, share buttons, embeds, and social media previews.
+	</p>
+  </a>
+
+  <a class="module-card" href="module15.html">
+    <div class="mod-icon">🔍</div>
+    <div class="mod-num"
+		data-en="MODULE 15"
+		data-es="MÓDULO 15">
+		MODULE 15
+	</div>
+   <h3
+		data-en="Optimizing Your Website for Search Engines"
+		data-es="Optimización de tu Sitio para Motores de Búsqueda">
+		Optimizing Your Website for Search Engines
+	</h3>
+	<p
+		data-en="Meta tags, semantic HTML, structured data, sitemaps, and SEO best practices."
+		data-es="Meta etiquetas, HTML semántico, datos estructurados, mapas del sitio y mejores prácticas SEO.">
+		Meta tags, semantic HTML, structured data, sitemaps, and SEO best practices.
+	</p>
+  </a>
+
+  <a class="module-card" href="module16.html">
+    <div class="mod-icon">⚡</div>
+    <div class="mod-num"
+		data-en="MODULE 16"
+		data-es="MÓDULO 16">
+		MODULE 16
+	</div>
+    <h3
+		data-en="Testing and Improving Performance"
+		data-es="Pruebas y Mejora del Rendimiento">
+		Testing and Improving Performance
+	</h3>
+	<p
+		data-en="DevTools, Lighthouse, image optimization, lazy loading, and Core Web Vitals."
+		data-es="DevTools, Lighthouse, optimización de imágenes, carga diferida y Core Web Vitals.">
+		DevTools, Lighthouse, image optimization, lazy loading, and Core Web Vitals.
+	</p>
+  </a>
+
+</div>
+
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

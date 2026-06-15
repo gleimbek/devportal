@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 8 — Organizing Content with Lists and Tables</title>
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+.demo-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0;}
+.demo-table th{background:#1d4ed8;color:#fff;padding:10px 14px;text-align:left;}
+.demo-table td{padding:9px 14px;border-bottom:1px solid #e2e8f0;}
+.demo-table tr:nth-child(even) td{background:#f8fafc;}
+.demo-table tr:hover td{background:#eff6ff;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 8: <em>Organizing Content</em> with Lists and Tables</h2>
+    <p>Structure information semantically using ordered lists, unordered lists, definition lists, and data tables.</p>
+    <span class="tag">&lt;ul&gt;</span><span class="tag">&lt;ol&gt;</span><span class="tag">&lt;dl&gt;</span>
+    <span class="tag">&lt;table&gt;</span><span class="tag">&lt;thead&gt;</span><span class="tag">colspan</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📋</span>
+    <div><h3>HTML Lists</h3><p>Three types for different kinds of information.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Unordered, Ordered &amp; Definition Lists</h3>
+    <div class="code-block"><span class="cmt">&lt;!-- Unordered list (bullets) --&gt;</span>
+&lt;<span class="tag-name">ul</span>&gt;
+  &lt;<span class="tag-name">li</span>&gt;HTML&lt;/<span class="tag-name">li</span>&gt;
+  &lt;<span class="tag-name">li</span>&gt;CSS&lt;/<span class="tag-name">li</span>&gt;
+  &lt;<span class="tag-name">li</span>&gt;JavaScript&lt;/<span class="tag-name">li</span>&gt;
+&lt;/<span class="tag-name">ul</span>&gt;
+
+<span class="cmt">&lt;!-- Ordered list (numbers) --&gt;</span>
+&lt;<span class="tag-name">ol</span>&gt;
+  &lt;<span class="tag-name">li</span>&gt;Create HTML file&lt;/<span class="tag-name">li</span>&gt;
+  &lt;<span class="tag-name">li</span>&gt;Add CSS styles&lt;/<span class="tag-name">li</span>&gt;
+  &lt;<span class="tag-name">li</span>&gt;Open in browser&lt;/<span class="tag-name">li</span>&gt;
+&lt;/<span class="tag-name">ol</span>&gt;
+
+<span class="cmt">&lt;!-- Definition list (term + description) --&gt;</span>
+&lt;<span class="tag-name">dl</span>&gt;
+  &lt;<span class="tag-name">dt</span>&gt;HTML&lt;/<span class="tag-name">dt</span>&gt;
+  &lt;<span class="tag-name">dd</span>&gt;HyperText Markup Language — structures web content.&lt;/<span class="tag-name">dd</span>&gt;
+  &lt;<span class="tag-name">dt</span>&gt;CSS&lt;/<span class="tag-name">dt</span>&gt;
+  &lt;<span class="tag-name">dd</span>&gt;Cascading Style Sheets — styles web content.&lt;/<span class="tag-name">dd</span>&gt;
+&lt;/<span class="tag-name">dl</span>&gt;</div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📊</span>
+    <div><h3>HTML Tables</h3><p>For tabular data — not for layout!</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Table Structure</h3>
+    <div class="code-block">&lt;<span class="tag-name">table</span>&gt;
+  &lt;<span class="tag-name">caption</span>&gt;Monthly Sales 2024&lt;/<span class="tag-name">caption</span>&gt;
+
+  &lt;<span class="tag-name">thead</span>&gt;
+    &lt;<span class="tag-name">tr</span>&gt;
+      &lt;<span class="tag-name">th</span> <span class="attr">scope</span>=<span class="str">"col"</span>&gt;Month&lt;/<span class="tag-name">th</span>&gt;
+      &lt;<span class="tag-name">th</span> <span class="attr">scope</span>=<span class="str">"col"</span>&gt;Revenue&lt;/<span class="tag-name">th</span>&gt;
+      &lt;<span class="tag-name">th</span> <span class="attr">scope</span>=<span class="str">"col"</span>&gt;Units&lt;/<span class="tag-name">th</span>&gt;
+    &lt;/<span class="tag-name">tr</span>&gt;
+  &lt;/<span class="tag-name">thead</span>&gt;
+
+  &lt;<span class="tag-name">tbody</span>&gt;
+    &lt;<span class="tag-name">tr</span>&gt;
+      &lt;<span class="tag-name">td</span>&gt;January&lt;/<span class="tag-name">td</span>&gt;
+      &lt;<span class="tag-name">td</span>&gt;$12,400&lt;/<span class="tag-name">td</span>&gt;
+      &lt;<span class="tag-name">td</span>&gt;320&lt;/<span class="tag-name">td</span>&gt;
+    &lt;/<span class="tag-name">tr</span>&gt;
+    <span class="cmt">&lt;!-- more rows... --&gt;</span>
+  &lt;/<span class="tag-name">tbody</span>&gt;
+
+  &lt;<span class="tag-name">tfoot</span>&gt;
+    &lt;<span class="tag-name">tr</span>&gt;
+      &lt;<span class="tag-name">td</span>&gt;Total&lt;/<span class="tag-name">td</span>&gt;
+      &lt;<span class="tag-name">td</span> <span class="attr">colspan</span>=<span class="str">"2"</span>&gt;$148,800&lt;/<span class="tag-name">td</span>&gt;  <span class="cmt">&lt;!-- spans 2 cols --&gt;</span>
+    &lt;/<span class="tag-name">tr</span>&gt;
+  &lt;/<span class="tag-name">tfoot</span>&gt;
+&lt;/<span class="tag-name">table</span>&gt;</div>
+    <h4>Live Table Example</h4>
+    <table class="demo-table">
+      <caption style="font-weight:700;margin-bottom:8px;text-align:left;color:var(--blue)">Monthly Sales 2024</caption>
+      <thead><tr><th>Month</th><th>Revenue</th><th>Units Sold</th></tr></thead>
+      <tbody>
+        <tr><td>January</td><td>$12,400</td><td>320</td></tr>
+        <tr><td>February</td><td>$9,800</td><td>255</td></tr>
+        <tr><td>March</td><td>$15,200</td><td>410</td></tr>
+      </tbody>
+      <tfoot><tr><td><strong>Total</strong></td><td colspan="2"><strong>$37,400 / 985 units</strong></td></tr></tfoot>
+    </table>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="List and table topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m8-t1" onclick="switchTab(this,'m8-t1','m8-tabs')">Styling Lists</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m8-t2" onclick="switchTab(this,'m8-t2','m8-tabs')">Styling Tables</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m8-t3" onclick="switchTab(this,'m8-t3','m8-tabs')">colspan / rowspan</button>
+  </div>
+  <div id="m8-tabs">
+    <div id="m8-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 Custom List Styles</h4>
+      <div class="code-block"><span class="cmt">/* Remove default bullets */</span>
+<span class="prop">ul.clean</span> { <span class="attr">list-style</span>: <span class="val">none</span>; <span class="attr">padding</span>: <span class="val">0</span>; }
+
+<span class="cmt">/* Custom bullet with emoji */</span>
+<span class="prop">ul.check li::before</span> {
+  <span class="attr">content</span>: <span class="val">"✅ "</span>;
+}
+
+<span class="cmt">/* Ordered list styles */</span>
+<span class="prop">ol.alpha</span>  { <span class="attr">list-style-type</span>: <span class="val">lower-alpha</span>; }
+<span class="prop">ol.roman</span>  { <span class="attr">list-style-type</span>: <span class="val">upper-roman</span>; }
+<span class="prop">ol.start5</span> { <span class="attr">start</span>: <span class="val">5</span>; }  <span class="cmt">/* begin at 5 */</span>
+
+<span class="cmt">/* Horizontal nav list */</span>
+<span class="prop">nav ul</span> {
+  <span class="attr">display</span>: <span class="val">flex</span>;
+  <span class="attr">list-style</span>: <span class="val">none</span>;
+  <span class="attr">gap</span>: <span class="val">16px</span>;
+}</div>
+    </div>
+    <div id="m8-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 Styling Tables with CSS</h4>
+      <div class="code-block"><span class="prop">table</span> {
+  <span class="attr">width</span>: <span class="val">100%</span>;
+  <span class="attr">border-collapse</span>: <span class="val">collapse</span>;  <span class="cmt">/* merge cell borders */</span>
+}
+<span class="prop">th</span> {
+  <span class="attr">background</span>: <span class="val">#1d4ed8</span>;
+  <span class="attr">color</span>: <span class="val">#fff</span>;
+  <span class="attr">padding</span>: <span class="val">10px 14px</span>;
+  <span class="attr">text-align</span>: <span class="val">left</span>;
+}
+<span class="prop">td</span> { <span class="attr">padding</span>: <span class="val">9px 14px</span>; <span class="attr">border-bottom</span>: <span class="val">1px solid #e2e8f0</span>; }
+<span class="prop">tr:nth-child(even) td</span> { <span class="attr">background</span>: <span class="val">#f8fafc</span>; }
+<span class="prop">tr:hover td</span>           { <span class="attr">background</span>: <span class="val">#eff6ff</span>; }
+
+<span class="cmt">/* Responsive: wrap in a scroll container */</span>
+<span class="prop">.table-wrap</span> { <span class="attr">overflow-x</span>: <span class="val">auto</span>; }</div>
+    </div>
+    <div id="m8-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔲 Merging Cells</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- colspan spans across columns, rowspan spans down rows --&gt;</span>
+&lt;<span class="tag-name">table</span>&gt;
+  &lt;<span class="tag-name">tr</span>&gt;
+    &lt;<span class="tag-name">th</span> <span class="attr">colspan</span>=<span class="str">"3"</span>&gt;Full Year Summary&lt;/<span class="tag-name">th</span>&gt;
+  &lt;/<span class="tag-name">tr</span>&gt;
+  &lt;<span class="tag-name">tr</span>&gt;
+    &lt;<span class="tag-name">td</span> <span class="attr">rowspan</span>=<span class="str">"2"</span>&gt;Q1 &amp; Q2&lt;/<span class="tag-name">td</span>&gt;
+    &lt;<span class="tag-name">td</span>&gt;Jan–Mar&lt;/<span class="tag-name">td</span>&gt;
+    &lt;<span class="tag-name">td</span>&gt;$36k&lt;/<span class="tag-name">td</span>&gt;
+  &lt;/<span class="tag-name">tr</span>&gt;
+  &lt;<span class="tag-name">tr</span>&gt;
+    &lt;<span class="tag-name">td</span>&gt;Apr–Jun&lt;/<span class="tag-name">td</span>&gt;
+    &lt;<span class="tag-name">td</span>&gt;$41k&lt;/<span class="tag-name">td</span>&gt;
+  &lt;/<span class="tag-name">tr</span>&gt;
+&lt;/<span class="tag-name">table</span>&gt;</div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Table &amp; List Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span><span class="ed-dot" style="background:#ffbd2e"></span><span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">table-demo.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m8-editor" rows="22">&lt;style&gt;
+  body { font-family: sans-serif; padding: 20px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  th { background: #1d4ed8; color: #fff; padding: 10px; text-align: left; }
+  td { padding: 9px; border-bottom: 1px solid #e2e8f0; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  ul { padding-left: 20px; line-height: 2; }
+  ul li::marker { color: #1d4ed8; }
+&lt;/style&gt;
+
+&lt;h2&gt;Web Technologies&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;HTML&lt;/strong&gt; — Structure&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CSS&lt;/strong&gt; — Presentation&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt; — Behavior&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;&lt;th&gt;Year&lt;/th&gt;&lt;th&gt;Creator&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;HTML&lt;/td&gt;&lt;td&gt;1991&lt;/td&gt;&lt;td&gt;Tim Berners-Lee&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;CSS&lt;/td&gt;&lt;td&gt;1996&lt;/td&gt;&lt;td&gt;Håkon Wium Lie&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;JavaScript&lt;/td&gt;&lt;td&gt;1995&lt;/td&gt;&lt;td&gt;Brendan Eich&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m8-editor','m8-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m8-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+  <div class="quiz-card">
+    <h4>Q1 — Which list type is best for a glossary of terms and their definitions?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m8q1" data-val="a" onclick="checkMC('m8q1','a','c','&lt;ul&gt; is for unordered bullet lists.')"><span class="option-icon">○</span> &lt;ul&gt;</button></li>
+      <li><button class="option-btn" data-q="m8q1" data-val="b" onclick="checkMC('m8q1','b','c','&lt;ol&gt; is for numbered/ordered lists.')"><span class="option-icon">○</span> &lt;ol&gt;</button></li>
+      <li><button class="option-btn" data-q="m8q1" data-val="c" onclick="checkMC('m8q1','c','c','Correct! &lt;dl&gt; (definition list) pairs &lt;dt&gt; terms with &lt;dd&gt; descriptions — perfect for glossaries.')"><span class="option-icon">○</span> &lt;dl&gt;</button></li>
+      <li><button class="option-btn" data-q="m8q1" data-val="d" onclick="checkMC('m8q1','d','c','&lt;table&gt; is for tabular data, not definition pairs.')"><span class="option-icon">○</span> &lt;table&gt;</button></li>
+    </ul>
+    <div id="m8q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q2 — What CSS property merges double-borders in a table into single lines?</h4>
+      <div class="attempts-info" id="m8q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m8q2-in" placeholder="property: value">
+      <button class="fill-btn" onclick="checkFill('m8q2','border-collapse:collapse','border-collapse: collapse removes the gap between adjacent cell borders, giving a clean grid look.','Hint: border-___: collapse')">Submit</button>
+      <div id="m8q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What attribute makes a table cell span across 2 columns?</h4>
+      <div class="attempts-info" id="m8q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m8q3-in" placeholder='attribute="2"'>
+      <button class="fill-btn" onclick="checkFill('m8q3','colspan=&quot;2&quot;','colspan=&quot;2&quot; merges a cell across 2 columns horizontally. rowspan does the same vertically.','Hint: col___')">Submit</button>
+      <div id="m8q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module07.html" style="margin-right:12px">← Module 7</a>
+    <a class="back-btn" href="../html-css-course/module09.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 9 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 15 — Optimizing Your Website for Search Engines</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 15: <em>Optimizing Your Website</em> for Search Engines</h2>
+    <p>Rank higher with semantic HTML, meta tags, structured data, canonical URLs, sitemaps, and on-page SEO best practices.</p>
+    <span class="tag">meta tags</span><span class="tag">canonical</span><span class="tag">structured data</span>
+    <span class="tag">sitemap.xml</span><span class="tag">robots.txt</span><span class="tag">Core Web Vitals</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🔍</span>
+    <div><h3>Essential Meta Tags for SEO</h3><p>The &lt;head&gt; elements search engines read first.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>SEO-Optimized &lt;head&gt;</h3>
+    <div class="code-block">&lt;<span class="tag-name">head</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"viewport"</span> <span class="attr">content</span>=<span class="str">"width=device-width, initial-scale=1.0"</span>&gt;
+
+  <span class="cmt">&lt;!-- Title: 50-60 characters. Most important on-page SEO factor --&gt;</span>
+  &lt;<span class="tag-name">title</span>&gt;Learn HTML &amp; CSS | Free Interactive Course — MyWebsite&lt;/<span class="tag-name">title</span>&gt;
+
+  <span class="cmt">&lt;!-- Description: 120-160 chars. Shown in search results --&gt;</span>
+  &lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"description"</span>
+        <span class="attr">content</span>=<span class="str">"Master HTML and CSS from scratch with 16 interactive modules,
+                 live code editors, and quizzes. Free and bilingual."</span>&gt;
+
+  <span class="cmt">&lt;!-- Robots: control indexing and link following --&gt;</span>
+  &lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"robots"</span> <span class="attr">content</span>=<span class="str">"index, follow"</span>&gt;
+
+  <span class="cmt">&lt;!-- Canonical: prevents duplicate content penalties --&gt;</span>
+  &lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"canonical"</span> <span class="attr">href</span>=<span class="str">"https://example.com/html-css-course"</span>&gt;
+
+  <span class="cmt">&lt;!-- Hreflang: tell Google about language variants --&gt;</span>
+  &lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"alternate"</span> <span class="attr">hreflang</span>=<span class="str">"en"</span> <span class="attr">href</span>=<span class="str">"https://example.com/en/course"</span>&gt;
+  &lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"alternate"</span> <span class="attr">hreflang</span>=<span class="str">"es"</span> <span class="attr">href</span>=<span class="str">"https://example.com/es/curso"</span>&gt;
+&lt;/<span class="tag-name">head</span>&gt;</div>
+
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p>The <strong>title tag</strong> is the single most impactful on-page SEO element. Put your primary keyword near the beginning and keep it under 60 characters to avoid truncation in search results.</p>
+    </div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="SEO topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m15-t1" onclick="switchTab(this,'m15-t1','m15-tabs')">Semantic HTML &amp; SEO</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m15-t2" onclick="switchTab(this,'m15-t2','m15-tabs')">Structured Data</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m15-t3" onclick="switchTab(this,'m15-t3','m15-tabs')">sitemap.xml</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m15-t4" onclick="switchTab(this,'m15-t4','m15-tabs')">robots.txt</button>
+  </div>
+  <div id="m15-tabs">
+    <div id="m15-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🏗️ Semantic HTML = Better SEO</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- ❌ Non-semantic — Google sees a blob of divs --&gt;</span>
+&lt;<span class="tag-name">div</span> <span class="attr">class</span>=<span class="str">"header"</span>&gt;&lt;<span class="tag-name">div</span> <span class="attr">class</span>=<span class="str">"title"</span>&gt;My Blog&lt;/<span class="tag-name">div</span>&gt;&lt;/<span class="tag-name">div</span>&gt;
+&lt;<span class="tag-name">div</span> <span class="attr">class</span>=<span class="str">"post"</span>&gt;&lt;<span class="tag-name">div</span> <span class="attr">class</span>=<span class="str">"post-title"</span>&gt;Article Title&lt;/<span class="tag-name">div</span>&gt;&lt;/<span class="tag-name">div</span>&gt;
+
+<span class="cmt">&lt;!-- ✅ Semantic — Google understands the hierarchy --&gt;</span>
+&lt;<span class="tag-name">header</span>&gt;&lt;<span class="tag-name">h1</span>&gt;My Blog&lt;/<span class="tag-name">h1</span>&gt;&lt;/<span class="tag-name">header</span>&gt;
+&lt;<span class="tag-name">main</span>&gt;
+  &lt;<span class="tag-name">article</span>&gt;
+    &lt;<span class="tag-name">h2</span>&gt;Article Title&lt;/<span class="tag-name">h2</span>&gt;
+    &lt;<span class="tag-name">time</span> <span class="attr">datetime</span>=<span class="str">"2025-06-15"</span>&gt;June 15, 2025&lt;/<span class="tag-name">time</span>&gt;
+    &lt;<span class="tag-name">p</span>&gt;Content…&lt;/<span class="tag-name">p</span>&gt;
+  &lt;/<span class="tag-name">article</span>&gt;
+&lt;/<span class="tag-name">main</span>&gt;
+
+<span class="cmt">/* SEO heading strategy:
+   h1  — One per page, contains main keyword
+   h2  — Major sections
+   h3  — Subsections within h2
+   Never skip levels! */</span></div>
+    </div>
+    <div id="m15-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📊 JSON-LD Structured Data</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Add in &lt;head&gt; — enables rich results in Google --&gt;</span>
+&lt;<span class="tag-name">script</span> <span class="attr">type</span>=<span class="str">"application/ld+json"</span>&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Learn HTML and CSS in 16 Modules",
+  "author": {
+    "@type": "Person",
+    "name": "Jane Developer"
+  },
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-06-15",
+  "image": "https://example.com/article-cover.jpg",
+  "description": "A comprehensive interactive course covering HTML5 and CSS3.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "MyWebsite",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/logo.png"
+    }
+  }
+}
+&lt;/<span class="tag-name">script</span>&gt;</div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p>Structured data can unlock <strong>rich results</strong> — star ratings, FAQs, breadcrumbs, and recipe cards that appear directly in Google search results.</p>
+      </div>
+    </div>
+    <div id="m15-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🗺️ sitemap.xml</h4>
+      <div class="code-block"><span class="cmt">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+&lt;<span class="tag-name">urlset</span> <span class="attr">xmlns</span>=<span class="str">"http://www.sitemaps.org/schemas/sitemap/0.9"</span>&gt;
+
+  &lt;<span class="tag-name">url</span>&gt;
+    &lt;<span class="tag-name">loc</span>&gt;https://example.com/&lt;/<span class="tag-name">loc</span>&gt;
+    &lt;<span class="tag-name">lastmod</span>&gt;2025-06-15&lt;/<span class="tag-name">lastmod</span>&gt;
+    &lt;<span class="tag-name">changefreq</span>&gt;weekly&lt;/<span class="tag-name">changefreq</span>&gt;
+    &lt;<span class="tag-name">priority</span>&gt;1.0&lt;/<span class="tag-name">priority</span>&gt;
+  &lt;/<span class="tag-name">url</span>&gt;
+
+  &lt;<span class="tag-name">url</span>&gt;
+    &lt;<span class="tag-name">loc</span>&gt;https://example.com/html-css-course/&lt;/<span class="tag-name">loc</span>&gt;
+    &lt;<span class="tag-name">lastmod</span>&gt;2025-06-15&lt;/<span class="tag-name">lastmod</span>&gt;
+    &lt;<span class="tag-name">changefreq</span>&gt;monthly&lt;/<span class="tag-name">changefreq</span>&gt;
+    &lt;<span class="tag-name">priority</span>&gt;0.8&lt;/<span class="tag-name">priority</span>&gt;
+  &lt;/<span class="tag-name">url</span>&gt;
+
+&lt;/<span class="tag-name">urlset</span>&gt;
+
+<span class="cmt">&lt;!-- Submit to Google Search Console:
+     https://search.google.com/search-console --&gt;</span></div>
+    </div>
+    <div id="m15-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🤖 robots.txt</h4>
+      <div class="code-block"><span class="cmt"># Place at: https://example.com/robots.txt</span>
+<span class="cmt"># Controls which pages crawlers can access</span>
+
+<span class="out">User-agent: *</span>         <span class="cmt"># applies to all robots</span>
+<span class="out">Allow: /</span>              <span class="cmt"># allow everything by default</span>
+<span class="out">Disallow: /admin/</span>     <span class="cmt"># block admin pages</span>
+<span class="out">Disallow: /private/</span>   <span class="cmt"># block private content</span>
+<span class="out">Disallow: /api/</span>       <span class="cmt"># no need to index API endpoints</span>
+
+<span class="cmt"># Specific bot rules</span>
+<span class="out">User-agent: GPTBot</span>
+<span class="out">Disallow: /</span>           <span class="cmt"># block OpenAI's crawler</span>
+
+<span class="cmt"># Point to your sitemap</span>
+<span class="out">Sitemap: https://example.com/sitemap.xml</span>
+
+<span class="cmt"># ⚠️ robots.txt is advisory only —
+#    malicious bots can ignore it!</span></div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ SEO Head Template</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">seo-template.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m15-editor" rows="32">&lt;style&gt;
+  body { font-family: sans-serif; padding: 24px; background: #f8fafc; color: #1e293b; }
+  .seo-card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,.08); max-width: 600px; }
+  .seo-title { color: #1a0dab; font-size: 1.1rem; font-weight: 700; text-decoration: none; display: block; margin-bottom: 4px; }
+  .seo-url   { color: #006621; font-size: .85rem; margin-bottom: 6px; }
+  .seo-desc  { color: #545454; font-size: .9rem; line-height: 1.5; }
+  .seo-label { font-size: .75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: .06em; margin: 16px 0 4px; }
+  input, textarea { width: 100%; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: .9rem; box-sizing: border-box; }
+  button { margin-top: 12px; padding: 10px 24px; background: #1d4ed8; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+&lt;/style&gt;
+
+&lt;div class="seo-card"&gt;
+  &lt;h2 style="margin-top:0"&gt;🔍 Google Preview Generator&lt;/h2&gt;
+
+  &lt;div class="seo-label"&gt;Page Title (50-60 chars)&lt;/div&gt;
+  &lt;input id="seo-title" type="text" value="Learn HTML &amp; CSS | Free Interactive Course" maxlength="60"&gt;
+
+  &lt;div class="seo-label"&gt;URL&lt;/div&gt;
+  &lt;input id="seo-url" type="text" value="https://example.com/html-css-course"&gt;
+
+  &lt;div class="seo-label"&gt;Meta Description (120-160 chars)&lt;/div&gt;
+  &lt;textarea id="seo-desc" rows="3" maxlength="160"&gt;Master HTML and CSS from scratch with 16 interactive modules, live code editors, and quizzes. Free and bilingual!&lt;/textarea&gt;
+
+  &lt;button onclick="updatePreview()"&gt;▶ Update Preview&lt;/button&gt;
+
+  &lt;hr style="margin:20px 0;border-color:#e2e8f0"&gt;
+  &lt;p style="font-size:.8rem;color:#94a3b8;margin:0 0 8px"&gt;GOOGLE SEARCH PREVIEW&lt;/p&gt;
+  &lt;a id="prev-title" class="seo-title" href="#"&gt;Learn HTML &amp; CSS | Free Interactive Course&lt;/a&gt;
+  &lt;div id="prev-url" class="seo-url"&gt;example.com › html-css-course&lt;/div&gt;
+  &lt;div id="prev-desc" class="seo-desc"&gt;Master HTML and CSS from scratch with 16 interactive modules, live code editors, and quizzes. Free and bilingual!&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  function updatePreview() {
+    document.getElementById('prev-title').textContent = document.getElementById('seo-title').value;
+    const url = document.getElementById('seo-url').value.replace('https://','').replace('http://','');
+    document.getElementById('prev-url').textContent = url.replace(/\//g,' › ');
+    document.getElementById('prev-desc').textContent = document.getElementById('seo-desc').value;
+  }
+&lt;/script&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m15-editor','m15-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m15-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — What is the recommended character length for an HTML &lt;title&gt; tag for SEO?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m15q1" data-val="a" onclick="checkMC('m15q1','a','c','20-30 chars is too short — you\'ll waste keyword opportunities.')"><span class="option-icon">○</span> 20 – 30 characters</button></li>
+      <li><button class="option-btn" data-q="m15q1" data-val="b" onclick="checkMC('m15q1','b','c','100+ chars will be truncated by Google in search results.')"><span class="option-icon">○</span> 100+ characters</button></li>
+      <li><button class="option-btn" data-q="m15q1" data-val="c" onclick="checkMC('m15q1','c','c','Correct! 50-60 characters ensures your title is fully visible in search results without being cut off.')"><span class="option-icon">○</span> 50 – 60 characters</button></li>
+      <li><button class="option-btn" data-q="m15q1" data-val="d" onclick="checkMC('m15q1','d','c','200 chars is far too long for a page title.')"><span class="option-icon">○</span> 200 characters</button></li>
+    </ul>
+    <div id="m15q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — What does the canonical link tag prevent?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m15q2" data-val="a" onclick="checkMC('m15q2','a','c','The canonical tag does not affect page load speed.')"><span class="option-icon">○</span> Slow page loads</button></li>
+      <li><button class="option-btn" data-q="m15q2" data-val="b" onclick="checkMC('m15q2','b','c','The canonical tag does not prevent XSS attacks.')"><span class="option-icon">○</span> XSS attacks</button></li>
+      <li><button class="option-btn" data-q="m15q2" data-val="c" onclick="checkMC('m15q2','c','c','Correct! Canonical tags tell Google which version of a page is the authoritative one, preventing duplicate content from splitting your SEO ranking signals.')"><span class="option-icon">○</span> Duplicate content penalties</button></li>
+      <li><button class="option-btn" data-q="m15q2" data-val="d" onclick="checkMC('m15q2','d','c','Meta tags do not protect cookies.')"><span class="option-icon">○</span> Cookie theft</button></li>
+    </ul>
+    <div id="m15q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What file tells search engine crawlers which pages they can and cannot index?</h4>
+      <div class="attempts-info" id="m15q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m15q3-in" placeholder="filename.txt">
+      <button class="fill-btn" onclick="checkFill('m15q3','robots.txt','robots.txt lives at the root of your domain (e.g., example.com/robots.txt) and uses User-agent and Disallow directives to control crawl access.','Hint: it has robot in the name.')">Submit</button>
+      <div id="m15q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What script type is used to add JSON-LD structured data to a page?</h4>
+      <div class="attempts-info" id="m15q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m15q4-in" placeholder='type="..."'>
+      <button class="fill-btn" onclick="checkFill('m15q4','application/ld+json','&lt;script type=&quot;application/ld+json&quot;&gt; is the correct way to embed JSON-LD structured data. Browsers ignore it as executable code; Google reads it as metadata.','Hint: application/ld+___')">Submit</button>
+      <div id="m15q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module14.html" style="margin-right:12px">← Module 14</a>
+    <a class="back-btn" href="../html-css-course/module16.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 16 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Development Learning Portal</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<!-- TOP NAV -->
+<header class="navbar">
+  <div class="logo">DevPortal</div>
+
+  <nav>
+    <a href="#courses" class="nav-link" data-en="Courses" data-es="Cursos">Courses</a>
+    <a href="#exams" class="nav-link" data-en="Exams" data-es="Exámenes">Exams</a>
+    <a href="#about" class="nav-link" data-en="About" data-es="Acerca de">About</a>
+  </nav>
+
+  <!-- Language Switch -->
+  <div class="lang-switch">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('es')">ES</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 data-en="Become a Web Developer" data-es="Conviértete en Desarrollador Web">
+      Become a Web Developer
+    </h1>
+
+    <p data-en="Learn HTML, CSS, JavaScript and Java with interactive lessons and certification exams."
+       data-es="Aprende HTML, CSS, JavaScript y Java con lecciones interactivas y exámenes de certificación.">
+      Learn HTML, CSS, JavaScript and Java with interactive lessons and certification exams.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#courses" class="btn primary" data-en="Start Learning" data-es="Comenzar">Start Learning</a>
+      <a href="#exams" class="btn secondary" data-en="Go to Exams" data-es="Ir a Exámenes">Go to Exams</a>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses" class="section">
+  <h2 data-en="Available Courses" data-es="Cursos Disponibles">Available Courses</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
+	  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
+      <h3>HTML5 & CSS3 </h3>
+      <p data-en="Structure modern websites" data-es="Estructura sitios web modernos">
+        Structure modern websites and Design beautiful interfaces
+      </p>
+      <a href="html-css-course/index.html" class="btn small" data-en="Open Course" data-es="Abrir Curso">Open Course</a>
+    </div>
+
+    <!--<div class="card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
+      <h3>CSS3</h3>
+      <p data-en="Design beautiful interfaces" data-es="Diseña interfaces atractivas">
+        Design beautiful interfaces
+      </p>
+      <a href="css-course.html" class="btn small" data-en="Open Course" data-es="Abrir Curso">Open Course</a>
+    </div>-->
+
+    <div class="card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
+      <h3>JavaScript</h3>
+      <p data-en="Add interactivity to websites" data-es="Agrega interactividad a sitios web">
+        Add interactivity to websites
+      </p>
+      <a href="java-course/java-course.html" class="btn small" data-en="Open Course" data-es="Abrir Curso">Open Course</a>
+    </div>
+
+   <!-- <div class="card">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg">
+      <h3>Java</h3>
+      <p data-en="Build powerful applications" data-es="Construye aplicaciones potentes">
+        Build powerful applications
+      </p>
+      <a href="java-course.html" class="btn small" data-en="Open Course" data-es="Abrir Curso">Open Course</a>
+    </div>-->
+
+  </div>
+</section>
+
+<!-- EXAMS SECTION -->
+<section id="exams" class="section dark">
+  <h2 data-en="Final Certification Exams" data-es="Exámenes de Certificación">Final Certification Exams</h2>
+
+  <p data-en="Each exam contains 50 questions. Minimum passing score: 80%."
+     data-es="Cada examen contiene 50 preguntas. Puntaje mínimo: 80%.">
+     Each exam contains 50 questions. Minimum passing score: 80%.
+  </p>
+
+  <div class="grid">
+
+    <div class="card dark-cardhtml">
+      <h3>HTML Exam</h3>
+      <a href="exam/html-exam.html" class="btn html">Start</a>
+    </div>
+
+    <div class="card dark-cardcss">
+      <h3>CSS Exam</h3>
+      <a href="exam/css-exam.html" class="btn css">Start</a>
+    </div>
+
+    <div class="card dark-cardjava">
+      <h3>JavaScript Exam</h3>
+      <a href="exam/js-exam.html" class="btn java">Start</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2 data-en="About This Platform" data-es="Sobre esta plataforma">About This Platform</h2>
+
+  <p data-en="This learning system is designed to help students master web development through structured modules and exams."
+     data-es="Este sistema de aprendizaje está diseñado para ayudar a los estudiantes a dominar desarrollo web mediante módulos estructurados y exámenes.">
+     This learning system is designed to help students master web development through structured modules and exams.
+  </p>
+
+  <div class="grid" style="margin-top: 32px;">
+
+    <div class="card">
+      <h3 data-en="🎯 Our Mission" data-es="🎯 Nuestra Misión">🎯 Our Mission</h3>
+      <p data-en="To provide accessible, practical, and high-quality web development education for students at all levels — from complete beginners to those looking to sharpen their professional skills."
+         data-es="Ofrecer educación en desarrollo web accesible, práctica y de alta calidad para estudiantes de todos los niveles — desde principiantes hasta quienes desean perfeccionar sus habilidades profesionales.">
+         To provide accessible, practical, and high-quality web development education for students at all levels — from complete beginners to those looking to sharpen their professional skills.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 data-en="📚 What You'll Learn" data-es="📚 Lo que Aprenderás">📚 What You'll Learn</h3>
+      <p data-en="Our curriculum covers HTML5, CSS3, and JavaScript through real-world examples, interactive exercises, and module quizzes — building up to a final certification exam."
+         data-es="Nuestro plan de estudios cubre HTML5, CSS3 y JavaScript a través de ejemplos del mundo real, ejercicios interactivos y cuestionarios por módulo, culminando en un examen de certificación final.">
+         Our curriculum covers HTML5, CSS3, and JavaScript through real-world examples, interactive exercises, and module quizzes — building up to a final certification exam.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 data-en="🏆 Certification" data-es="🏆 Certificación">🏆 Certification</h3>
+      <p data-en="Students who score 80% or higher on any final exam receive a downloadable certificate of completion, recognizing their achievement in that technology."
+         data-es="Los estudiantes que obtengan un 80% o más en cualquier examen final recibirán un certificado de finalización descargable, reconociendo su logro en esa tecnología.">
+         Students who score 80% or higher on any final exam receive a downloadable certificate of completion, recognizing their achievement in that technology.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 data-en="🌐 Bilingual Support" data-es="🌐 Soporte Bilingüe">🌐 Bilingual Support</h3>
+      <p data-en="All courses and exams are fully available in both English and Spanish, making this platform ideal for bilingual classrooms and self-learners around the world."
+         data-es="Todos los cursos y exámenes están completamente disponibles en inglés y español, haciendo esta plataforma ideal para aulas bilingües y estudiantes independientes en todo el mundo.">
+         All courses and exams are fully available in both English and Spanish, making this platform ideal for bilingual classrooms and self-learners around the world.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 DevPortal - Design by Leimbek-WebStudio</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

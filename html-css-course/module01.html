@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 — Getting Started with HTML</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<header id="top-bar" role="banner">
+	  <h1
+	  data-en="🌐 HTML &amp; CSS — Complete Interactive Course"
+	  data-es="🌐 HTML &amp; CSS — Curso Interactivo Completo">
+	  🌐 HTML &amp; CSS — Complete Interactive Course
+	</h1>
+
+	<div id="score-display"
+		 data-en="Score: <span id='score-num'>0</span> / 110"
+		 data-es="Puntuación: <span id='score-num'>0</span> / 110">
+	  Score: <span id="score-num">0</span> / 110
+	</div>
+
+	<button id="lang-toggle"
+			onclick="toggleLang()"
+			aria-label="Switch language">
+	  🌐 Español
+	</button>
+</header>
+
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2
+	 data-en="Module 1: <em>Getting Started</em> with HTML"
+	 data-es="Módulo 1: <em>Introducción</em> a HTML">
+	 Module 1: <em>Getting Started</em> with HTML
+	</h2>
+
+	<p
+	 data-en="Learn what HTML is, how browsers interpret it, and write your very first web page from scratch."
+	 data-es="Aprende qué es HTML, cómo lo interpretan los navegadores y crea tu primera página web desde cero.">
+	 Learn what HTML is, how browsers interpret it, and write your very first web page from scratch.
+	</p>
+    <span class="tag">DOCTYPE</span><span class="tag">&lt;html&gt;</span><span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;body&gt;</span><span class="tag" data-en="tags" data-es="etiquetas">tags</span><span class="tag" data-en="attributes" data-es="atributos">attributes</span>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section-header">
+    <span class="section-icon">📄</span>
+    <div>
+      <h3
+		data-en="What is HTML?"
+		data-es="¿Qué es HTML?">
+		What is HTML?
+	  </h3>
+
+	  <p
+		 data-en="HyperText Markup Language — the skeleton of every web page."
+		 data-es="HyperText Markup Language — el esqueleto de toda página web.">
+		 HyperText Markup Language — the skeleton of every web page.
+	  </p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+	 data-en="HTML at a Glance"
+	 data-es="HTML de un Vistazo">
+	 HTML at a Glance
+	</h3>
+    <p 
+		data-en="<strong>HTML</strong> (HyperText Markup Language) tells the browser <em>what</em> content is on a page — headings, paragraphs, images, links, and more. It uses <strong>tags</strong> wrapped in angle brackets."
+		data-es="<strong>HTML</strong> (HyperText Markup Language) le indica al navegador <em>qué</em> contenido hay en una página: encabezados, párrafos, imágenes, enlaces y más. Utiliza <strong>etiquetas</strong> encerradas entre signos de mayor y menor que.">
+		<strong>HTML</strong> (HyperText Markup Language) tells the browser <em>what</em> content is on a page — headings, paragraphs, images, links, and more. It uses <strong>tags</strong> wrapped in angle brackets.
+	</p>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p
+		data-en="<strong>HTML ≠ a programming language.</strong> It is a <em>markup</em> language — you describe content, not logic. For logic you add JavaScript."
+		data-es="<strong>HTML ≠ lenguaje de programación.</strong> Es un lenguaje de <em>marcado</em>: describes contenido, no lógica. Para la lógica, añades JavaScript.">
+		<strong>HTML ≠ a programming language.</strong> It is a <em>markup</em> language — you describe content, not logic. For logic you add JavaScript.
+	  </p>
+    </div>
+    <h4
+	 data-en="The Minimal HTML Document"
+	 data-es="El Documento HTML Mínimo">
+	 The Minimal HTML Document
+	</h4>
+    <div class="code-block">&lt;!<span class="kw">DOCTYPE</span> <span class="ty">html</span>&gt;
+&lt;<span class="tag-name">html</span> <span class="attr">lang</span>=<span class="str">"en"</span>&gt;
+  &lt;<span class="tag-name">head</span>&gt;
+    &lt;<span class="tag-name">meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span>&gt;
+    &lt;<span class="tag-name">title</span>&gt;My First Page&lt;/<span class="tag-name">title</span>&gt;
+  &lt;/<span class="tag-name">head</span>&gt;
+  &lt;<span class="tag-name">body</span>&gt;
+    &lt;<span class="tag-name">h1</span>&gt;Hello, World!&lt;/<span class="tag-name">h1</span>&gt;
+    &lt;<span class="tag-name">p</span>&gt;This is my first web page.&lt;/<span class="tag-name">p</span>&gt;
+  &lt;/<span class="tag-name">body</span>&gt;
+&lt;/<span class="tag-name">html</span>&gt;</div>
+    <p
+		data-en="Every HTML file should start with this structure. Let's break it down:"
+		data-es="Todo archivo HTML debe comenzar con esta estructura. Analicémosla:">
+		Every HTML file should start with this structure. Let's break it down:
+	</p>
+    <ul class="step-list">
+      <li
+		data-en="<strong>&lt;!DOCTYPE html&gt;</strong> — Tells the browser this is an HTML5 document."
+		data-es="<strong>&lt;!DOCTYPE html&gt;</strong> — Indica al navegador que se trata de un documento HTML5.">
+		<strong>&lt;!DOCTYPE html&gt;</strong> — Tells the browser this is an HTML5 document.
+	  </li>
+      <li
+		data-en="<strong>&lt;html lang='en'&gt;</strong>— The root element; <code>lang</code> helps screen readers and search engines."
+		data-es="<strong>&lt;html lang='en'&gt;</strong> — El elemento raíz; <code>lang</code> ayuda a los lectores de pantalla y a los motores de búsqueda.">
+		<strong>&lt;html lang="en"&gt;</strong> — The root element; <code>lang</code> helps screen readers and search engines.
+	  </li>
+      <li
+		data-en="<strong>&lt;head&gt;</strong> — Invisible metadata: character set, title, CSS links."
+		data-es="<strong>&lt;head&gt;</strong> — Metadatos invisibles: juego de caracteres, título, enlaces a CSS.">
+		<strong>&lt;head&gt;</strong> — Invisible metadata: character set, title, CSS links.
+	  </li>
+      <li
+	   data-en="<strong>&lt;body&gt;</strong> — Everything the user sees on screen."
+	   data-es="<strong>&lt;body&gt;</strong> — Todo lo que el usuario ve en pantalla.">
+	   <strong>&lt;body&gt;</strong> — Everything the user sees on screen.
+	  </li>
+    </ul>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-header">
+    <span class="section-icon">🏷️</span>
+    <div>
+      <h3
+	   data-en="Tags, Elements &amp; Attributes"
+	   data-es="Etiquetas, Elementos y Atributos">
+	   Tags, Elements &amp; Attributes
+	  </h3>
+
+	  <p
+	   data-en="The building blocks of every HTML document."
+	   data-es="Los componentes fundamentales de cualquier documento HTML.">
+	   The building blocks of every HTML document.
+	  </p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+		data-en="Anatomy of an HTML Tag"
+		data-es="Anatomía de una Etiqueta HTML">
+		Anatomy of an HTML Tag
+	</h3>
+    <div class="code-block"><span class="cmt">&lt;!-- Opening tag + content + closing tag = element --&gt;</span>
+&lt;<span class="tag-name">p</span>&gt;This is a paragraph.&lt;/<span class="tag-name">p</span>&gt;
+
+<span class="cmt">&lt;!-- Self-closing (void) element — no closing tag needed --&gt;</span>
+&lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"photo.jpg"</span> <span class="attr">alt</span>=<span class="str">"A landscape"</span>&gt;
+
+<span class="cmt">&lt;!-- Attribute format:  name="value" --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://example.com"</span> <span class="attr">target</span>=<span class="str">"_blank"</span>&gt;Visit&lt;/<span class="tag-name">a</span>&gt;</div>
+    <div class="info-box warning">
+      <span class="info-icon">⚠️</span>
+      <p
+	   data-en="<strong>Always close your tags</strong> (except void elements). Unclosed tags cause unpredictable rendering bugs."
+	   data-es="<strong>Siempre cierra tus etiquetas</strong> (excepto los elementos vacíos). Las etiquetas sin cerrar provocan errores de visualización impredecibles.">
+	   <strong>Always close your tags</strong> (except void elements). Unclosed tags cause unpredictable rendering bugs.
+	  </p>
+    </div>
+  </div>
+
+  <!-- TABS: Common tags -->
+  <div class="tab-btns" role="tablist" aria-label="Common HTML tags">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m1-t1" onclick="switchTab(this,'m1-t1','m1-tabs')" data-en="Text Tags" data-es="Etiquetas de Texto">Text Tags</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m1-t2" onclick="switchTab(this,'m1-t2','m1-tabs')" data-en="Formatting" data-es="Formato">Formatting</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m1-t3" onclick="switchTab(this,'m1-t3','m1-tabs')" data-en="Comments"
+ data-es="Comentarios">Comments</button>
+  </div>
+  <div id="m1-tabs">
+    <div id="m1-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px" data-en="📝 Core Text Tags" data-es="📝 Etiquetas de Texto Fundamentales">📝 Core Text Tags</h4>
+      <div class="code-block">&lt;<span class="tag-name">h1</span>&gt;Main Heading (biggest)&lt;/<span class="tag-name">h1</span>&gt;
+&lt;<span class="tag-name">h2</span>&gt;Sub-heading&lt;/<span class="tag-name">h2</span>&gt;
+&lt;<span class="tag-name">h3</span>&gt;Section heading&lt;/<span class="tag-name">h3</span>&gt;
+&lt;<span class="tag-name">p</span>&gt;A paragraph of text.&lt;/<span class="tag-name">p</span>&gt;
+&lt;<span class="tag-name">span</span>&gt;Inline container&lt;/<span class="tag-name">span</span>&gt;
+&lt;<span class="tag-name">div</span>&gt;Block container&lt;/<span class="tag-name">div</span>&gt;</div>
+    </div>
+    <div id="m1-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px" data-en="✨ Inline Formatting" data-es="✨ Formato en Línea">✨ Inline Formatting</h4>
+      <div class="code-block">&lt;<span class="tag-name">strong</span>&gt;Bold / important text&lt;/<span class="tag-name">strong</span>&gt;
+&lt;<span class="tag-name">em</span>&gt;Italic / emphasized text&lt;/<span class="tag-name">em</span>&gt;
+&lt;<span class="tag-name">mark</span>&gt;Highlighted text&lt;/<span class="tag-name">mark</span>&gt;
+&lt;<span class="tag-name">code</span>&gt;Inline code&lt;/<span class="tag-name">code</span>&gt;
+&lt;<span class="tag-name">br</span>&gt;  <span class="cmt">&lt;!-- line break (void) --&gt;</span>
+&lt;<span class="tag-name">hr</span>&gt;  <span class="cmt">&lt;!-- horizontal rule (void) --&gt;</span></div>
+    </div>
+    <div id="m1-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px" data-en="💬 HTML Comments" data-es="💬 Comentarios HTML">💬 HTML Comments</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- This is a comment — the browser ignores it --&gt;</span>
+
+<span class="cmt">&lt;!-- 
+  Multi-line comment.
+  Use comments to explain your code or
+  temporarily disable sections.
+--&gt;</span>
+
+&lt;<span class="tag-name">p</span>&gt;This text shows.&lt;/<span class="tag-name">p</span>&gt;
+<span class="cmt">&lt;!-- &lt;p&gt;This paragraph is hidden.&lt;/p&gt; --&gt;</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-header">
+    <span class="section-icon">🔬</span>
+    <div>
+      <h3
+	    data-en="Live Sandbox"
+	    data-es="Laboratorio Interactivo">
+	    Live Sandbox
+	  </h3>
+
+	  <p
+	   data-en="Try editing the HTML and see the result instantly."
+	   data-es="Edita el HTML y observa el resultado al instante.">
+	   Try editing the HTML and see the result instantly.
+	  </p>
+    </div>
+  </div>
+
+  <div class="sandbox">
+    <h4
+		data-en="✏️ Edit HTML — See it live!"
+		data-es="✏️ Editar HTML — ¡Visualízalo en tiempo real!">
+		✏️ Edit HTML — See it live!
+	</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">index.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m1-editor" rows="10">&lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;p&gt;This is my &lt;strong&gt;first&lt;/strong&gt; web page.&lt;/p&gt;
+&lt;p&gt;I am learning &lt;em&gt;HTML&lt;/em&gt; today.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;mark&gt;Try editing this!&lt;/mark&gt;&lt;/p&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m1-editor','m1-preview')" data-en="▶ Preview"
+ data-es="▶ Vista previa">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m1-preview">
+      <em style="color:var(--muted);font-size:.85rem" data-en="Click ▶ Preview to see your HTML rendered here." data-es="Haz clic en ▶ Vista previa para ver tu HTML renderizado aquí.">Click ▶ Preview to see your HTML rendered here.</em>
+    </div>
+  </div>
+
+  <!-- QUIZZES -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div>
+		<h3
+		 data-en="Exercises &amp; Quiz"
+		 data-es="Ejercicios y Cuestionario">
+		 Exercises &amp; Quiz
+		</h3>
+
+		<p
+		 data-en="Test your understanding."
+		 data-es="Pon a prueba tus conocimientos.">
+		 Test your understanding.
+		</p>
+	</div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+	 data-en="Q1 — Which element goes inside &lt;head&gt; to set the page title?"
+	 data-es="P1 — ¿Qué elemento va dentro de &lt;head&gt; para establecer el título de la página?">
+	 Q1 — Which element goes inside &lt;head&gt; to set the page title?
+	</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m1q1" data-val="a" onclick="checkMC('m1q1','a','b','&lt;title&gt; sets the text shown in the browser tab and bookmarks.')"><span class="option-icon">○</span> &lt;header&gt;</button></li>
+      <li><button class="option-btn" data-q="m1q1" data-val="b" onclick="checkMC('m1q1','b','b','&lt;title&gt; sets the text shown in the browser tab and bookmarks.')"><span class="option-icon">○</span> &lt;title&gt;</button></li>
+      <li><button class="option-btn" data-q="m1q1" data-val="c" onclick="checkMC('m1q1','c','b','&lt;title&gt; sets the text shown in the browser tab and bookmarks.')"><span class="option-icon">○</span> &lt;h1&gt;</button></li>
+      <li><button class="option-btn" data-q="m1q1" data-val="d" onclick="checkMC('m1q1','d','b','&lt;title&gt; sets the text shown in the browser tab and bookmarks.')"><span class="option-icon">○</span> &lt;name&gt;</button></li>
+    </ul>
+    <div id="m1q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+	 data-en="Q2 — Which tag makes text <strong>bold and important</strong> (semantically)?"
+	 data-es="P2 — ¿Qué etiqueta hace que el texto aparezca en **negrita y sea importante** (semánticamente)?">
+	 Q2 — Which tag makes text <strong>bold and important</strong> (semantically)?
+	</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m1q2" data-val="a" onclick="checkMC('m1q2','a','c','&lt;b&gt; is purely visual bold with no semantic meaning. Use &lt;strong&gt; for importance.')"><span class="option-icon">○</span> &lt;bold&gt;</button></li>
+      <li><button class="option-btn" data-q="m1q2" data-val="b" onclick="checkMC('m1q2','b','c','&lt;b&gt; is purely visual bold with no semantic meaning. Use &lt;strong&gt; for importance.')"><span class="option-icon">○</span> &lt;b&gt;</button></li>
+      <li><button class="option-btn" data-q="m1q2" data-val="c" onclick="checkMC('m1q2','c','c','&lt;strong&gt; conveys semantic importance and renders bold. Screen readers announce it differently.')"><span class="option-icon">○</span> &lt;strong&gt;</button></li>
+      <li><button class="option-btn" data-q="m1q2" data-val="d" onclick="checkMC('m1q2','d','c','&lt;b&gt; is purely visual bold with no semantic meaning. Use &lt;strong&gt; for importance.')"><span class="option-icon">○</span> &lt;em&gt;</button></li>
+    </ul>
+    <div id="m1q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+		data-en="🧩 Fill-in Exercises"
+		data-es="🧩 Ejercicios para completar">
+		🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4
+		data-en="Q3 — What declaration must appear on the very first line of an HTML file?"
+		data-es="P3 — ¿Qué declaración debe aparecer en la primera línea de un archivo HTML?">
+		Q3 — What declaration must appear on the very first line of an HTML file?
+	  </h4>
+      <div class="attempts-info" id="m1q3-att" data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m1q3-in" placeholder="&lt;...&gt;">
+      <button class="fill-btn" onclick="checkFill('m1q3','&lt;!DOCTYPE html&gt;','&lt;!DOCTYPE html&gt; tells the browser to use the modern HTML5 standard.','Hint: it starts with &lt;! and declares the document type.')" data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m1q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4
+		data-en="Q4 — What attribute on &lt;html&gt; specifies the document language?"
+		data-es="P4 — ¿Qué atributo de &lt;html&gt; especifica el idioma del documento?">
+		Q4 — What attribute on &lt;html&gt; specifies the document language?
+	  </h4>
+      <div class="attempts-info" id="m1q4-att" data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m1q4-in" placeholder="attribute name" data-placeholder-en="attribute name" data-placeholder-es="nombre del atributo">
+      <button class="fill-btn" onclick="checkFill('m1q4','lang','The lang attribute (e.g. lang=&quot;en&quot;) helps screen readers and search engines identify the language.','Hint: it is a 4-letter word.')"  data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m1q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4
+		data-en="Q5 — Which void element inserts a line break inside a paragraph?"
+		data-es="P5 — ¿Qué elemento vacío inserta un salto de línea dentro de un párrafo?">
+		Q5 — Which void element inserts a line break inside a paragraph?
+	  </h4>
+      <div class="attempts-info" id="m1q5-att" data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m1q5-in" placeholder="&lt;tag&gt;">
+      <button class="fill-btn" onclick="checkFill('m1q5','&lt;br&gt;','&lt;br&gt; is a void (self-closing) element that forces a line break without starting a new paragraph.','Hint: it is 2 letters long.')"  data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m1q5-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/index.html" style="margin-right:12px" data-en="← Home" data-es="← Inicio">← Home</a>
+    <a class="back-btn" href="../html-css-course/module02.html" style="background:var(--accent);color:#fff;border-color:var(--accent)" data-en="Module 2 →" data-es="Módulo 2 →">Module 2 →</a>
+  </div>
+
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

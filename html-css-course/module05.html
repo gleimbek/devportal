@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — Formatting Text with CSS</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 5: <em>Formatting Text</em> with CSS</h2>
+    <p>Typography is 95% of web design. Master font properties, Google Fonts, spacing, and readability.</p>
+    <span class="tag">font-family</span><span class="tag">font-size</span><span class="tag">line-height</span>
+    <span class="tag">Google Fonts</span><span class="tag">text-align</span><span class="tag">letter-spacing</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">✍️</span>
+    <div><h3>Font Properties</h3><p>Control how type looks on screen.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Core Typography Properties</h3>
+    <div class="code-block"><span class="prop">body</span> {
+  <span class="attr">font-family</span>: <span class="val">'Inter', Arial, sans-serif</span>; <span class="cmt">/* font stack */</span>
+  <span class="attr">font-size</span>: <span class="val">16px</span>;           <span class="cmt">/* base size */</span>
+  <span class="attr">line-height</span>: <span class="val">1.6</span>;           <span class="cmt">/* 1.5–1.8 for readability */</span>
+  <span class="attr">color</span>: <span class="val">#1e293b</span>;             <span class="cmt">/* dark but not pure black */</span>
+}
+
+<span class="prop">h1</span> {
+  <span class="attr">font-size</span>: <span class="val">clamp(1.8rem, 4vw, 3rem)</span>; <span class="cmt">/* fluid sizing */</span>
+  <span class="attr">font-weight</span>: <span class="val">700</span>;           <span class="cmt">/* 100–900 */</span>
+  <span class="attr">letter-spacing</span>: <span class="val">-0.02em</span>;   <span class="cmt">/* tight for headings */</span>
+  <span class="attr">text-transform</span>: <span class="val">none</span>;       <span class="cmt">/* uppercase | capitalize */</span>
+}
+
+<span class="prop">p</span> {
+  <span class="attr">max-width</span>: <span class="val">65ch</span>;            <span class="cmt">/* optimal line length */</span>
+  <span class="attr">text-align</span>: <span class="val">left</span>;           <span class="cmt">/* left | center | right | justify */</span>
+  <span class="attr">text-indent</span>: <span class="val">1.5em</span>;         <span class="cmt">/* first line indent */</span>
+}</div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p><strong>65ch rule</strong>: Limit paragraph width to ~65 characters for maximum readability. The <code>ch</code> unit equals the width of "0" in the current font.</p>
+    </div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Typography topics">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m5-t1" onclick="switchTab(this,'m5-t1','m5-tabs')">Google Fonts</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m5-t2" onclick="switchTab(this,'m5-t2','m5-tabs')">Text Decoration</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m5-t3" onclick="switchTab(this,'m5-t3','m5-tabs')">CSS Variables</button>
+  </div>
+  <div id="m5-tabs">
+    <div id="m5-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔤 Using Google Fonts</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- 1. Add in &lt;head&gt; of HTML --&gt;</span>
+&lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"preconnect"</span> <span class="attr">href</span>=<span class="str">"https://fonts.googleapis.com"</span>&gt;
+&lt;<span class="tag-name">link</span> <span class="attr">href</span>=<span class="str">"https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"</span> <span class="attr">rel</span>=<span class="str">"stylesheet"</span>&gt;
+
+<span class="cmt">/* 2. Use in CSS */</span>
+<span class="prop">body</span> { <span class="attr">font-family</span>: <span class="val">'Inter', sans-serif</span>; }
+
+<span class="cmt">/* Or via @import in CSS file */</span>
+@<span class="kw">import</span> <span class="val">url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap')</span>;
+<span class="prop">h1</span> { <span class="attr">font-family</span>: <span class="val">'Playfair Display', serif</span>; }</div>
+    </div>
+    <div id="m5-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 Text Decoration &amp; Effects</h4>
+      <div class="code-block"><span class="prop">.link</span> {
+  <span class="attr">text-decoration</span>: <span class="val">underline</span>;           <span class="cmt">/* none | underline | line-through */</span>
+  <span class="attr">text-decoration-color</span>: <span class="val">#3b82f6</span>;
+  <span class="attr">text-underline-offset</span>: <span class="val">4px</span>;          <span class="cmt">/* gap between text and underline */</span>
+}
+
+<span class="prop">.gradient-text</span> {
+  <span class="attr">background</span>: <span class="val">linear-gradient(135deg, #1d4ed8, #9333ea)</span>;
+  <span class="attr">-webkit-background-clip</span>: <span class="val">text</span>;
+  <span class="attr">-webkit-text-fill-color</span>: <span class="val">transparent</span>;
+}
+
+<span class="prop">.truncate</span> {
+  <span class="attr">white-space</span>: <span class="val">nowrap</span>;
+  <span class="attr">overflow</span>: <span class="val">hidden</span>;
+  <span class="attr">text-overflow</span>: <span class="val">ellipsis</span>;  <span class="cmt">/* shows "…" */</span>
+}</div>
+    </div>
+    <div id="m5-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎛️ CSS Custom Properties (Variables)</h4>
+      <div class="code-block"><span class="cmt">/* Define in :root — globally available */</span>
+<span class="prop">:root</span> {
+  <span class="attr">--font-sans</span>: <span class="val">'Inter', sans-serif</span>;
+  <span class="attr">--font-serif</span>: <span class="val">'Playfair Display', serif</span>;
+  <span class="attr">--text-base</span>: <span class="val">1rem</span>;
+  <span class="attr">--text-lg</span>: <span class="val">1.25rem</span>;
+  <span class="attr">--text-xl</span>: <span class="val">1.5rem</span>;
+  <span class="attr">--color-text</span>: <span class="val">#1e293b</span>;
+}
+
+<span class="cmt">/* Use with var() */</span>
+<span class="prop">body</span>  { <span class="attr">font-family</span>: <span class="val">var(--font-sans)</span>; <span class="attr">color</span>: <span class="val">var(--color-text)</span>; }
+<span class="prop">h1</span>    { <span class="attr">font-family</span>: <span class="val">var(--font-serif)</span>; <span class="attr">font-size</span>: <span class="val">var(--text-xl)</span>; }</div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Typography Sandbox</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;"><span style="margin-left:8px">HTML</span></div>
+        <textarea class="sandbox-textarea" id="m5-html" rows="8" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">&lt;h1&gt;Typography Demo&lt;/h1&gt;
+&lt;p class="lead"&gt;Great typography makes reading effortless.&lt;/p&gt;
+&lt;p&gt;Body text should have a comfortable line-height and limited width for easy reading. Aim for 65 characters per line.&lt;/p&gt;
+&lt;a href="#"&gt;Styled link&lt;/a&gt;</textarea>
+      </div>
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;"><span style="margin-left:8px">CSS</span></div>
+        <textarea class="sandbox-textarea" id="m5-css" rows="8" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">body { font-family: Georgia, serif; color: #1e293b; }
+h1 { font-size: 2rem; letter-spacing: -0.02em; }
+.lead { font-size: 1.2rem; color: #475569; margin-bottom: 12px; }
+p { max-width: 60ch; line-height: 1.7; margin-bottom: 8px; }
+a { color: #1d4ed8; text-underline-offset: 3px; }</textarea>
+      </div>
+    </div>
+    <div class="sandbox-actions" style="margin-top:12px;">
+      <button class="run-btn" onclick="cssPreview('m5-html','m5-css','m5-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m5-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+  <div class="quiz-card">
+    <h4>Q1 — What is the recommended line-height range for body text?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m5q1" data-val="a" onclick="checkMC('m5q1','a','b','1.0 is single-spaced — too tight for comfortable reading.')"><span class="option-icon">○</span> 1.0 – 1.2</button></li>
+      <li><button class="option-btn" data-q="m5q1" data-val="b" onclick="checkMC('m5q1','b','b','Correct! 1.5–1.8 gives comfortable breathing room between lines.')"><span class="option-icon">○</span> 1.5 – 1.8</button></li>
+      <li><button class="option-btn" data-q="m5q1" data-val="c" onclick="checkMC('m5q1','c','b','2.5+ is too loose for body text — good for spacious designs.')"><span class="option-icon">○</span> 2.5 – 3.0</button></li>
+      <li><button class="option-btn" data-q="m5q1" data-val="d" onclick="checkMC('m5q1','d','b','0.5 would cause lines to overlap.')"><span class="option-icon">○</span> 0.5 – 0.8</button></li>
+    </ul>
+    <div id="m5q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q2 — What CSS function creates a fluid font-size between a min and max based on viewport?</h4>
+      <div class="attempts-info" id="m5q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m5q2-in" placeholder="function()">
+      <button class="fill-btn" onclick="checkFill('m5q2','clamp()','clamp(min, preferred, max) creates responsive sizing without media queries. e.g. clamp(1.5rem, 4vw, 3rem)','Hint: it has 3 values and clamps between a min and max.')">Submit</button>
+      <div id="m5q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What property adds "…" when text overflows its container?</h4>
+      <div class="attempts-info" id="m5q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m5q3-in" placeholder="property">
+      <button class="fill-btn" onclick="checkFill('m5q3','text-overflow','text-overflow: ellipsis shows "…" — requires white-space: nowrap and overflow: hidden too.','Hint: text-___')">Submit</button>
+      <div id="m5q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module04.html" style="margin-right:12px">← Module 4</a>
+    <a class="back-btn" href="../html-css-course/module06.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 6 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 7 — Inserting and Working with Images</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 7: <em>Inserting and Working</em> with Images</h2>
+    <p>Add images correctly: alt text, responsive sizing, modern formats, lazy loading, and the &lt;picture&gt; element.</p>
+    <span class="tag">&lt;img&gt;</span><span class="tag">alt</span><span class="tag">srcset</span>
+    <span class="tag">&lt;picture&gt;</span><span class="tag">lazy loading</span><span class="tag">object-fit</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🖼️</span>
+    <div><h3>The &lt;img&gt; Element</h3><p>Core attributes and best practices.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Essential Image Attributes</h3>
+    <div class="code-block"><span class="cmt">&lt;!-- Minimum required: src + alt --&gt;</span>
+&lt;<span class="tag-name">img</span>
+  <span class="attr">src</span>=<span class="str">"photo.jpg"</span>
+  <span class="attr">alt</span>=<span class="str">"A golden retriever playing in the park"</span>
+  <span class="attr">width</span>=<span class="str">"800"</span>
+  <span class="attr">height</span>=<span class="str">"600"</span>
+  <span class="attr">loading</span>=<span class="str">"lazy"</span>
+&gt;
+
+<span class="cmt">&lt;!-- Decorative image — empty alt, browser skips it --&gt;</span>
+&lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"divider.svg"</span> <span class="attr">alt</span>=<span class="str">""</span> <span class="attr">role</span>=<span class="str">"presentation"</span>&gt;
+
+<span class="cmt">&lt;!-- Image inside a figure --&gt;</span>
+&lt;<span class="tag-name">figure</span>&gt;
+  &lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"chart.png"</span> <span class="attr">alt</span>=<span class="str">"Bar chart showing Q4 revenue by region"</span>&gt;
+  &lt;<span class="tag-name">figcaption</span>&gt;Figure 1: Q4 2024 Revenue&lt;/<span class="tag-name">figcaption</span>&gt;
+&lt;/<span class="tag-name">figure</span>&gt;</div>
+    <div class="info-box warning">
+      <span class="info-icon">⚠️</span>
+      <p>Always include <strong>width and height attributes</strong> — they prevent layout shifts (CLS) while the image loads. The browser reserves the space before the image arrives.</p>
+    </div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Image topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m7-t1" onclick="switchTab(this,'m7-t1','m7-tabs')">Responsive Images</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m7-t2" onclick="switchTab(this,'m7-t2','m7-tabs')">&lt;picture&gt; Element</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m7-t3" onclick="switchTab(this,'m7-t3','m7-tabs')">CSS Styling</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m7-t4" onclick="switchTab(this,'m7-t4','m7-tabs')">Formats Guide</button>
+  </div>
+  <div id="m7-tabs">
+    <div id="m7-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📐 srcset &amp; sizes</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Browser picks the best image for the screen --&gt;</span>
+&lt;<span class="tag-name">img</span>
+  <span class="attr">src</span>=<span class="str">"photo-800.jpg"</span>
+  <span class="attr">srcset</span>=<span class="str">"photo-400.jpg 400w,
+          photo-800.jpg 800w,
+          photo-1200.jpg 1200w"</span>
+  <span class="attr">sizes</span>=<span class="str">"(max-width: 600px) 100vw,
+         (max-width: 900px) 50vw,
+         800px"</span>
+  <span class="attr">alt</span>=<span class="str">"Responsive landscape photo"</span>
+&gt;</div>
+    </div>
+    <div id="m7-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🖼️ Art Direction with &lt;picture&gt;</h4>
+      <div class="code-block">&lt;<span class="tag-name">picture</span>&gt;
+  <span class="cmt">&lt;!-- Modern format first --&gt;</span>
+  &lt;<span class="tag-name">source</span> <span class="attr">srcset</span>=<span class="str">"photo.avif"</span> <span class="attr">type</span>=<span class="str">"image/avif"</span>&gt;
+  &lt;<span class="tag-name">source</span> <span class="attr">srcset</span>=<span class="str">"photo.webp"</span> <span class="attr">type</span>=<span class="str">"image/webp"</span>&gt;
+
+  <span class="cmt">&lt;!-- Different crop for mobile --&gt;</span>
+  &lt;<span class="tag-name">source</span>
+    <span class="attr">media</span>=<span class="str">"(max-width: 600px)"</span>
+    <span class="attr">srcset</span>=<span class="str">"photo-portrait.jpg"</span>
+  &gt;
+
+  <span class="cmt">&lt;!-- Fallback --&gt;</span>
+  &lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"photo.jpg"</span> <span class="attr">alt</span>=<span class="str">"Mountain landscape"</span>&gt;
+&lt;/<span class="tag-name">picture</span>&gt;</div>
+    </div>
+    <div id="m7-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 CSS Image Styling</h4>
+      <div class="code-block"><span class="cmt">/* Always responsive */</span>
+<span class="prop">img</span> { <span class="attr">max-width</span>: <span class="val">100%</span>; <span class="attr">height</span>: <span class="val">auto</span>; <span class="attr">display</span>: <span class="val">block</span>; }
+
+<span class="cmt">/* Fixed-size container with cover crop */</span>
+<span class="prop">.thumbnail</span> {
+  <span class="attr">width</span>: <span class="val">300px</span>;
+  <span class="attr">height</span>: <span class="val">200px</span>;
+  <span class="attr">object-fit</span>: <span class="val">cover</span>;     <span class="cmt">/* fill, contain, cover, none */</span>
+  <span class="attr">object-position</span>: <span class="val">center top</span>;
+  <span class="attr">border-radius</span>: <span class="val">8px</span>;
+}
+
+<span class="cmt">/* Aspect ratio box */</span>
+<span class="prop">.ratio-16-9</span> {
+  <span class="attr">aspect-ratio</span>: <span class="val">16 / 9</span>;
+  <span class="attr">width</span>: <span class="val">100%</span>;
+  <span class="attr">object-fit</span>: <span class="val">cover</span>;
+}</div>
+    </div>
+    <div id="m7-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📋 Image Format Guide</h4>
+      <div class="code-block"><span class="cmt">Format   | Best for                    | Support</span>
+<span class="cmt">---------|-----------------------------|---------</span>
+<span class="out">AVIF</span>     | Photos, high compression    | Modern browsers
+<span class="out">WebP</span>     | Photos + transparency       | 95%+ browsers
+<span class="out">JPEG</span>     | Photos (legacy fallback)    | Universal
+<span class="out">PNG</span>      | Transparency, screenshots   | Universal
+<span class="out">SVG</span>      | Icons, logos, illustrations | Universal
+<span class="out">GIF</span>      | Simple animation (use video!)| Universal
+
+<span class="cmt">Tip: Use AVIF → WebP → JPEG in &lt;picture&gt;</span>
+<span class="cmt">Aim for &lt; 200KB for above-the-fold images</span></div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Image Layout Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">images.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m7-editor" rows="18">&lt;style&gt;
+  body { font-family: sans-serif; padding: 20px; background: #f8fafc; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .gallery img {
+    width: 100%; aspect-ratio: 1;
+    object-fit: cover; border-radius: 8px;
+  }
+  figure { margin: 20px 0; }
+  figcaption { font-size: .85rem; color: #64748b; margin-top: 6px; text-align: center; }
+&lt;/style&gt;
+
+&lt;h2&gt;Image Gallery&lt;/h2&gt;
+&lt;div class="gallery"&gt;
+  &lt;img src="https://picsum.photos/seed/a/300/300" alt="Random photo A"&gt;
+  &lt;img src="https://picsum.photos/seed/b/300/300" alt="Random photo B"&gt;
+  &lt;img src="https://picsum.photos/seed/c/300/300" alt="Random photo C"&gt;
+&lt;/div&gt;
+
+&lt;figure&gt;
+  &lt;img src="https://picsum.photos/seed/hero/800/300" alt="Wide landscape" style="width:100%;border-radius:8px;"&gt;
+  &lt;figcaption&gt;Figure 1: A beautiful landscape (via picsum.photos)&lt;/figcaption&gt;
+&lt;/figure&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m7-editor','m7-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m7-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+  <div class="quiz-card">
+    <h4>Q1 — What CSS property fills a fixed container with an image while keeping its aspect ratio (cropping if needed)?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m7q1" data-val="a" onclick="checkMC('m7q1','a','c','object-fit: contain fits the whole image inside, possibly leaving gaps.')"><span class="option-icon">○</span> object-fit: contain</button></li>
+      <li><button class="option-btn" data-q="m7q1" data-val="b" onclick="checkMC('m7q1','b','c','background-size is for background images, not &lt;img&gt; elements.')"><span class="option-icon">○</span> background-size: cover</button></li>
+      <li><button class="option-btn" data-q="m7q1" data-val="c" onclick="checkMC('m7q1','c','c','Correct! object-fit: cover fills the container and crops excess — perfect for thumbnails.')"><span class="option-icon">○</span> object-fit: cover</button></li>
+      <li><button class="option-btn" data-q="m7q1" data-val="d" onclick="checkMC('m7q1','d','c','object-fit: fill stretches the image, distorting it.')"><span class="option-icon">○</span> object-fit: fill</button></li>
+    </ul>
+    <div id="m7q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q2 — What attribute defers image loading until it's near the viewport?</h4>
+      <div class="attempts-info" id="m7q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m7q2-in" placeholder="attribute">
+      <button class="fill-btn" onclick="checkFill('m7q2','loading=&quot;lazy&quot;','loading=&quot;lazy&quot; is a native browser feature that defers off-screen images, improving initial page load speed.','Hint: loading=&quot;___&quot;')">Submit</button>
+      <div id="m7q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What should the alt attribute contain for a purely decorative image?</h4>
+      <div class="attempts-info" id="m7q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m7q3-in" placeholder='alt="..."'>
+      <button class="fill-btn" onclick="checkFill('m7q3','&quot;&quot;','An empty alt=&quot;&quot; tells screen readers to skip the image entirely — correct for decorative images that add no information.','Hint: it is empty — just two quotes.')">Submit</button>
+      <div id="m7q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module06.html" style="margin-right:12px">← Module 6</a>
+    <a class="back-btn" href="../html-css-course/module08.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 8 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

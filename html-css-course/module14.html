@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 14 — Integrating Social Media</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 14: <em>Integrating</em> Social Media</h2>
+    <p>Control how your pages look when shared. Add Open Graph tags, Twitter Cards, share buttons, and social embeds.</p>
+    <span class="tag">Open Graph</span><span class="tag">og:image</span><span class="tag">Twitter Card</span>
+    <span class="tag">&lt;meta&gt;</span><span class="tag">share buttons</span><span class="tag">embeds</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📲</span>
+    <div><h3>Open Graph Protocol</h3><p>Control how your page appears when shared on social media.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Open Graph Meta Tags</h3>
+    <p>When someone shares your URL on Facebook, LinkedIn, WhatsApp, or Slack, these tags control the preview card that appears.</p>
+    <div class="code-block">&lt;<span class="tag-name">head</span>&gt;
+  <span class="cmt">&lt;!-- Essential Open Graph tags --&gt;</span>
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:title"</span>       <span class="attr">content</span>=<span class="str">"My Awesome Article"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:description"</span>  <span class="attr">content</span>=<span class="str">"A concise summary under 200 chars."</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:image"</span>        <span class="attr">content</span>=<span class="str">"https://example.com/social-preview.jpg"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:url"</span>          <span class="attr">content</span>=<span class="str">"https://example.com/article"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:type"</span>         <span class="attr">content</span>=<span class="str">"article"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:site_name"</span>    <span class="attr">content</span>=<span class="str">"My Website"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:locale"</span>       <span class="attr">content</span>=<span class="str">"en_US"</span>&gt;
+
+  <span class="cmt">&lt;!-- og:image specs: 1200×630px recommended, &lt;5MB --&gt;</span>
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:image:width"</span>  <span class="attr">content</span>=<span class="str">"1200"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:image:height"</span> <span class="attr">content</span>=<span class="str">"630"</span>&gt;
+  &lt;<span class="tag-name">meta</span> <span class="attr">property</span>=<span class="str">"og:image:alt"</span>    <span class="attr">content</span>=<span class="str">"Article cover image"</span>&gt;
+&lt;/<span class="tag-name">head</span>&gt;</div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p>The <strong>og:image</strong> is the most important tag — it's the first thing people see when your link is shared. Design a dedicated 1200×630px image for each key page.</p>
+    </div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Social media topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m14-t1" onclick="switchTab(this,'m14-t1','m14-tabs')">Twitter Cards</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m14-t2" onclick="switchTab(this,'m14-t2','m14-tabs')">Share Buttons</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m14-t3" onclick="switchTab(this,'m14-t3','m14-tabs')">Social Embeds</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m14-t4" onclick="switchTab(this,'m14-t4','m14-tabs')">Privacy Tips</button>
+  </div>
+  <div id="m14-tabs">
+    <div id="m14-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🐦 Twitter / X Card Tags</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Twitter uses its own meta tags (also reads og: as fallback) --&gt;</span>
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:card"</span>        <span class="attr">content</span>=<span class="str">"summary_large_image"</span>&gt;
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:site"</span>        <span class="attr">content</span>=<span class="str">"@YourHandle"</span>&gt;
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:creator"</span>     <span class="attr">content</span>=<span class="str">"@AuthorHandle"</span>&gt;
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:title"</span>       <span class="attr">content</span>=<span class="str">"My Awesome Article"</span>&gt;
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:description"</span>  <span class="attr">content</span>=<span class="str">"Summary of the article."</span>&gt;
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:image"</span>       <span class="attr">content</span>=<span class="str">"https://example.com/card.jpg"</span>&gt;
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"twitter:image:alt"</span>   <span class="attr">content</span>=<span class="str">"Card image description"</span>&gt;
+
+<span class="cmt">&lt;!-- Card types --&gt;</span>
+<span class="cmt">/* summary              — small image + text
+   summary_large_image  — full-width image (most common)
+   app                  — mobile app cards
+   player               — embedded media player */</span></div>
+    </div>
+    <div id="m14-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔗 Custom Share Buttons (no SDK needed)</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Build share links manually — no tracking scripts! --&gt;</span>
+
+<span class="cmt">&lt;!-- Twitter / X --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://twitter.com/intent/tweet
+  ?url=https://example.com/article
+  &amp;text=Check+this+out!
+  &amp;via=YourHandle"</span>
+   <span class="attr">target</span>=<span class="str">"_blank"</span> <span class="attr">rel</span>=<span class="str">"noopener noreferrer"</span>&gt;
+  Share on X
+&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- Facebook --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://www.facebook.com/sharer/sharer.php
+  ?u=https://example.com/article"</span>
+   <span class="attr">target</span>=<span class="str">"_blank"</span> <span class="attr">rel</span>=<span class="str">"noopener noreferrer"</span>&gt;
+  Share on Facebook
+&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- LinkedIn --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://www.linkedin.com/shareArticle
+  ?url=https://example.com/article
+  &amp;title=My+Article"</span>
+   <span class="attr">target</span>=<span class="str">"_blank"</span> <span class="attr">rel</span>=<span class="str">"noopener noreferrer"</span>&gt;
+  Share on LinkedIn
+&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- Native Web Share API (mobile / modern browsers) --&gt;</span>
+&lt;<span class="tag-name">button</span> <span class="attr">onclick</span>=<span class="str">"navigator.share({title:'Article',url:location.href})"</span>&gt;
+  📤 Share
+&lt;/<span class="tag-name">button</span>&gt;</div>
+    </div>
+    <div id="m14-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📌 Embedding Social Posts</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Instagram: use blockquote embed from Instagram --&gt;</span>
+&lt;<span class="tag-name">blockquote</span> <span class="attr">class</span>=<span class="str">"instagram-media"</span>
+  <span class="attr">data-instgrm-permalink</span>=<span class="str">"https://www.instagram.com/p/POST_ID/"</span>&gt;
+&lt;/<span class="tag-name">blockquote</span>&gt;
+&lt;<span class="tag-name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="str">"//www.instagram.com/embed.js"</span>&gt;&lt;/<span class="tag-name">script</span>&gt;
+
+<span class="cmt">&lt;!-- X / Twitter post embed --&gt;</span>
+&lt;<span class="tag-name">blockquote</span> <span class="attr">class</span>=<span class="str">"twitter-tweet"</span>&gt;
+  &lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://twitter.com/user/status/TWEET_ID"</span>&gt;&lt;/<span class="tag-name">a</span>&gt;
+&lt;/<span class="tag-name">blockquote</span>&gt;
+&lt;<span class="tag-name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="str">"https://platform.twitter.com/widgets.js"</span>&gt;&lt;/<span class="tag-name">script</span>&gt;
+
+<span class="cmt">&lt;!-- Alternative: screenshot or static quote card
+     (no JS overhead, GDPR friendly) --&gt;</span>
+&lt;<span class="tag-name">figure</span>&gt;
+  &lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"tweet-screenshot.png"</span> <span class="attr">alt</span>=<span class="str">"Tweet by @user: Full tweet text here"</span>&gt;
+  &lt;<span class="tag-name">figcaption</span>&gt;Via &lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://twitter.com/..."</span>&gt;@user on X&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">figcaption</span>&gt;
+&lt;/<span class="tag-name">figure</span>&gt;</div>
+    </div>
+    <div id="m14-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔒 Privacy &amp; Performance Tips</h4>
+      <div class="code-block"><span class="cmt">/* Social SDK scripts load third-party JS on your page.
+   This can:
+   - Slow down page load (render-blocking)
+   - Track visitors without their consent (GDPR/CCPA)
+   - Inject additional cookies
+
+   Better approaches: */</span>
+
+<span class="cmt">1. Use manual share links (no SDK required)</span>
+   → Just URL-based links, zero JS overhead
+
+<span class="cmt">2. Lazy-load social embeds</span>
+   → Load the SDK only when user clicks "Show Tweet"
+
+<span class="cmt">3. Use screenshots for social proof</span>
+   → Static image, GDPR-safe, fast
+
+<span class="cmt">4. Add loading="lazy" to iframes</span>
+   → Defers off-screen embed loading</div>
+      <div class="info-box warning">
+        <span class="info-icon">⚠️</span>
+        <p>Social media SDKs (Like buttons, Follow buttons) load tracking scripts even if the user never interacts with them. Under GDPR/CCPA, you may need user consent before loading them.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Social Sharing Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">share-buttons.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m14-editor" rows="36">&lt;style&gt;
+  body { font-family: sans-serif; padding: 24px; background: #f8fafc; }
+  h2 { color: #1e293b; }
+  .article-card {
+    background: #fff; border-radius: 12px;
+    padding: 24px; max-width: 560px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    margin-bottom: 20px;
+  }
+  .article-card h3 { margin: 0 0 8px; color: #1d4ed8; }
+  .article-card p  { color: #475569; margin: 0 0 16px; line-height: 1.6; }
+  .share-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .share-btn {
+    padding: 8px 16px; border-radius: 20px;
+    text-decoration: none; font-size: .85rem; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .share-x        { background: #000; color: #fff; }
+  .share-fb       { background: #1877f2; color: #fff; }
+  .share-li       { background: #0a66c2; color: #fff; }
+  .share-copy     { background: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; cursor: pointer; }
+&lt;/style&gt;
+
+&lt;h2&gt;Article Share Buttons&lt;/h2&gt;
+&lt;div class="article-card"&gt;
+  &lt;h3&gt;10 Tips for Better HTML&lt;/h3&gt;
+  &lt;p&gt;Semantic markup, accessibility, and performance best practices that every web developer should know.&lt;/p&gt;
+  &lt;div class="share-row"&gt;
+    &lt;a class="share-btn share-x"
+       href="https://twitter.com/intent/tweet?url=https://example.com&amp;text=Great+article!"
+       target="_blank" rel="noopener noreferrer"&gt;𝕏 Share&lt;/a&gt;
+    &lt;a class="share-btn share-fb"
+       href="https://www.facebook.com/sharer/sharer.php?u=https://example.com"
+       target="_blank" rel="noopener noreferrer"&gt;f Share&lt;/a&gt;
+    &lt;a class="share-btn share-li"
+       href="https://www.linkedin.com/shareArticle?url=https://example.com"
+       target="_blank" rel="noopener noreferrer"&gt;in Share&lt;/a&gt;
+    &lt;button class="share-btn share-copy"
+       onclick="navigator.clipboard.writeText('https://example.com').then(()=>this.textContent='✅ Copied!')"&gt;
+      🔗 Copy Link
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m14-editor','m14-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m14-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — What Open Graph tag controls the image shown when a URL is shared on social media?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m14q1" data-val="a" onclick="checkMC('m14q1','a','c','og:title controls the title text, not the image.')"><span class="option-icon">○</span> og:title</button></li>
+      <li><button class="option-btn" data-q="m14q1" data-val="b" onclick="checkMC('m14q1','b','c','og:url is the canonical URL of the page.')"><span class="option-icon">○</span> og:url</button></li>
+      <li><button class="option-btn" data-q="m14q1" data-val="c" onclick="checkMC('m14q1','c','c','Correct! og:image specifies the image URL for the social preview card. Recommended size: 1200×630px.')"><span class="option-icon">○</span> og:image</button></li>
+      <li><button class="option-btn" data-q="m14q1" data-val="d" onclick="checkMC('m14q1','d','c','og:type describes the content type (article, website, video).')"><span class="option-icon">○</span> og:type</button></li>
+    </ul>
+    <div id="m14q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — What is the recommended image size (in pixels) for an Open Graph social preview image?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m14q2" data-val="a" onclick="checkMC('m14q2','a','c','800×600 is too small and the wrong ratio.')"><span class="option-icon">○</span> 800 × 600</button></li>
+      <li><button class="option-btn" data-q="m14q2" data-val="b" onclick="checkMC('m14q2','b','c','512×512 is square — social cards use landscape ratio.')"><span class="option-icon">○</span> 512 × 512</button></li>
+      <li><button class="option-btn" data-q="m14q2" data-val="c" onclick="checkMC('m14q2','c','c','Correct! 1200×630px is the standard — it is a roughly 1.91:1 ratio that works well on all platforms.')"><span class="option-icon">○</span> 1200 × 630</button></li>
+      <li><button class="option-btn" data-q="m14q2" data-val="d" onclick="checkMC('m14q2','d','c','2000×1000 is unnecessarily large and will slow load times.')"><span class="option-icon">○</span> 2000 × 1000</button></li>
+    </ul>
+    <div id="m14q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What meta property attribute prefix is used for Open Graph tags?</h4>
+      <div class="attempts-info" id="m14q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m14q3-in" placeholder="prefix:">
+      <button class="fill-btn" onclick="checkFill('m14q3','og:','Open Graph tags use property=&quot;og:...&quot; — note this uses the property attribute, not name like standard meta tags.','Hint: it stands for Open Graph — two letters.')">Submit</button>
+      <div id="m14q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What modern browser API lets you trigger the native share sheet on mobile?</h4>
+      <div class="attempts-info" id="m14q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m14q4-in" placeholder="navigator.___()">
+      <button class="fill-btn" onclick="checkFill('m14q4','navigator.share()','navigator.share() triggers the OS native share sheet on mobile. Always check support: if (navigator.share) {...}','Hint: navigator.___()')">Submit</button>
+      <div id="m14q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module13.html" style="margin-right:12px">← Module 13</a>
+    <a class="back-btn" href="../html-css-course/module15.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 15 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 — Getting Started with CSS</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 3: <em>Getting Started</em> with CSS</h2>
+    <p>Selectors, the cascade, specificity, colors, units, and the box model — the foundations of all styling.</p>
+    <span class="tag">selectors</span><span class="tag">specificity</span><span class="tag">cascade</span>
+    <span class="tag">box model</span><span class="tag">colors</span><span class="tag">units</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🎨</span>
+    <div><h3>How CSS Works</h3><p>Rules, selectors, properties, and values.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>CSS Rule Anatomy</h3>
+    <div class="code-block"><span class="cmt">/* selector { property: value; } */</span>
+
+<span class="prop">h1</span> {
+  <span class="attr">color</span>: <span class="val">#1d4ed8</span>;
+  <span class="attr">font-size</span>: <span class="val">2rem</span>;
+  <span class="attr">margin-bottom</span>: <span class="val">16px</span>;
+}
+
+<span class="prop">p, li</span> {             <span class="cmt">/* group selector */</span>
+  <span class="attr">line-height</span>: <span class="val">1.7</span>;
+}
+
+<span class="prop">.card</span> {            <span class="cmt">/* class selector */</span>
+  <span class="attr">background</span>: <span class="val">#fff</span>;
+  <span class="attr">border-radius</span>: <span class="val">8px</span>;
+}
+
+<span class="prop">#hero</span> {            <span class="cmt">/* ID selector (use sparingly) */</span>
+  <span class="attr">padding</span>: <span class="val">60px 24px</span>;
+}</div>
+    <h4>Three Ways to Add CSS</h4>
+    <div class="code-block"><span class="cmt">&lt;!-- 1. External (best) —  in &lt;head&gt; --&gt;</span>
+&lt;<span class="tag-name">link</span> <span class="attr">rel</span>=<span class="str">"stylesheet"</span> <span class="attr">href</span>=<span class="str">"styles.css"</span>&gt;
+
+<span class="cmt">&lt;!-- 2. Internal — in &lt;head&gt; --&gt;</span>
+&lt;<span class="tag-name">style</span>&gt;  body { background: #f0f4ff; }  &lt;/<span class="tag-name">style</span>&gt;
+
+<span class="cmt">&lt;!-- 3. Inline (avoid for maintainability) --&gt;</span>
+&lt;<span class="tag-name">p</span> <span class="attr">style</span>=<span class="str">"color:red;"</span>&gt;Red text&lt;/<span class="tag-name">p</span>&gt;</div>
+  </div>
+
+  <!-- TABS: Selectors / Box Model / Colors -->
+  <div class="tab-btns" role="tablist" aria-label="CSS concepts">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m3-t1" onclick="switchTab(this,'m3-t1','m3-tabs')">Selectors</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m3-t2" onclick="switchTab(this,'m3-t2','m3-tabs')">Box Model</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m3-t3" onclick="switchTab(this,'m3-t3','m3-tabs')">Colors &amp; Units</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m3-t4" onclick="switchTab(this,'m3-t4','m3-tabs')">Specificity</button>
+  </div>
+  <div id="m3-tabs">
+    <div id="m3-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎯 CSS Selectors</h4>
+      <div class="code-block"><span class="prop">*</span>          { box-sizing: border-box; }  <span class="cmt">/* universal */</span>
+<span class="prop">p</span>          { color: #333; }              <span class="cmt">/* element */</span>
+<span class="prop">.highlight</span> { background: yellow; }      <span class="cmt">/* class */</span>
+<span class="prop">#logo</span>      { width: 120px; }             <span class="cmt">/* ID */</span>
+<span class="prop">a:hover</span>    { color: blue; }              <span class="cmt">/* pseudo-class */</span>
+<span class="prop">p::first-line</span> { font-weight: bold; }    <span class="cmt">/* pseudo-element */</span>
+<span class="prop">nav > a</span>    { display: block; }           <span class="cmt">/* child combinator */</span>
+<span class="prop">h2 + p</span>    { margin-top: 0; }             <span class="cmt">/* adjacent sibling */</span>
+<span class="prop">[type="email"]</span> { border: 2px solid; }   <span class="cmt">/* attribute */</span></div>
+    </div>
+    <div id="m3-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📦 The CSS Box Model</h4>
+      <div class="code-block"><span class="cmt">/* Every element is a box:
+   content → padding → border → margin  */</span>
+
+<span class="prop">.box</span> {
+  <span class="attr">width</span>: <span class="val">200px</span>;        <span class="cmt">/* content width */</span>
+  <span class="attr">padding</span>: <span class="val">16px</span>;       <span class="cmt">/* inside spacing */</span>
+  <span class="attr">border</span>: <span class="val">2px solid #333</span>;
+  <span class="attr">margin</span>: <span class="val">24px auto</span>;   <span class="cmt">/* outside spacing */</span>
+
+  <span class="cmt">/* box-sizing: border-box makes width include padding+border */</span>
+  <span class="attr">box-sizing</span>: <span class="val">border-box</span>;
+}</div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p>Always use <code>box-sizing: border-box</code> globally. It makes layout math much more intuitive.</p>
+      </div>
+    </div>
+    <div id="m3-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🌈 Colors &amp; Units</h4>
+      <div class="code-block"><span class="cmt">/* Color formats */</span>
+<span class="prop">.a</span> { <span class="attr">color</span>: <span class="val">red</span>; }                  <span class="cmt">/* keyword */</span>
+<span class="prop">.b</span> { <span class="attr">color</span>: <span class="val">#1d4ed8</span>; }             <span class="cmt">/* hex */</span>
+<span class="prop">.c</span> { <span class="attr">color</span>: <span class="val">rgb(29,78,216)</span>; }        <span class="cmt">/* rgb */</span>
+<span class="prop">.d</span> { <span class="attr">color</span>: <span class="val">rgba(29,78,216,0.5)</span>; }  <span class="cmt">/* rgba — with opacity */</span>
+<span class="prop">.e</span> { <span class="attr">color</span>: <span class="val">hsl(222,76%,48%)</span>; }     <span class="cmt">/* hsl */</span>
+
+<span class="cmt">/* Units */</span>
+<span class="prop">.f</span> { <span class="attr">font-size</span>: <span class="val">16px</span>; }    <span class="cmt">/* absolute pixels */</span>
+<span class="prop">.g</span> { <span class="attr">font-size</span>: <span class="val">1rem</span>; }   <span class="cmt">/* relative to root font-size */</span>
+<span class="prop">.h</span> { <span class="attr">font-size</span>: <span class="val">1.2em</span>; }  <span class="cmt">/* relative to parent */</span>
+<span class="prop">.i</span> { <span class="attr">width</span>: <span class="val">50%</span>; }        <span class="cmt">/* % of parent width */</span>
+<span class="prop">.j</span> { <span class="attr">width</span>: <span class="val">50vw</span>; }       <span class="cmt">/* 50% of viewport width */</span></div>
+    </div>
+    <div id="m3-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">⚖️ Specificity (who wins?)</h4>
+      <div class="code-block"><span class="cmt">/* Specificity score: (IDs, Classes, Elements) */</span>
+
+<span class="prop">p</span>          { color: black; }    <span class="cmt">/* (0,0,1) */</span>
+<span class="prop">.highlight</span> { color: yellow; }   <span class="cmt">/* (0,1,0) — wins over p */</span>
+<span class="prop">#hero p</span>    { color: blue; }     <span class="cmt">/* (1,0,1) — wins over .highlight */</span>
+
+<span class="cmt">/* !important overrides everything — use sparingly */</span>
+<span class="prop">p</span> { color: red <span class="kw">!important</span>; }
+
+<span class="cmt">/* Order matters when specificity is equal — last rule wins */</span>
+<span class="prop">p</span> { color: blue; }
+<span class="prop">p</span> { color: green; }  <span class="cmt">/* this wins */</span></div>
+    </div>
+  </div>
+
+  <!-- LIVE CSS SANDBOX -->
+  <div class="section-header">
+    <span class="section-icon">🔬</span>
+    <div><h3>CSS Live Sandbox</h3><p>Edit both HTML and CSS — see the result.</p></div>
+  </div>
+  <div class="sandbox">
+    <h4>✏️ Style It Live!</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex-wrap:wrap;">
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;">
+          <span class="ed-dot" style="background:#ff5f56"></span><span class="ed-dot" style="background:#ffbd2e"></span><span class="ed-dot" style="background:#27c93f"></span>
+          <span style="margin-left:8px">HTML</span>
+        </div>
+        <textarea class="sandbox-textarea" id="m3-html" rows="8" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">&lt;h1 class="title"&gt;Hello CSS!&lt;/h1&gt;
+&lt;p class="intro"&gt;I am styled with CSS.&lt;/p&gt;
+&lt;div class="card"&gt;
+  &lt;h2&gt;A Card&lt;/h2&gt;
+  &lt;p&gt;Edit the CSS to style me!&lt;/p&gt;
+&lt;/div&gt;</textarea>
+      </div>
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;">
+          <span class="ed-dot" style="background:#ff5f56"></span><span class="ed-dot" style="background:#ffbd2e"></span><span class="ed-dot" style="background:#27c93f"></span>
+          <span style="margin-left:8px">CSS</span>
+        </div>
+        <textarea class="sandbox-textarea" id="m3-css" rows="8" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">.title { color: #1d4ed8; font-family: Georgia, serif; }
+.intro  { color: #475569; font-size: 1.1rem; }
+.card   {
+  background: #eff6ff;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}</textarea>
+      </div>
+    </div>
+    <div class="sandbox-actions" style="margin-top:12px;">
+      <button class="run-btn" onclick="cssPreview('m3-html','m3-css','m3-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m3-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — Which selector targets an element with class "btn"?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m3q1" data-val="a" onclick="checkMC('m3q1','a','b','Classes use a dot prefix: .btn. IDs use #. The # selector would be #btn.')"><span class="option-icon">○</span> #btn</button></li>
+      <li><button class="option-btn" data-q="m3q1" data-val="b" onclick="checkMC('m3q1','b','b','Correct! Classes are selected with a dot: .btn')"><span class="option-icon">○</span> .btn</button></li>
+      <li><button class="option-btn" data-q="m3q1" data-val="c" onclick="checkMC('m3q1','c','b','btn without a prefix selects the &lt;btn&gt; element type, not a class.')"><span class="option-icon">○</span> btn</button></li>
+      <li><button class="option-btn" data-q="m3q1" data-val="d" onclick="checkMC('m3q1','d','b','[btn] is an attribute selector, not a class selector.')"><span class="option-icon">○</span> [btn]</button></li>
+    </ul>
+    <div id="m3q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — In the box model, which layer is immediately OUTSIDE the content?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m3q2" data-val="a" onclick="checkMC('m3q2','a','a','Correct! Content → padding → border → margin (outside to inside).')"><span class="option-icon">○</span> padding</button></li>
+      <li><button class="option-btn" data-q="m3q2" data-val="b" onclick="checkMC('m3q2','b','a','Border comes after padding, not directly around content.')"><span class="option-icon">○</span> border</button></li>
+      <li><button class="option-btn" data-q="m3q2" data-val="c" onclick="checkMC('m3q2','c','a','Margin is the outermost layer.')"><span class="option-icon">○</span> margin</button></li>
+      <li><button class="option-btn" data-q="m3q2" data-val="d" onclick="checkMC('m3q2','d','a','Outline is not part of the box model.')"><span class="option-icon">○</span> outline</button></li>
+    </ul>
+    <div id="m3q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What CSS unit is relative to the root element's font-size?</h4>
+      <div class="attempts-info" id="m3q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m3q3-in" placeholder="unit">
+      <button class="fill-btn" onclick="checkFill('m3q3','rem','rem (root em) is relative to the &lt;html&gt; font-size (usually 16px). Great for consistent scaling.','Hint: it is 3 letters, starts with r.')">Submit</button>
+      <div id="m3q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What property value makes an element include padding and border in its stated width?</h4>
+      <div class="attempts-info" id="m3q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m3q4-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m3q4','border-box','box-sizing: border-box means padding and border are included in the width — no more unexpected overflow!','Hint: box-sizing: ___-box')">Submit</button>
+      <div id="m3q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module02.html" style="margin-right:12px">← Module 2</a>
+    <a class="back-btn" href="../html-css-course/module04.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 4 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

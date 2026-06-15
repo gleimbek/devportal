@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Laying Out Elements With CSS</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 4: <em>Laying Out Elements</em> With CSS</h2>
+    <p>Master Flexbox and CSS Grid — the two modern layout systems that power virtually every website today.</p>
+    <span class="tag">flexbox</span><span class="tag">CSS Grid</span><span class="tag">display</span>
+    <span class="tag">position</span><span class="tag">gap</span><span class="tag">fr unit</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📐</span>
+    <div><h3>Display &amp; Flexbox</h3><p>One-dimensional layouts made easy.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>display Property</h3>
+    <div class="code-block"><span class="prop">.block</span>  { <span class="attr">display</span>: <span class="val">block</span>; }   <span class="cmt">/* full width, new line */</span>
+<span class="prop">.inline</span> { <span class="attr">display</span>: <span class="val">inline</span>; }  <span class="cmt">/* width = content, same line */</span>
+<span class="prop">.ib</span>     { <span class="attr">display</span>: <span class="val">inline-block</span>; } <span class="cmt">/* inline + respects width/height */</span>
+<span class="prop">.none</span>   { <span class="attr">display</span>: <span class="val">none</span>; }    <span class="cmt">/* hides completely */</span>
+<span class="prop">.flex</span>   { <span class="attr">display</span>: <span class="val">flex</span>; }    <span class="cmt">/* flexbox container */</span>
+<span class="prop">.grid</span>   { <span class="attr">display</span>: <span class="val">grid</span>; }    <span class="cmt">/* grid container */</span></div>
+    <h3>Flexbox Essentials</h3>
+    <div class="code-block"><span class="prop">.container</span> {
+  <span class="attr">display</span>: <span class="val">flex</span>;
+  <span class="attr">flex-direction</span>: <span class="val">row</span>;           <span class="cmt">/* row | column */</span>
+  <span class="attr">justify-content</span>: <span class="val">space-between</span>; <span class="cmt">/* main axis */</span>
+  <span class="attr">align-items</span>: <span class="val">center</span>;            <span class="cmt">/* cross axis */</span>
+  <span class="attr">flex-wrap</span>: <span class="val">wrap</span>;                <span class="cmt">/* allow wrapping */</span>
+  <span class="attr">gap</span>: <span class="val">16px</span>;                       <span class="cmt">/* space between items */</span>
+}
+
+<span class="prop">.item</span> {
+  <span class="attr">flex</span>: <span class="val">1</span>;                <span class="cmt">/* grow to fill space equally */</span>
+  <span class="attr">flex-shrink</span>: <span class="val">0</span>;        <span class="cmt">/* don't shrink */</span>
+  <span class="attr">align-self</span>: <span class="val">flex-start</span>; <span class="cmt">/* override container alignment */</span>
+}</div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Layout techniques">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m4-t1" onclick="switchTab(this,'m4-t1','m4-tabs')">Flex Patterns</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m4-t2" onclick="switchTab(this,'m4-t2','m4-tabs')">CSS Grid</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m4-t3" onclick="switchTab(this,'m4-t3','m4-tabs')">Positioning</button>
+  </div>
+  <div id="m4-tabs">
+    <div id="m4-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔧 Common Flex Patterns</h4>
+      <div class="code-block"><span class="cmt">/* Centered hero */</span>
+<span class="prop">.hero</span> {
+  <span class="attr">display</span>: <span class="val">flex</span>;
+  <span class="attr">justify-content</span>: <span class="val">center</span>;
+  <span class="attr">align-items</span>: <span class="val">center</span>;
+  <span class="attr">min-height</span>: <span class="val">100vh</span>;
+}
+
+<span class="cmt">/* Nav bar */</span>
+<span class="prop">nav</span> {
+  <span class="attr">display</span>: <span class="val">flex</span>;
+  <span class="attr">justify-content</span>: <span class="val">space-between</span>;
+  <span class="attr">align-items</span>: <span class="val">center</span>;
+  <span class="attr">padding</span>: <span class="val">0 24px</span>;
+}
+
+<span class="cmt">/* Card row that wraps */</span>
+<span class="prop">.cards</span> {
+  <span class="attr">display</span>: <span class="val">flex</span>;
+  <span class="attr">flex-wrap</span>: <span class="val">wrap</span>;
+  <span class="attr">gap</span>: <span class="val">20px</span>;
+}
+<span class="prop">.card</span> { <span class="attr">flex</span>: <span class="val">1 1 280px</span>; } <span class="cmt">/* grow, shrink, min 280px */</span></div>
+    </div>
+    <div id="m4-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔲 CSS Grid</h4>
+      <div class="code-block"><span class="prop">.grid</span> {
+  <span class="attr">display</span>: <span class="val">grid</span>;
+  <span class="attr">grid-template-columns</span>: <span class="val">1fr 2fr 1fr</span>; <span class="cmt">/* 3 cols, middle is 2x */</span>
+  <span class="attr">grid-template-rows</span>: <span class="val">auto 1fr auto</span>;
+  <span class="attr">gap</span>: <span class="val">20px</span>;
+}
+
+<span class="cmt">/* Responsive grid — auto-fill columns ≥ 200px */</span>
+<span class="prop">.auto-grid</span> {
+  <span class="attr">display</span>: <span class="val">grid</span>;
+  <span class="attr">grid-template-columns</span>: <span class="val">repeat(auto-fill, minmax(200px, 1fr))</span>;
+  <span class="attr">gap</span>: <span class="val">16px</span>;
+}
+
+<span class="cmt">/* Span across columns */</span>
+<span class="prop">.header-area</span> { <span class="attr">grid-column</span>: <span class="val">1 / -1</span>; } <span class="cmt">/* full width */</span>
+<span class="prop">.sidebar</span>     { <span class="attr">grid-row</span>: <span class="val">2 / 4</span>; }     <span class="cmt">/* span 2 rows */</span></div>
+    </div>
+    <div id="m4-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📌 CSS Positioning</h4>
+      <div class="code-block"><span class="prop">.static</span>   { <span class="attr">position</span>: <span class="val">static</span>; }    <span class="cmt">/* default */</span>
+<span class="prop">.relative</span> { <span class="attr">position</span>: <span class="val">relative</span>; } <span class="cmt">/* offset from normal */</span>
+<span class="prop">.absolute</span> { <span class="attr">position</span>: <span class="val">absolute</span>; } <span class="cmt">/* relative to nearest positioned ancestor */</span>
+<span class="prop">.fixed</span>    { <span class="attr">position</span>: <span class="val">fixed</span>; }    <span class="cmt">/* relative to viewport */</span>
+<span class="prop">.sticky</span>   { <span class="attr">position</span>: <span class="val">sticky</span>; }   <span class="cmt">/* sticks on scroll */</span>
+
+<span class="cmt">/* Centering with absolute */</span>
+<span class="prop">.centered</span> {
+  <span class="attr">position</span>: <span class="val">absolute</span>;
+  <span class="attr">top</span>: <span class="val">50%</span>; <span class="attr">left</span>: <span class="val">50%</span>;
+  <span class="attr">transform</span>: <span class="val">translate(-50%, -50%)</span>;
+}</div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Flexbox Sandbox</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;"><span style="margin-left:8px">HTML</span></div>
+        <textarea class="sandbox-textarea" id="m4-html" rows="8" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">&lt;div class="container"&gt;
+  &lt;div class="box"&gt;One&lt;/div&gt;
+  &lt;div class="box"&gt;Two&lt;/div&gt;
+  &lt;div class="box"&gt;Three&lt;/div&gt;
+&lt;/div&gt;</textarea>
+      </div>
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;"><span style="margin-left:8px">CSS</span></div>
+        <textarea class="sandbox-textarea" id="m4-css" rows="8" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">.container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  background: #eff6ff;
+  padding: 20px;
+}
+.box {
+  background: #1d4ed8;
+  color: white;
+  padding: 20px 28px;
+  border-radius: 8px;
+  font-weight: bold;
+}</textarea>
+      </div>
+    </div>
+    <div class="sandbox-actions" style="margin-top:12px;">
+      <button class="run-btn" onclick="cssPreview('m4-html','m4-css','m4-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m4-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+  <div class="quiz-card">
+    <h4>Q1 — Which Flexbox property aligns items along the <strong>main axis</strong>?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m4q1" data-val="a" onclick="checkMC('m4q1','a','b','align-items controls the cross axis (perpendicular to main).')"><span class="option-icon">○</span> align-items</button></li>
+      <li><button class="option-btn" data-q="m4q1" data-val="b" onclick="checkMC('m4q1','b','b','Correct! justify-content distributes items along the main axis.')"><span class="option-icon">○</span> justify-content</button></li>
+      <li><button class="option-btn" data-q="m4q1" data-val="c" onclick="checkMC('m4q1','c','b','flex-direction sets the direction, not alignment.')"><span class="option-icon">○</span> flex-direction</button></li>
+      <li><button class="option-btn" data-q="m4q1" data-val="d" onclick="checkMC('m4q1','d','b','align-self overrides alignment for a single item.')"><span class="option-icon">○</span> align-self</button></li>
+    </ul>
+    <div id="m4q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+  <div class="quiz-card">
+    <h4>Q2 — In CSS Grid, what does the <code>fr</code> unit represent?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m4q2" data-val="a" onclick="checkMC('m4q2','a','c','fr is not font-relative.')"><span class="option-icon">○</span> font-size relative</button></li>
+      <li><button class="option-btn" data-q="m4q2" data-val="b" onclick="checkMC('m4q2','b','c','fr is not a fixed pixel size.')"><span class="option-icon">○</span> fixed ratio in pixels</button></li>
+      <li><button class="option-btn" data-q="m4q2" data-val="c" onclick="checkMC('m4q2','c','c','Correct! fr = fractional unit — a share of the available space in the grid container.')"><span class="option-icon">○</span> fraction of available space</button></li>
+      <li><button class="option-btn" data-q="m4q2" data-val="d" onclick="checkMC('m4q2','d','c','fr is not a percentage of viewport.')"><span class="option-icon">○</span> percentage of viewport</button></li>
+    </ul>
+    <div id="m4q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What CSS property value sticks an element to the top of the viewport when scrolled?</h4>
+      <div class="attempts-info" id="m4q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m4q3-in" placeholder="position: ___">
+      <button class="fill-btn" onclick="checkFill('m4q3','sticky','position: sticky combines relative and fixed — the element sticks once it reaches a threshold.','Hint: it is 6 letters and sounds like something that clings.')">Submit</button>
+      <div id="m4q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — Which grid shorthand creates a 3-column layout where all columns are equal?</h4>
+      <div class="attempts-info" id="m4q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m4q4-in" placeholder="repeat(...)">
+      <button class="fill-btn" onclick="checkFill('m4q4','repeat(3,1fr)','repeat(3, 1fr) creates 3 equal-width columns. The fr unit distributes space equally.','Hint: use repeat() with 3 and 1fr.')">Submit</button>
+      <div id="m4q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module03.html" style="margin-right:12px">← Module 3</a>
+    <a class="back-btn" href="../html-css-course/module05.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 5 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

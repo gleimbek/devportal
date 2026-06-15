@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6 — Inserting and Working with Links</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 6: <em>Inserting and Working</em> with Links</h2>
+    <p>The anchor element connects the web. Learn absolute vs relative paths, link states, navigation patterns, and accessibility.</p>
+    <span class="tag">&lt;a&gt;</span><span class="tag">href</span><span class="tag">target</span>
+    <span class="tag">relative paths</span><span class="tag">:hover</span><span class="tag">aria-label</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🔗</span>
+    <div><h3>The Anchor Element</h3><p>Everything you need to know about &lt;a&gt;.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Link Types &amp; Attributes</h3>
+    <div class="code-block"><span class="cmt">&lt;!-- External link — opens in new tab --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://www.example.com"</span> <span class="attr">target</span>=<span class="str">"_blank"</span> <span class="attr">rel</span>=<span class="str">"noopener noreferrer"</span>&gt;
+  Visit Example
+&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- Internal relative link --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"about.html"</span>&gt;About Us&lt;/<span class="tag-name">a</span>&gt;
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"../index.html"</span>&gt;Up one folder&lt;/<span class="tag-name">a</span>&gt;
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"pages/contact.html"</span>&gt;Down into folder&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- Jump to an ID on the page --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"#section-2"</span>&gt;Skip to Section 2&lt;/<span class="tag-name">a</span>&gt;
+&lt;<span class="tag-name">section</span> <span class="attr">id</span>=<span class="str">"section-2"</span>&gt;…&lt;/<span class="tag-name">section</span>&gt;
+
+<span class="cmt">&lt;!-- Email and phone links --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"mailto:hello@example.com"</span>&gt;Email Us&lt;/<span class="tag-name">a</span>&gt;
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"tel:+15551234567"</span>&gt;Call Us&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- Download link --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"resume.pdf"</span> <span class="attr">download</span>&gt;Download PDF&lt;/<span class="tag-name">a</span>&gt;</div>
+    <div class="info-box warning">
+      <span class="info-icon">⚠️</span>
+      <p>Always add <code>rel="noopener noreferrer"</code> to <code>target="_blank"</code> links — it prevents the new tab from accessing your page via <code>window.opener</code> (a security risk).</p>
+    </div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Link topics">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m6-t1" onclick="switchTab(this,'m6-t1','m6-tabs')">CSS Link States</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m6-t2" onclick="switchTab(this,'m6-t2','m6-tabs')">Navigation Pattern</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m6-t3" onclick="switchTab(this,'m6-t3','m6-tabs')">Accessibility</button>
+  </div>
+  <div id="m6-tabs">
+    <div id="m6-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 Styling Link States</h4>
+      <div class="code-block"><span class="cmt">/* LVHA order matters! */</span>
+<span class="prop">a:link</span>    { <span class="attr">color</span>: <span class="val">#1d4ed8</span>; }            <span class="cmt">/* unvisited */</span>
+<span class="prop">a:visited</span> { <span class="attr">color</span>: <span class="val">#7c3aed</span>; }            <span class="cmt">/* visited */</span>
+<span class="prop">a:hover</span>   { <span class="attr">color</span>: <span class="val">#2563eb</span>; <span class="attr">text-decoration</span>: <span class="val">underline</span>; }
+<span class="prop">a:active</span>  { <span class="attr">color</span>: <span class="val">#1e40af</span>; }            <span class="cmt">/* being clicked */</span>
+<span class="prop">a:focus-visible</span> {
+  <span class="attr">outline</span>: <span class="val">3px solid #3b82f6</span>;
+  <span class="attr">outline-offset</span>: <span class="val">3px</span>;
+}
+
+<span class="cmt">/* Button-style link */</span>
+<span class="prop">.btn-link</span> {
+  <span class="attr">display</span>: <span class="val">inline-block</span>;
+  <span class="attr">padding</span>: <span class="val">10px 24px</span>;
+  <span class="attr">background</span>: <span class="val">#1d4ed8</span>;
+  <span class="attr">color</span>: <span class="val">#fff</span>;
+  <span class="attr">border-radius</span>: <span class="val">8px</span>;
+  <span class="attr">text-decoration</span>: <span class="val">none</span>;
+}</div>
+    </div>
+    <div id="m6-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🧭 Navigation with Flexbox</h4>
+      <div class="code-block">&lt;<span class="tag-name">nav</span> <span class="attr">aria-label</span>=<span class="str">"Main navigation"</span>&gt;
+  &lt;<span class="tag-name">ul</span>&gt;
+    &lt;<span class="tag-name">li</span>&gt;&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/"</span> <span class="attr">aria-current</span>=<span class="str">"page"</span>&gt;Home&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">li</span>&gt;
+    &lt;<span class="tag-name">li</span>&gt;&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/about"</span>&gt;About&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">li</span>&gt;
+    &lt;<span class="tag-name">li</span>&gt;&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/contact"</span>&gt;Contact&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">li</span>&gt;
+  &lt;/<span class="tag-name">ul</span>&gt;
+&lt;/<span class="tag-name">nav</span>&gt;
+
+<span class="cmt">/* CSS */</span>
+<span class="prop">nav ul</span>  { <span class="attr">display</span>: <span class="val">flex</span>; <span class="attr">list-style</span>: <span class="val">none</span>; <span class="attr">gap</span>: <span class="val">24px</span>; }
+<span class="prop">nav a</span>   { <span class="attr">text-decoration</span>: <span class="val">none</span>; <span class="attr">color</span>: <span class="val">inherit</span>; }
+<span class="prop">nav a[aria-current]</span> { <span class="attr">font-weight</span>: <span class="val">700</span>; <span class="attr">border-bottom</span>: <span class="val">2px solid currentColor</span>; }</div>
+    </div>
+    <div id="m6-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">♿ Link Accessibility</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- ❌ BAD — meaningless link text --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"article.html"</span>&gt;Click here&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- ✅ GOOD — descriptive text --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"article.html"</span>&gt;Read our guide to CSS Grid&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- ✅ Icon-only link needs aria-label --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://twitter.com/x"</span> <span class="attr">aria-label</span>=<span class="str">"Follow us on Twitter"</span>&gt;
+  🐦
+&lt;/<span class="tag-name">a</span>&gt;
+
+<span class="cmt">&lt;!-- Opens in new tab? Tell the user! --&gt;</span>
+&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"https://example.com"</span> <span class="attr">target</span>=<span class="str">"_blank"</span>
+   <span class="attr">aria-label</span>=<span class="str">"Example (opens in new tab)"</span>&gt;
+  Example ↗
+&lt;/<span class="tag-name">a</span>&gt;</div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Link &amp; Navigation Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span><span class="ed-dot" style="background:#ffbd2e"></span><span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">nav-demo.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m6-editor" rows="18">&lt;style&gt;
+  body { font-family: sans-serif; margin: 0; }
+  nav { background: #1e293b; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { color: white; font-weight: 700; font-size: 1.2rem; text-decoration: none; padding: 16px 0; }
+  nav ul { display: flex; list-style: none; gap: 8px; margin: 0; padding: 0; }
+  nav a { color: #94a3b8; text-decoration: none; padding: 10px 14px; border-radius: 6px; }
+  nav a:hover { color: white; background: rgba(255,255,255,.1); }
+&lt;/style&gt;
+&lt;nav&gt;
+  &lt;a class="logo" href="#"&gt;MyBrand&lt;/a&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" style="background:#1d4ed8;color:white;"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;p style="padding:20px;"&gt;Try editing the nav above!&lt;/p&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m6-editor','m6-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m6-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+  <div class="quiz-card">
+    <h4>Q1 — What attribute on &lt;a&gt; opens the link in a new browser tab?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m6q1" data-val="a" onclick="checkMC('m6q1','a','c','new-tab is not a valid attribute.')"><span class="option-icon">○</span> new-tab</button></li>
+      <li><button class="option-btn" data-q="m6q1" data-val="b" onclick="checkMC('m6q1','b','c','open is not a valid attribute.')"><span class="option-icon">○</span> open="_blank"</button></li>
+      <li><button class="option-btn" data-q="m6q1" data-val="c" onclick="checkMC('m6q1','c','c','Correct! target=\"_blank\" opens in a new tab. Pair with rel=\"noopener noreferrer\" for security.')"><span class="option-icon">○</span> target="_blank"</button></li>
+      <li><button class="option-btn" data-q="m6q1" data-val="d" onclick="checkMC('m6q1','d','c','window is not a valid attribute.')"><span class="option-icon">○</span> window="_new"</button></li>
+    </ul>
+    <div id="m6q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q2 — What href value creates a link that opens the user's email client?</h4>
+      <div class="attempts-info" id="m6q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m6q2-in" placeholder="href=...">
+      <button class="fill-btn" onclick="checkFill('m6q2','mailto:','href starting with mailto: opens the default email client with a new message addressed to that email.','Hint: it starts with mail...')">Submit</button>
+      <div id="m6q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What attribute provides a text label for a link that only contains an icon (for screen readers)?</h4>
+      <div class="attempts-info" id="m6q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m6q3-in" placeholder="attribute">
+      <button class="fill-btn" onclick="checkFill('m6q3','aria-label','aria-label provides an accessible name for elements without visible text, like icon-only links.','Hint: it starts with aria-...')">Submit</button>
+      <div id="m6q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module05.html" style="margin-right:12px">← Module 5</a>
+    <a class="back-btn" href="../html-css-course/module07.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 7 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

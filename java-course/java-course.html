@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intro to Java — Complete Interactive Course</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700&display=swap');
+:root {
+  --navy:#f7f3ea;--deep:#fff7ed;--card:#ffffff;--card2:#f8fafc;
+  --border:#94a3b8;--accent:#b45309;--accent2:#d97706;
+  --blue:#075985;--teal:#0f766e;--green:#166534;
+  --red:#991b1b;--yellow:#92400e;--purple:#5b21b6;
+  --text:#102a43;--muted:#334155;--white:#102a43;
+  --shadow:0 4px 18px rgba(15,23,42,0.14);--radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Nunito',sans-serif;background:#f7f3ea;color:var(--text);line-height:1.7;min-height:100vh;}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:var(--accent);color:#fff;padding:8px 16px;font-weight:700;border-radius:0 0 8px 0;}
+.skip-link:focus{left:0;}
+#aria-live{position:absolute;left:-9999px;}
+
+/* ===== TOP BAR ===== */
+#top-bar{position:sticky;top:0;z-index:200;background:#fff;border-bottom:3px solid var(--accent);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+#top-bar h1{font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent);letter-spacing:.04em;white-space:nowrap; margin-left:-80px;}
+.progress-bar-wrap{flex:1;min-width:100px;max-width:220px;background:var(--border);border-radius:20px;height:10px;overflow:hidden;}
+#progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:20px;width:0%;transition:width .5s;}
+#score-display{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--text);font-weight:700;background:var(--card2);border:1px solid var(--accent);padding:5px 14px;border-radius:20px;white-space:nowrap;}
+#score-display span{color:var(--accent);}
+#lang-toggle{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;}
+#lang-toggle:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.back-btn{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.back-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* ===== MODULE NAV ===== */
+#module-nav{background:#fff;border-bottom:2px solid #e2e8f0;padding:0 16px;display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.mod-tab{background:none;border:none;border-bottom:3px solid transparent;padding:12px 16px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;color:var(--muted);white-space:nowrap;transition:all .2s;min-height:44px;}
+.mod-tab:hover{color:var(--accent);background:#fff7ed;}
+.mod-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.mod-tab.completed{color:var(--teal);}
+.mod-tab.completed::after{content:" ✓";}
+
+/* ===== MODULE PANELS ===== */
+.module-panel{display:none;max-width:900px;margin:0 auto;padding:0 16px 80px;}
+.module-panel.active{display:block;}
+
+/* ===== HERO ===== */
+.mod-hero{padding:40px 24px 30px;text-align:center;background:linear-gradient(180deg,#fff7ed 0%,#f7f3ea 100%);margin-bottom:32px;border-radius:var(--radius);}
+.mod-hero h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);margin-bottom:12px;}
+.mod-hero h2 em{color:var(--accent);font-style:normal;}
+.mod-hero p{color:var(--muted);max-width:560px;margin:0 auto 16px;font-size:1rem;}
+.tag{display:inline-block;background:var(--card2);border:1px solid var(--border);color:var(--blue);padding:3px 12px;border-radius:20px;font-size:.8rem;margin:3px;}
+
+/* ===== SECTION HEADER ===== */
+.section-header{display:flex;align-items:center;gap:14px;margin:40px 0 20px;padding:18px 22px;background:linear-gradient(135deg,var(--card2),var(--card));border-left:5px solid var(--accent);border-radius:var(--radius);}
+.section-icon{font-size:1.8rem;}
+.section-header h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--text);}
+.section-header p{color:var(--muted);font-size:.9rem;margin-top:3px;}
+
+/* ===== CONCEPT CARD ===== */
+.concept-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin-bottom:18px;box-shadow:var(--shadow);}
+.concept-card h3{color:var(--blue);margin-bottom:10px;font-size:1.1rem;}
+.concept-card h4{color:var(--blue);margin-bottom:8px;font-size:1rem;}
+.concept-card p{color:var(--text);margin-bottom:8px;}
+
+/* ===== CODE BLOCK ===== */
+.code-block{background:#f8fafc;border:1px solid #64748b;border-radius:8px;padding:16px 18px;margin:14px 0;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.88rem;line-height:1.65;white-space:pre-wrap;}
+.code-block .kw{color:#6d28d9;font-weight:700;}
+.code-block .ty{color:#075985;font-weight:700;}
+.code-block .num{color:#b45309;font-weight:700;}
+.code-block .str{color:#166534;}
+.code-block .cmt{color:#475569;font-style:italic;}
+.code-block .out{color:#0f766e;font-weight:700;}
+
+/* ===== TABS ===== */
+.tab-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0;}
+.tab-btn{background:var(--card2);border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:8px 8px 0 0;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;transition:all .2s;border-bottom:none;min-height:44px;}
+.tab-btn[aria-selected="true"]{background:#fff;border-color:var(--accent);color:var(--accent);}
+.tab-btn:hover:not([aria-selected="true"]){color:var(--text);}
+.tab-panel{background:#fff;border:1px solid var(--border);border-radius:0 var(--radius) var(--radius) var(--radius);padding:20px 22px;display:none;}
+.tab-panel.active{display:block;}
+
+/* ===== SIMULATOR ===== */
+.simulator{background:#fff;border:2px solid var(--teal);border-radius:var(--radius);padding:22px;margin:18px 0;}
+.simulator h4{color:var(--teal);margin-bottom:14px;font-size:.95rem;display:flex;align-items:center;gap:8px;}
+.sim-vars{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.sim-var{background:var(--card2);border:1px solid var(--purple);border-radius:8px;padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--purple);}
+.sim-var span{color:var(--text);font-weight:700;}
+.sim-display{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:.82rem;min-height:50px;}
+.sim-step{color:var(--yellow);}
+.sim-output{color:var(--teal);}
+.sim-info{color:var(--muted);font-size:.82rem;margin-top:8px;}
+.sim-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.sim-btn{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.85rem;min-height:44px;}
+.sim-btn:hover{background:#0d9488;}
+.sim-btn.reset{background:var(--card2);color:var(--text);border:1px solid var(--border);}
+.sim-btn.reset:hover{background:var(--border);}
+
+/* ===== TRACE ===== */
+.trace-activity{background:#fff;border:2px solid var(--purple);border-radius:var(--radius);padding:22px;margin:18px 0;}
+.trace-activity h4{color:var(--purple);margin-bottom:12px;font-size:.95rem;}
+.trace-table{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.82rem;margin:10px 0;}
+.trace-table th{background:var(--card2);color:var(--muted);padding:7px 10px;text-align:center;border:1px solid var(--border);}
+.trace-table td{padding:6px 10px;text-align:center;border:1px solid var(--border);}
+.trace-table tr:nth-child(even) td{background:rgba(0,0,0,.02);}
+.trace-input{width:65px;background:#f8fafc;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:3px 6px;font-family:'JetBrains Mono',monospace;text-align:center;font-size:.82rem;}
+.trace-input:focus{outline:2px solid var(--purple);}
+.trace-check-btn{background:var(--purple);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px;font-size:.85rem;min-height:44px;}
+.trace-check-btn:hover{background:#7c3aed;}
+
+/* ===== QUIZ / FILL ===== */
+.quiz-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin:18px 0;}
+.quiz-card h4{color:var(--yellow);margin-bottom:12px;font-size:.95rem;}
+.options-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.option-btn{width:100%;text-align:left;background:var(--card2);border:2px solid var(--border);color:var(--text);padding:10px 16px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:600;transition:all .15s;display:flex;align-items:center;gap:10px;min-height:44px;}
+.option-btn:hover:not(:disabled){border-color:var(--yellow);background:#fffbeb;}
+.option-btn.correct{border-color:var(--green);background:#f0fdf4;color:var(--green);}
+.option-btn.incorrect{border-color:var(--red);background:#fef2f2;color:var(--red);}
+.option-btn:disabled{cursor:not-allowed;opacity:.75;}
+.option-icon{font-size:1rem;min-width:22px;text-align:center;}
+.fill-exercise{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin:18px 0;}
+.fill-exercise h4{color:var(--blue);margin-bottom:10px;font-size:.95rem;}
+.fill-input{background:#f8fafc;border:2px solid var(--border);color:var(--text);padding:7px 12px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:.87rem;width:140px;}
+.fill-input:focus{outline:none;border-color:var(--blue);}
+.fill-btn{background:var(--blue);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.85rem;margin-left:6px;min-height:44px;}
+.fill-btn:hover{background:#0369a1;}
+.feedback-box{border-radius:8px;padding:10px 14px;margin-top:8px;font-weight:600;font-size:.88rem;display:none;align-items:flex-start;gap:8px;}
+.feedback-box.show{display:flex;}
+.feedback-box.hint{background:#fffbeb;border:1px solid #92400e;color:#78350f;}
+.feedback-box.correct{background:#f0fdf4;border:1px solid #166534;color:#14532d;}
+.feedback-box.incorrect{background:#fef2f2;border:1px solid #991b1b;color:#7f1d1d;}
+.feedback-icon{font-size:1.1rem;}
+.attempts-info{color:var(--muted);font-size:.8rem;margin-bottom:6px;}
+
+/* ===== INFO BOX ===== */
+.info-box{border-radius:10px;padding:12px 16px;margin:12px 0;display:flex;gap:10px;align-items:flex-start;font-size:.9rem;}
+.info-box.tip{background:#eff6ff;border:1px solid var(--blue);}
+.info-box.warning{background:#fffbeb;border:1px solid var(--yellow);}
+.info-icon{font-size:1.2rem;}
+
+/* ===== STEP LIST ===== */
+.step-list{counter-reset:step;list-style:none;}
+.step-list li{counter-increment:step;padding:9px 9px 9px 48px;margin-bottom:7px;border-radius:8px;background:rgba(0,0,0,.02);position:relative;}
+.step-list li::before{content:counter(step);position:absolute;left:10px;top:50%;transform:translateY(-50%);background:var(--accent);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;}
+
+/* ===== SANDBOX ===== */
+.sandbox{background:#fff;border:2px solid var(--accent);border-radius:var(--radius);padding:22px 26px;margin:18px 0;}
+.sandbox h4{color:var(--accent);margin-bottom:6px;font-size:1rem;}
+.sandbox-editor{background:#f8fafc;border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden;}
+.sandbox-editor-header{background:var(--card2);padding:7px 14px;display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:.77rem;color:var(--muted);border-bottom:1px solid var(--border);}
+.ed-dot{width:9px;height:9px;border-radius:50%;}
+.sandbox-textarea{width:100%;background:transparent;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.65;padding:14px 18px;resize:vertical;min-height:120px;outline:none;tab-size:4;}
+.sandbox-textarea:focus{outline:2px solid var(--accent);outline-offset:-2px;}
+.sandbox-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.run-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:9px 22px;border-radius:8px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;min-height:44px;}
+.run-btn:hover{box-shadow:0 4px 14px rgba(180,83,9,.35);transform:translateY(-1px);}
+.hint-btn{background:transparent;border:1px solid var(--yellow);color:var(--yellow);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;min-height:44px;}
+.hint-btn:hover{background:#fffbeb;}
+.sandbox-output{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:.82rem;min-height:44px;color:var(--teal);white-space:pre-wrap;}
+.sandbox-output.error{color:var(--red);}
+.sandbox-hint{background:#fffbeb;border:1px solid var(--yellow);border-radius:8px;padding:10px 14px;color:#78350f;font-size:.87rem;margin-bottom:10px;display:none;}
+.sandbox-hint.show{display:block;}
+
+/* ===== RESULTS ===== */
+#results-section{background:linear-gradient(135deg,var(--card2),var(--card));border:3px solid var(--accent);border-radius:16px;padding:36px 28px;text-align:center;margin:40px 0;display:none;}
+#results-section.show{display:block;}
+#results-section h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--text);margin-bottom:6px;}
+.result-score{font-size:3rem;font-weight:900;color:var(--accent);margin:16px 0 6px;font-family:'JetBrains Mono',monospace;}
+.result-pct{font-size:1.2rem;color:var(--yellow);margin-bottom:16px;font-weight:700;}
+.result-msg{font-size:1rem;color:var(--text);max-width:480px;margin:0 auto 20px;}
+.result-grade{display:inline-block;padding:8px 24px;border-radius:24px;font-weight:800;font-size:1.1rem;margin-bottom:16px;letter-spacing:.04em;}
+.grade-a{background:rgba(22,101,52,.1);border:2px solid var(--green);color:var(--green);}
+.grade-b{background:rgba(7,89,133,.1);border:2px solid var(--blue);color:var(--blue);}
+.grade-c{background:rgba(146,64,14,.1);border:2px solid var(--yellow);color:var(--yellow);}
+.grade-d{background:rgba(153,27,27,.1);border:2px solid var(--red);color:var(--red);}
+.mod-results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:20px 0;text-align:left;}
+.mod-result-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.mod-result-card h5{font-size:.85rem;color:var(--muted);margin-bottom:4px;}
+.mod-result-card .mod-score{font-size:1.2rem;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .section-header{padding:12px 14px;}
+  .concept-card,.quiz-card,.fill-exercise,.sandbox{padding:16px 14px;}
+  .tab-panel{padding:14px 12px;}
+  #top-bar h1{font-size:.85rem;}
+}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #f59e0b!important;outline-offset:3px!important;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<!-- TOP BAR -->
+<header id="top-bar" role="banner">
+	<div style="text-align:center;margin:40px 0 20px;">
+		<a class="back-btn" href="../index.html" style="margin-right:12px" data-en="← Home" data-es="← Inicio">← Home</a>
+    </div>
+  <h1>☕ Intro to Java</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="110" aria-valuenow="0" aria-label="Course progress">
+    <div id="progress-fill"></div>
+  </div>
+  <div id="score-display">Score: <span id="score-num">0</span> / 110</div>
+  <button id="lang-toggle" onclick="toggleLang()" aria-label="Switch language">🌐 Español</button>
+</header>
+
+<!-- MODULE NAV -->
+<nav id="module-nav" role="tablist" aria-label="Course modules">
+  <button class="mod-tab active" role="tab" aria-selected="true" aria-controls="mod1" onclick="switchModule(1)">M1: Variables</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod2" onclick="switchModule(2)">M2: Operators</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod3" onclick="switchModule(3)">M3: Conditionals</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod4" onclick="switchModule(4)">M4: Loops</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod5" onclick="switchModule(5)">M5: Arrays</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod6" onclick="switchModule(6)">M6: Methods</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod7" onclick="switchModule(7)">M7: OOP</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod8" onclick="switchModule(8)">M8: Inheritance</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod9" onclick="switchModule(9)">M9: ArrayList</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod10" onclick="switchModule(10)">M10: Exceptions &amp; I/O</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod11" onclick="switchModule(11)">M11: GUI</button>
+  <button class="mod-tab" role="tab" aria-selected="false" aria-controls="mod-results" onclick="switchModule('results')">🏆 Results</button>
+</nav>
+
+<main id="main-content">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--         MODULE 1 — VARIABLES & DATA TYPES       -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel active" id="mod1">
+  <div class="mod-hero">
+    <h2 data-en="Module 1: <em>Variables</em> &amp; Data Types" data-es="Módulo 1: <em>Variables</em> y Tipos de Datos">Module 1: <em>Variables</em> &amp; Data Types</h2>
+    <p data-en="Learn how Java stores data — the building blocks of every program." data-es="Aprende cómo Java almacena datos — los bloques fundamentales de todo programa.">Learn how Java stores data — the building blocks of every program.</p>
+    <span class="tag">int</span><span class="tag">double</span><span class="tag">String</span><span class="tag">boolean</span><span class="tag">char</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📦</span>
+    <div>
+      <h3 data-en="What is a Variable?" data-es="¿Qué es una Variable?">What is a Variable?</h3>
+      <p data-en="A named box in memory that stores a value." data-es="Una caja con nombre en memoria que guarda un valor.">A named box in memory that stores a value.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3 data-en="Primitive Data Types" data-es="Tipos de Datos Primitivos">Primitive Data Types</h3>
+    <p data-en="Java has 8 primitive types. The 5 most common for beginners:" data-es="Java tiene 8 tipos primitivos. Los 5 más comunes para principiantes:">Java has 8 primitive types. The 5 most common for beginners:</p>
+    <div class="code-block"><span class="ty">int</span>     age    = <span class="num">20</span>;         <span class="cmt">// whole numbers / números enteros</span>
+<span class="ty">double</span>  gpa    = <span class="num">3.75</span>;       <span class="cmt">// decimals / decimales</span>
+<span class="ty">String</span>  name   = <span class="str">"Maria"</span>;    <span class="cmt">// text / texto (NOT primitive)</span>
+<span class="ty">boolean</span> passed = <span class="kw">true</span>;       <span class="cmt">// true or false / verdadero o falso</span>
+<span class="ty">char</span>    grade  = <span class="str">'A'</span>;        <span class="cmt">// single character / carácter único</span></div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p data-en="<strong>Naming rule:</strong> variable names must start with a letter, can't have spaces, and Java is case-sensitive (age ≠ Age)." data-es="<strong>Regla de nombres:</strong> los nombres de variables deben comenzar con una letra, no pueden tener espacios, y Java distingue mayúsculas de minúsculas (age ≠ Age)."><strong>Naming rule:</strong> variable names must start with a letter, can't have spaces, and Java is case-sensitive (age ≠ Age).</p>
+    </div>
+    <h4 data-en="Declaring &amp; Assigning" data-es="Declarar y Asignar">Declaring &amp; Assigning</h4>
+    <div class="code-block"><span class="cmt">// Declare and assign in one line / Declarar y asignar en una línea</span>
+<span class="ty">int</span> score = <span class="num">95</span>;
+
+<span class="cmt">// Declare first, assign later / Declarar primero, asignar después</span>
+<span class="ty">int</span> bonus;
+bonus = <span class="num">10</span>;
+
+<span class="cmt">// Update an existing variable / Actualizar variable existente</span>
+score = score + bonus;  <span class="cmt">// score is now 105</span>
+System.out.println(score); <span class="cmt">// prints 105</span></div>
+  </div>
+
+  <!-- EXAMPLES TABS -->
+  <div class="tab-btns" role="tablist" aria-label="Variable examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m1-ex1" id="m1-t1" onclick="switchTab(this,'m1-ex1','m1-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m1-ex2" id="m1-t2" onclick="switchTab(this,'m1-ex2','m1-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m1-ex3" id="m1-t3" onclick="switchTab(this,'m1-ex3','m1-tabs')">Example 3</button>
+  </div>
+  <div id="m1-tabs">
+    <div id="m1-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎓 Student Profile</h4>
+      <div class="code-block"><span class="ty">String</span>  name  = <span class="str">"Carlos"</span>;
+<span class="ty">int</span>     age   = <span class="num">19</span>;
+<span class="ty">double</span>  gpa   = <span class="num">3.8</span>;
+<span class="ty">boolean</span> enrolled = <span class="kw">true</span>;
+System.out.println(name + <span class="str">" | Age: "</span> + age + <span class="str">" | GPA: "</span> + gpa);
+System.out.println(<span class="str">"Enrolled: "</span> + enrolled);</div>
+      <div class="code-block"><span class="cmt">// Output:</span>
+<span class="out">Carlos | Age: 19 | GPA: 3.8
+Enrolled: true</span></div>
+    </div>
+    <div id="m1-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🛒 Price Calculation</h4>
+      <div class="code-block"><span class="ty">double</span> price    = <span class="num">49.99</span>;
+<span class="ty">double</span> taxRate  = <span class="num">0.08</span>;
+<span class="ty">double</span> tax      = price * taxRate;
+<span class="ty">double</span> total    = price + tax;
+System.out.println(<span class="str">"Price: $"</span> + price);
+System.out.println(<span class="str">"Tax: $"</span> + tax);
+System.out.println(<span class="str">"Total: $"</span> + total);</div>
+      <div class="code-block"><span class="cmt">// Output:</span>
+<span class="out">Price: $49.99
+Tax: $3.9992
+Total: $53.9892</span></div>
+    </div>
+    <div id="m1-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔄 Swapping Variables</h4>
+      <div class="code-block"><span class="ty">int</span> a = <span class="num">10</span>;
+<span class="ty">int</span> b = <span class="num">20</span>;
+System.out.println(<span class="str">"Before: a="</span> + a + <span class="str">", b="</span> + b);
+<span class="ty">int</span> temp = a;
+a = b;
+b = temp;
+System.out.println(<span class="str">"After:  a="</span> + a + <span class="str">", b="</span> + b);</div>
+      <div class="code-block"><span class="cmt">// Output:</span>
+<span class="out">Before: a=10, b=20
+After:  a=20, b=10</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M1 -->
+  <div class="trace-activity">
+    <h4>🔍 Code Trace — Fill the Table</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="ty">int</span> x = <span class="num">5</span>;
+<span class="ty">int</span> y = x * <span class="num">2</span>;
+x = x + <span class="num">3</span>;
+System.out.println(x + <span class="str">" "</span> + y);</div>
+    <table class="trace-table">
+      <thead><tr><th>Step</th><th>x</th><th>y</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>int x=5</td><td>5</td><td>—</td><td>—</td></tr>
+        <tr><td>int y=x*2</td><td>5</td><td><input class="trace-input" data-answer="10" id="m1t1"></td><td>—</td></tr>
+        <tr><td>x=x+3</td><td><input class="trace-input" data-answer="8" id="m1t2"></td><td>10</td><td>—</td></tr>
+        <tr><td>println</td><td>8</td><td>10</td><td><input class="trace-input" data-answer="8 10" id="m1t3" style="width:80px"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m1',['m1t1','m1t2','m1t3'])">✓ Check / Verificar</button>
+    <div id="m1-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M1 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises / Ejercicios</h3>
+    <div class="fill-exercise">
+      <h4 data-en="Q1 — What type holds the value 3.14?" data-es="P1 — ¿Qué tipo almacena el valor 3.14?">Q1 — What type holds the value 3.14?</h4>
+      <div class="attempts-info" id="m1q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m1q1-in" placeholder="type name">
+      <button class="fill-btn" onclick="checkFill('m1q1','double','double is the Java type for decimal numbers / double es el tipo Java para decimales.','Hint: it has decimal places. Not int, not String. / Pista: tiene decimales.')">Submit</button>
+      <div id="m1q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4 data-en="Q2 — After: int n=4; n=n*3; What is n?" data-es="P2 — Después de: int n=4; n=n*3; ¿Cuánto es n?">Q2 — After: int n=4; n=n*3; What is n?</h4>
+      <div class="attempts-info" id="m1q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m1q2-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m1q2','12','n starts at 4. 4 × 3 = 12. / n empieza en 4. 4 × 3 = 12.','Hint: multiply 4 by 3. / Pista: multiplica 4 por 3.')">Submit</button>
+      <div id="m1q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4 data-en="Q3 — What keyword declares a true/false variable?" data-es="P3 — ¿Qué palabra clave declara una variable verdadero/falso?">Q3 — What keyword declares a true/false variable?</h4>
+      <div class="attempts-info" id="m1q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m1q3-in" placeholder="type">
+      <button class="fill-btn" onclick="checkFill('m1q3','boolean','boolean stores true or false values only. / boolean solo almacena valores true o false.','Hint: it only has two possible values. / Pista: solo tiene dos valores posibles.')">Submit</button>
+      <div id="m1q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <!-- MCQ M1 -->
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point / 1 Punto</h4>
+    <p data-en="Which data type would you use to store the grade letter 'B'?" data-es="¿Qué tipo de dato usarías para guardar la letra de calificación 'B'?">Which data type would you use to store the grade letter 'B'?</p>
+    <div class="attempts-info" id="m1mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m1mcq','A','C','char is for single characters. A String could also work but char is more precise for a single letter / char es para un carácter. String también funciona pero char es más preciso.','int stores numbers, not letters / int guarda números, no letras.')"><span class="option-icon">🅐</span> int</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m1mcq','B','C','char stores single characters like &quot;B&quot; / char guarda caracteres únicos como &quot;B&quot;.','double stores decimal numbers / double guarda números decimales.')"><span class="option-icon">🅑</span> double</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m1mcq','C','C','Correct! char stores a single character in single quotes like char grade = \'B\'; / ¡Correcto! char guarda un solo carácter entre comillas simples.','char stores a single character. This is correct! / char guarda un solo carácter. ¡Correcto!')"><span class="option-icon">🅒</span> char</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m1mcq','D','C','boolean only stores true or false / boolean solo guarda true o false.','boolean is only for true/false values / boolean solo es para true/false.')"><span class="option-icon">🅓</span> boolean</button></li>
+    </ul>
+    <div id="m1mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="text-align:right;margin-top:24px;">
+    <button class="run-btn" onclick="switchModule(2)">Next: Operators →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--        MODULE 2 — OPERATORS & EXPRESSIONS       -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod2">
+  <div class="mod-hero">
+    <h2 data-en="Module 2: <em>Operators</em> &amp; Expressions" data-es="Módulo 2: <em>Operadores</em> y Expresiones">Module 2: <em>Operators</em> &amp; Expressions</h2>
+    <p data-en="Calculate, compare, and combine values with Java's powerful operators." data-es="Calcula, compara y combina valores con los poderosos operadores de Java.">Calculate, compare, and combine values with Java's powerful operators.</p>
+    <span class="tag">+ - * / %</span><span class="tag">== != &lt; &gt;</span><span class="tag">&amp;&amp; || !</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">➕</span>
+    <div>
+      <h3 data-en="Arithmetic Operators" data-es="Operadores Aritméticos">Arithmetic Operators</h3>
+      <p data-en="Math inside your code." data-es="Matemáticas dentro de tu código.">Math inside your code.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="ty">int</span> a = <span class="num">10</span>, b = <span class="num">3</span>;
+System.out.println(a + b);   <span class="cmt">// 13  → addition / suma</span>
+System.out.println(a - b);   <span class="cmt">//  7  → subtraction / resta</span>
+System.out.println(a * b);   <span class="cmt">// 30  → multiplication / multiplicación</span>
+System.out.println(a / b);   <span class="cmt">//  3  → integer division / división entera</span>
+System.out.println(a % b);   <span class="cmt">//  1  → modulus/remainder / módulo/residuo</span></div>
+    <div class="info-box warning">
+      <span class="info-icon">⚠️</span>
+      <p data-en="<strong>Integer division</strong>: 10/3 = 3 (not 3.33). Java drops the decimal when both numbers are int. Use double to keep decimals: 10.0/3 = 3.333..." data-es="<strong>División entera</strong>: 10/3 = 3 (no 3.33). Java descarta el decimal cuando ambos son int. Usa double para conservar decimales: 10.0/3 = 3.333..."><strong>Integer division</strong>: 10/3 = 3 (not 3.33). Java drops the decimal when both numbers are int.</p>
+    </div>
+    <h3 data-en="Comparison Operators" data-es="Operadores de Comparación">Comparison Operators</h3>
+    <div class="code-block"><span class="ty">int</span> x = <span class="num">5</span>, y = <span class="num">8</span>;
+System.out.println(x == y);  <span class="cmt">// false → equal / igual</span>
+System.out.println(x != y);  <span class="cmt">// true  → not equal / diferente</span>
+System.out.println(x &lt;  y);  <span class="cmt">// true  → less than / menor que</span>
+System.out.println(x &gt;= y);  <span class="cmt">// false → greater or equal / mayor o igual</span></div>
+    <h3 data-en="Logical Operators" data-es="Operadores Lógicos">Logical Operators</h3>
+    <div class="code-block"><span class="ty">boolean</span> hasTicket = <span class="kw">true</span>;
+<span class="ty">boolean</span> isAdult    = <span class="kw">false</span>;
+System.out.println(hasTicket &amp;&amp; isAdult);  <span class="cmt">// false (AND — both must be true)</span>
+System.out.println(hasTicket || isAdult);  <span class="cmt">// true  (OR  — at least one true)</span>
+System.out.println(!hasTicket);           <span class="cmt">// false (NOT — flips the value)</span></div>
+  </div>
+
+  <!-- TABS M2 -->
+  <div class="tab-btns" role="tablist" aria-label="Operator examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m2-ex1" onclick="switchTab(this,'m2-ex1','m2-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m2-ex2" onclick="switchTab(this,'m2-ex2','m2-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m2-ex3" onclick="switchTab(this,'m2-ex3','m2-tabs')">Example 3</button>
+  </div>
+  <div id="m2-tabs">
+    <div id="m2-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📊 Modulus Use Case</h4>
+      <p data-en="Determine if a number is even or odd using %:" data-es="Determinar si un número es par o impar con %:">Determine if a number is even or odd using %:</p>
+      <div class="code-block"><span class="ty">int</span> num = <span class="num">17</span>;
+System.out.println(num % <span class="num">2</span>); <span class="cmt">// prints 1 → odd/impar</span>
+num = <span class="num">24</span>;
+System.out.println(num % <span class="num">2</span>); <span class="cmt">// prints 0 → even/par</span></div>
+    </div>
+    <div id="m2-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">💰 Compound Assignment</h4>
+      <div class="code-block"><span class="ty">int</span> balance = <span class="num">100</span>;
+balance += <span class="num">50</span>;   <span class="cmt">// balance = 150  (same as balance = balance + 50)</span>
+balance -= <span class="num">30</span>;   <span class="cmt">// balance = 120</span>
+balance *= <span class="num">2</span>;    <span class="cmt">// balance = 240</span>
+System.out.println(balance); <span class="cmt">// 240</span></div>
+    </div>
+    <div id="m2-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎓 Passing Grade Logic</h4>
+      <div class="code-block"><span class="ty">int</span>     score    = <span class="num">78</span>;
+<span class="ty">boolean</span> attended = <span class="kw">true</span>;
+<span class="ty">boolean</span> passes   = (score &gt;= <span class="num">70</span>) &amp;&amp; attended;
+System.out.println(<span class="str">"Passes: "</span> + passes); <span class="cmt">// true</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M2 -->
+  <div class="trace-activity">
+    <h4>🔍 Operator Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="ty">int</span> a = <span class="num">10</span>;
+<span class="ty">int</span> b = <span class="num">3</span>;
+<span class="ty">int</span> c = a % b;
+<span class="ty">boolean</span> result = (a &gt; b) &amp;&amp; (c == <span class="num">1</span>);</div>
+    <table class="trace-table">
+      <thead><tr><th>Variable</th><th>Value / Valor</th></tr></thead>
+      <tbody>
+        <tr><td>a</td><td>10</td></tr>
+        <tr><td>b</td><td>3</td></tr>
+        <tr><td>c = a % b</td><td><input class="trace-input" data-answer="1" id="m2t1"></td></tr>
+        <tr><td>a &gt; b</td><td><input class="trace-input" data-answer="true" id="m2t2"></td></tr>
+        <tr><td>c == 1</td><td><input class="trace-input" data-answer="true" id="m2t3"></td></tr>
+        <tr><td>result</td><td><input class="trace-input" data-answer="true" id="m2t4"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m2',['m2t1','m2t2','m2t3','m2t4'])">✓ Check</button>
+    <div id="m2-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M2 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — What is the result of 17 % 5?</h4>
+      <div class="attempts-info" id="m2q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m2q1-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m2q1','2','17 divided by 5 is 3 remainder 2. So 17 % 5 = 2. / 17 dividido entre 5 es 3 con residuo 2.','Hint: how many times does 5 go into 17? What is left over? / Pista: ¿cuántas veces cabe 5 en 17? ¿Qué sobra?')">Submit</button>
+      <div id="m2q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — true &amp;&amp; false evaluates to?</h4>
+      <div class="attempts-info" id="m2q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m2q2-in" placeholder="true/false">
+      <button class="fill-btn" onclick="checkFill('m2q2','false','AND requires BOTH sides to be true. Since one is false, the result is false. / AND requiere que ambos sean true. Como uno es false, el resultado es false.','Hint: && means BOTH must be true. / Pista: && significa que AMBOS deben ser true.')">Submit</button>
+      <div id="m2q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — int x=8; x *= 3; x is?</h4>
+      <div class="attempts-info" id="m2q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m2q3-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m2q3','24','x *= 3 means x = x * 3 = 8 * 3 = 24. / x *= 3 significa x = x * 3 = 8 * 3 = 24.','Hint: *= means multiply and assign. / Pista: *= significa multiplicar y asignar.')">Submit</button>
+      <div id="m2q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What does the % operator do in Java?</p>
+    <div class="attempts-info" id="m2mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m2mcq','A','B','% returns the remainder of integer division. / % devuelve el residuo de la división entera.','% is not a percentage calculator. / % no es una calculadora de porcentajes.')"><span class="option-icon">🅐</span> Calculates a percentage</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m2mcq','B','B','Correct! % gives the remainder. 10 % 3 = 1 because 3 goes into 10 three times with remainder 1. / ¡Correcto! % da el residuo. 10 % 3 = 1.','This is correct! / ¡Correcto!')"><span class="option-icon">🅑</span> Returns the remainder of division</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m2mcq','C','B','% does not multiply. * is multiplication. / % no multiplica. * es multiplicación.','% is the modulus operator, not multiplication. / % es el operador módulo, no multiplicación.')"><span class="option-icon">🅒</span> Multiplies two numbers</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m2mcq','D','B','% works on numbers, not text. / % funciona con números, no con texto.','% is an arithmetic operator for integer division remainder. / % es un operador aritmético para el residuo de la división entera.')"><span class="option-icon">🅓</span> Formats text output</button></li>
+    </ul>
+    <div id="m2mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(1)">← Variables</button>
+    <button class="run-btn" onclick="switchModule(3)">Next: Conditionals →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--       MODULE 3 — CONDITIONALS (if / switch)     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod3">
+  <div class="mod-hero">
+    <h2 data-en="Module 3: <em>Conditionals</em>" data-es="Módulo 3: <em>Condicionales</em>">Module 3: <em>Conditionals</em></h2>
+    <p data-en="Make decisions in code — run different blocks based on conditions." data-es="Toma decisiones en el código — ejecuta bloques diferentes según condiciones.">Make decisions in code — run different blocks based on conditions.</p>
+    <span class="tag">if</span><span class="tag">else if</span><span class="tag">else</span><span class="tag">switch</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🔀</span>
+    <div>
+      <h3>if / else if / else</h3>
+      <p data-en="The backbone of decision-making in Java." data-es="La columna vertebral de la toma de decisiones en Java.">The backbone of decision-making in Java.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="ty">int</span> score = <span class="num">82</span>;
+<span class="kw">if</span> (score &gt;= <span class="num">90</span>) {
+    System.out.println(<span class="str">"A"</span>);
+} <span class="kw">else if</span> (score &gt;= <span class="num">80</span>) {
+    System.out.println(<span class="str">"B"</span>);  <span class="cmt">// ← this runs</span>
+} <span class="kw">else if</span> (score &gt;= <span class="num">70</span>) {
+    System.out.println(<span class="str">"C"</span>);
+} <span class="kw">else</span> {
+    System.out.println(<span class="str">"F"</span>);
+}</div>
+    <h3>switch Statement</h3>
+    <div class="code-block"><span class="ty">int</span> day = <span class="num">3</span>;
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>: System.out.println(<span class="str">"Monday"</span>);    <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: System.out.println(<span class="str">"Tuesday"</span>);   <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">3</span>: System.out.println(<span class="str">"Wednesday"</span>);  <span class="kw">break</span>; <span class="cmt">// ← runs</span>
+    <span class="kw">default</span>: System.out.println(<span class="str">"Other"</span>);
+}</div>
+    <div class="info-box warning"><span class="info-icon">⚠️</span>
+      <p data-en="<strong>Don't forget break!</strong> Without it, execution 'falls through' to the next case." data-es="<strong>¡No olvides break!</strong> Sin él, la ejecución 'cae' al siguiente caso."><strong>Don't forget break!</strong> Without it, execution 'falls through' to the next case.</p>
+    </div>
+  </div>
+
+  <!-- TABS M3 -->
+  <div class="tab-btns" role="tablist" aria-label="Conditional examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m3-ex1" onclick="switchTab(this,'m3-ex1','m3-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m3-ex2" onclick="switchTab(this,'m3-ex2','m3-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m3-ex3" onclick="switchTab(this,'m3-ex3','m3-tabs')">Example 3</button>
+  </div>
+  <div id="m3-tabs">
+    <div id="m3-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🌡️ Temperature Check</h4>
+      <div class="code-block"><span class="ty">int</span> temp = <span class="num">85</span>;
+<span class="kw">if</span> (temp &gt; <span class="num">90</span>) {
+    System.out.println(<span class="str">"Very hot!"</span>);
+} <span class="kw">else if</span> (temp &gt; <span class="num">70</span>) {
+    System.out.println(<span class="str">"Nice day"</span>); <span class="cmt">// ← runs</span>
+} <span class="kw">else</span> {
+    System.out.println(<span class="str">"Cold"</span>);
+}</div>
+      <div class="code-block"><span class="out">Nice day</span></div>
+    </div>
+    <div id="m3-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🚦 Nested if</h4>
+      <div class="code-block"><span class="ty">int</span> age = <span class="num">20</span>;
+<span class="ty">boolean</span> hasID = <span class="kw">true</span>;
+<span class="kw">if</span> (age &gt;= <span class="num">18</span>) {
+    <span class="kw">if</span> (hasID) {
+        System.out.println(<span class="str">"Entry allowed"</span>);
+    } <span class="kw">else</span> {
+        System.out.println(<span class="str">"Need ID"</span>);
+    }
+} <span class="kw">else</span> {
+    System.out.println(<span class="str">"Too young"</span>);
+}</div>
+      <div class="code-block"><span class="out">Entry allowed</span></div>
+    </div>
+    <div id="m3-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎮 Switch — Game Difficulty</h4>
+      <div class="code-block"><span class="ty">int</span> level = <span class="num">2</span>;
+<span class="kw">switch</span> (level) {
+    <span class="kw">case</span> <span class="num">1</span>: System.out.println(<span class="str">"Easy"</span>);   <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: System.out.println(<span class="str">"Normal"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">3</span>: System.out.println(<span class="str">"Hard"</span>);   <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.println(<span class="str">"Custom"</span>);
+}</div>
+      <div class="code-block"><span class="out">Normal</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M3 -->
+  <div class="trace-activity">
+    <h4>🔍 Conditional Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="ty">int</span> x = <span class="num">15</span>;
+<span class="kw">if</span> (x &gt; <span class="num">20</span>) {
+    System.out.println(<span class="str">"Big"</span>);
+} <span class="kw">else if</span> (x &gt; <span class="num">10</span>) {
+    System.out.println(<span class="str">"Medium"</span>);
+} <span class="kw">else</span> {
+    System.out.println(<span class="str">"Small"</span>);
+}</div>
+    <table class="trace-table">
+      <thead><tr><th>Condition</th><th>Result</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>x &gt; 20 (15 &gt; 20)?</td><td><input class="trace-input" data-answer="false" id="m3t1" style="width:70px"></td><td rowspan="3"><input class="trace-input" data-answer="Medium" id="m3t3" style="width:80px"></td></tr>
+        <tr><td>x &gt; 10 (15 &gt; 10)?</td><td><input class="trace-input" data-answer="true" id="m3t2" style="width:70px"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m3',['m3t1','m3t2','m3t3'])">✓ Check</button>
+    <div id="m3-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M3 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — int age=16; if(age>=18) "Adult"; else "Minor"; → Output?</h4>
+      <div class="attempts-info" id="m3q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m3q1-in" placeholder="output">
+      <button class="fill-btn" onclick="checkFill('m3q1','Minor','16 is NOT >= 18, so the else block runs and prints Minor. / 16 NO es >= 18, así que se ejecuta el else y se imprime Minor.','Hint: is 16 >= 18? / Pista: ¿es 16 >= 18?')">Submit</button>
+      <div id="m3q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — What keyword exits a switch case?</h4>
+      <div class="attempts-info" id="m3q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m3q2-in" placeholder="keyword">
+      <button class="fill-btn" onclick="checkFill('m3q2','break','break exits the switch case. Without it, execution falls through to the next case. / break sale del caso switch. Sin él, la ejecución cae al siguiente caso.','Hint: it starts with &quot;b&quot; / Pista: empieza con &quot;b&quot;')">Submit</button>
+      <div id="m3q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — How many branches can an if-else if-else chain have?</h4>
+      <div class="attempts-info" id="m3q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m3q3-in" placeholder="answer">
+      <button class="fill-btn" onclick="checkFill('m3q3','unlimited','You can have as many else if branches as needed — there is no limit. / Puedes tener tantos else if como necesites — no hay límite.','Hint: think about how many else if you can chain. / Pista: piensa en cuántos else if puedes encadenar.')">Submit</button>
+      <div id="m3q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>In a switch statement, what happens if you forget the <code>break</code> keyword?</p>
+    <div class="attempts-info" id="m3mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m3mcq','A','C','No error — Java just falls through to the next case.','The program compiles fine but has unexpected behavior.')"><span class="option-icon">🅐</span> The program won't compile</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m3mcq','B','C','Only the matching case runs when break is used correctly.','Without break, more than one case can execute.')"><span class="option-icon">🅑</span> Only the matching case runs</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m3mcq','C','C','Correct! Without break, execution falls through to the next case(s) automatically. / ¡Correcto! Sin break, la ejecución cae automáticamente al siguiente caso.','This is the correct answer! Fall-through is a common bug.')"><span class="option-icon">🅒</span> Execution falls through to the next case</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m3mcq','D','C','Java switch does not jump to default when break is missing — it falls through sequentially.','The default case only runs when no other case matches (or fall-through reaches it).')"><span class="option-icon">🅓</span> It jumps to the default case</button></li>
+    </ul>
+    <div id="m3mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(2)">← Operators</button>
+    <button class="run-btn" onclick="switchModule(4)">Next: Loops →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--              MODULE 4 — LOOPS                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod4">
+  <div class="mod-hero">
+    <h2 data-en="Module 4: <em>Loops</em>" data-es="Módulo 4: <em>Bucles</em>">Module 4: <em>Loops</em></h2>
+    <p data-en="Repeat code efficiently with for, while, and do-while loops." data-es="Repite código eficientemente con bucles for, while y do-while.">Repeat code efficiently with for, while, and do-while loops.</p>
+    <span class="tag">for</span><span class="tag">while</span><span class="tag">do-while</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🎯</span>
+    <div>
+      <h3 data-en="The Three Loop Types" data-es="Los Tres Tipos de Bucle">The Three Loop Types</h3>
+      <p data-en="Each loop type suits a different scenario." data-es="Cada tipo de bucle se adapta a un escenario diferente.">Each loop type suits a different scenario.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="cmt">// FOR — know the count / sabes cuántas veces</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+    System.out.println(<span class="str">"i = "</span> + i);
+}
+
+<span class="cmt">// WHILE — unknown count, checks first / cuenta desconocida, verifica primero</span>
+<span class="ty">int</span> n = <span class="num">1</span>;
+<span class="kw">while</span> (n &lt;= <span class="num">5</span>) {
+    System.out.println(n);
+    n++;
+}
+
+<span class="cmt">// DO-WHILE — runs at least once / se ejecuta al menos una vez</span>
+<span class="ty">int</span> x = <span class="num">1</span>;
+<span class="kw">do</span> {
+    System.out.println(x);
+    x++;
+} <span class="kw">while</span> (x &lt;= <span class="num">5</span>);</div>
+  </div>
+
+  <!-- SIMULATOR M4 -->
+  <div class="simulator">
+    <h4>🎬 For Loop Simulator</h4>
+    <div class="sim-vars">
+      <div class="sim-var">i = <span id="m4-sim-i">—</span></div>
+      <div class="sim-var">condition = <span id="m4-sim-cond">—</span></div>
+    </div>
+    <div class="sim-display">
+      <div id="m4-sim-step" class="sim-step">Click ▶ to start</div>
+      <div id="m4-sim-out" class="sim-output"></div>
+    </div>
+    <div id="m4-sim-info" class="sim-info"></div>
+    <div class="sim-controls">
+      <button class="sim-btn" onclick="m4SimStep()">▶ Next Step</button>
+      <button class="sim-btn reset" onclick="m4SimReset()">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- TRACE M4 -->
+  <div class="trace-activity">
+    <h4>🔍 Loop Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">4</span>; i++) {
+    System.out.println(i * i);
+}</div>
+    <table class="trace-table">
+      <thead><tr><th>i</th><th>i*i</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input class="trace-input" data-answer="1" id="m4t1"></td></tr>
+        <tr><td>2</td><td><input class="trace-input" data-answer="4" id="m4t2"></td></tr>
+        <tr><td>3</td><td><input class="trace-input" data-answer="9" id="m4t3"></td></tr>
+        <tr><td>4</td><td><input class="trace-input" data-answer="16" id="m4t4"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m4',['m4t1','m4t2','m4t3','m4t4'])">✓ Check</button>
+    <div id="m4-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M4 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — How many times does this run? for(int i=0; i&lt;5; i++)</h4>
+      <div class="attempts-info" id="m4q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m4q1-in" placeholder="count">
+      <button class="fill-btn" onclick="checkFill('m4q1','5','i goes 0,1,2,3,4 — all less than 5. That is 5 iterations. / i va 0,1,2,3,4 — todos menores que 5. Son 5 iteraciones.','Hint: i starts at 0 and goes up to (but not including) 5. / Pista: i empieza en 0 y llega hasta (sin incluir) 5.')">Submit</button>
+      <div id="m4q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — What keyword stops an infinite while loop? (besides fixing the condition)</h4>
+      <div class="attempts-info" id="m4q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m4q2-in" placeholder="keyword">
+      <button class="fill-btn" onclick="checkFill('m4q2','break','break immediately exits any loop. / break sale inmediatamente de cualquier bucle.','Hint: same keyword used in switch. / Pista: misma palabra clave usada en switch.')">Submit</button>
+      <div id="m4q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — A do-while loop with a false condition runs how many times?</h4>
+      <div class="attempts-info" id="m4q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m4q3-in" placeholder="count">
+      <button class="fill-btn" onclick="checkFill('m4q3','1','Do-while always runs the body FIRST, then checks. So even if condition is false, it runs once. / Do-while siempre ejecuta el cuerpo PRIMERO, luego verifica. Entonces, aunque la condición sea falsa, se ejecuta una vez.','Hint: the do-while checks AFTER the body runs. / Pista: el do-while verifica DESPUÉS de que el cuerpo se ejecuta.')">Submit</button>
+      <div id="m4q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>Which loop type should you use when you don't know in advance how many iterations are needed?</p>
+    <div class="attempts-info" id="m4mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m4mcq','A','B','for loop is best when you know the count. Use while when you don\'t.','for is for known iteration counts.')"><span class="option-icon">🅐</span> for loop</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m4mcq','B','B','Correct! while loop keeps running as long as a condition is true — perfect when the count is unknown. / ¡Correcto! El bucle while sigue ejecutándose mientras una condición sea verdadera — perfecto cuando no sabes cuántas veces.','This is correct!')"><span class="option-icon">🅑</span> while loop</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m4mcq','C','B','do-while also works but while is the standard choice for unknown-count scenarios.','while is the standard answer here.')"><span class="option-icon">🅒</span> do-while loop</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m4mcq','D','B','if is a conditional, not a loop.','if does not loop — it just checks once.')"><span class="option-icon">🅓</span> if statement</button></li>
+    </ul>
+    <div id="m4mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(3)">← Conditionals</button>
+    <button class="run-btn" onclick="switchModule(5)">Next: Arrays →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--              MODULE 5 — ARRAYS                  -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod5">
+  <div class="mod-hero">
+    <h2 data-en="Module 5: <em>Arrays</em>" data-es="Módulo 5: <em>Arreglos</em>">Module 5: <em>Arrays</em></h2>
+    <p data-en="Store multiple values in a single variable — indexed collections." data-es="Guarda múltiples valores en una sola variable — colecciones indexadas.">Store multiple values in a single variable — indexed collections.</p>
+    <span class="tag">int[]</span><span class="tag">String[]</span><span class="tag">array.length</span><span class="tag">for-each</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📋</span>
+    <div>
+      <h3 data-en="Creating &amp; Accessing Arrays" data-es="Crear y Acceder a Arreglos">Creating &amp; Accessing Arrays</h3>
+      <p data-en="Arrays are zero-indexed: first element is index 0." data-es="Los arreglos son de índice cero: el primer elemento es el índice 0.">Arrays are zero-indexed: first element is index 0.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="cmt">// Create an array / Crear un arreglo</span>
+<span class="ty">int</span>[] scores = {<span class="num">90</span>, <span class="num">85</span>, <span class="num">78</span>, <span class="num">92</span>, <span class="num">88</span>};
+
+<span class="cmt">// Access elements (index starts at 0!) / Acceder (índice empieza en 0)</span>
+System.out.println(scores[<span class="num">0</span>]);  <span class="cmt">// 90 ← first element</span>
+System.out.println(scores[<span class="num">4</span>]);  <span class="cmt">// 88 ← last element</span>
+System.out.println(scores.length); <span class="cmt">// 5 ← size of array</span>
+
+<span class="cmt">// Loop through array / Recorrer arreglo</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; scores.length; i++) {
+    System.out.println(<span class="str">"Score "</span> + i + <span class="str">": "</span> + scores[i]);
+}
+
+<span class="cmt">// For-each loop (simpler) / Bucle for-each (más sencillo)</span>
+<span class="kw">for</span> (<span class="ty">int</span> s : scores) {
+    System.out.println(s);
+}</div>
+    <div class="info-box warning"><span class="info-icon">⚠️</span>
+      <p data-en="<strong>Index out of bounds!</strong> Accessing scores[5] on a 5-element array causes a runtime error. Valid indices: 0 to length-1." data-es="<strong>¡Índice fuera de rango!</strong> Acceder a scores[5] en un arreglo de 5 elementos causa un error en tiempo de ejecución. Índices válidos: 0 hasta length-1."><strong>Index out of bounds!</strong> Accessing scores[5] on a 5-element array causes a runtime error.</p>
+    </div>
+  </div>
+
+  <!-- TABS M5 -->
+  <div class="tab-btns" role="tablist" aria-label="Array examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m5-ex1" onclick="switchTab(this,'m5-ex1','m5-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m5-ex2" onclick="switchTab(this,'m5-ex2','m5-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m5-ex3" onclick="switchTab(this,'m5-ex3','m5-tabs')">Example 3</button>
+  </div>
+  <div id="m5-tabs">
+    <div id="m5-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📊 Find the Max</h4>
+      <div class="code-block"><span class="ty">int</span>[] nums = {<span class="num">3</span>, <span class="num">9</span>, <span class="num">1</span>, <span class="num">7</span>, <span class="num">5</span>};
+<span class="ty">int</span> max = nums[<span class="num">0</span>];
+<span class="kw">for</span> (<span class="ty">int</span> n : nums) {
+    <span class="kw">if</span> (n &gt; max) max = n;
+}
+System.out.println(<span class="str">"Max: "</span> + max);</div>
+      <div class="code-block"><span class="out">Max: 9</span></div>
+    </div>
+    <div id="m5-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">➕ Sum of Array</h4>
+      <div class="code-block"><span class="ty">int</span>[] vals = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>};
+<span class="ty">int</span> sum = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> v : vals) {
+    sum += v;
+}
+System.out.println(<span class="str">"Sum: "</span> + sum);
+System.out.println(<span class="str">"Average: "</span> + (sum / vals.length));</div>
+      <div class="code-block"><span class="out">Sum: 100
+Average: 25</span></div>
+    </div>
+    <div id="m5-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔤 String Array</h4>
+      <div class="code-block"><span class="ty">String</span>[] fruits = {<span class="str">"Apple"</span>, <span class="str">"Banana"</span>, <span class="str">"Cherry"</span>};
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; fruits.length; i++) {
+    System.out.println(i + <span class="str">": "</span> + fruits[i]);
+}</div>
+      <div class="code-block"><span class="out">0: Apple
+1: Banana
+2: Cherry</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M5 -->
+  <div class="trace-activity">
+    <h4>🔍 Array Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="ty">int</span>[] a = {<span class="num">2</span>, <span class="num">4</span>, <span class="num">6</span>, <span class="num">8</span>};
+System.out.println(a[<span class="num">0</span>] + a[<span class="num">2</span>]);
+System.out.println(a.length);</div>
+    <table class="trace-table">
+      <thead><tr><th>Expression</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>a[0]</td><td><input class="trace-input" data-answer="2" id="m5t1"></td></tr>
+        <tr><td>a[2]</td><td><input class="trace-input" data-answer="6" id="m5t2"></td></tr>
+        <tr><td>a[0] + a[2]</td><td><input class="trace-input" data-answer="8" id="m5t3"></td></tr>
+        <tr><td>a.length</td><td><input class="trace-input" data-answer="4" id="m5t4"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m5',['m5t1','m5t2','m5t3','m5t4'])">✓ Check</button>
+    <div id="m5-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M5 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — int[] x = {5,10,15}; What is x[1]?</h4>
+      <div class="attempts-info" id="m5q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m5q1-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m5q1','10','Arrays are zero-indexed: x[0]=5, x[1]=10, x[2]=15. / Los arreglos tienen índice cero: x[0]=5, x[1]=10, x[2]=15.','Hint: index 0 is the first element, index 1 is the second. / Pista: índice 0 es el primer elemento, índice 1 es el segundo.')">Submit</button>
+      <div id="m5q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — String[] names = {"Ana","Bob","Cara"}; names.length = ?</h4>
+      <div class="attempts-info" id="m5q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m5q2-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m5q2','3','There are 3 elements in the array, so length = 3. / Hay 3 elementos en el arreglo, entonces length = 3.','Hint: count the elements in the { } / Pista: cuenta los elementos entre { }')">Submit</button>
+      <div id="m5q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What index is the LAST element of a 6-element array?</h4>
+      <div class="attempts-info" id="m5q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m5q3-in" placeholder="index">
+      <button class="fill-btn" onclick="checkFill('m5q3','5','Arrays are zero-indexed: 6 elements → indices 0,1,2,3,4,5. Last = 5 (= length-1). / Índice cero: 6 elementos → índices 0,1,2,3,4,5. Último = 5.','Hint: if there are 6 elements starting at index 0, what is the last index? / Pista: si hay 6 elementos empezando en índice 0, ¿cuál es el último?')">Submit</button>
+      <div id="m5q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What is the index of the first element in a Java array?</p>
+    <div class="attempts-info" id="m5mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m5mcq','A','A','Correct! Java (and most languages) use zero-based indexing. First element = index 0. / ¡Correcto! Java usa indexación basada en cero. Primer elemento = índice 0.','This is correct!')"><span class="option-icon">🅐</span> 0</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m5mcq','B','A','Arrays start at 0, not 1. This is a common misconception. / Los arreglos empiezan en 0, no en 1.','Array indices start at 0 in Java.')"><span class="option-icon">🅑</span> 1</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m5mcq','C','A','The last index is length-1, not length. And the first is always 0. / El último índice es length-1, no length.','The first index is always 0.')"><span class="option-icon">🅒</span> length</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m5mcq','D','A','There is no automatic middle index. First is always 0. / No hay índice medio automático. El primero siempre es 0.','The first element is always at index 0.')"><span class="option-icon">🅓</span> The middle index</button></li>
+    </ul>
+    <div id="m5mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(4)">← Loops</button>
+    <button class="run-btn" onclick="switchModule(6)">Next: Methods →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--           MODULE 6 — METHODS & FUNCTIONS        -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod6">
+  <div class="mod-hero">
+    <h2 data-en="Module 6: <em>Methods</em> &amp; Functions" data-es="Módulo 6: <em>Métodos</em> y Funciones">Module 6: <em>Methods</em> &amp; Functions</h2>
+    <p data-en="Organize reusable code into named blocks — the foundation of clean programming." data-es="Organiza código reutilizable en bloques con nombre — la base de la programación limpia.">Organize reusable code into named blocks — the foundation of clean programming.</p>
+    <span class="tag">void</span><span class="tag">return</span><span class="tag">parameters</span><span class="tag">overloading</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🔧</span>
+    <div>
+      <h3 data-en="Defining &amp; Calling Methods" data-es="Definir y Llamar Métodos">Defining &amp; Calling Methods</h3>
+      <p data-en="Write once, use anywhere in your class." data-es="Escribe una vez, usa en cualquier lugar de tu clase.">Write once, use anywhere in your class.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="cmt">// Method with no return value / Método sin valor de retorno</span>
+<span class="kw">static void</span> greet(<span class="ty">String</span> name) {
+    System.out.println(<span class="str">"Hello, "</span> + name + <span class="str">"!"</span>);
+}
+
+<span class="cmt">// Method that returns a value / Método que retorna un valor</span>
+<span class="kw">static int</span> add(<span class="ty">int</span> a, <span class="ty">int</span> b) {
+    <span class="kw">return</span> a + b;
+}
+
+<span class="cmt">// Calling methods / Llamar métodos</span>
+greet(<span class="str">"Maria"</span>);            <span class="cmt">// Hello, Maria!</span>
+<span class="ty">int</span> result = add(<span class="num">5</span>, <span class="num">3</span>); <span class="cmt">// result = 8</span></div>
+    <h4 data-en="Anatomy of a Method" data-es="Anatomía de un Método">Anatomy of a Method</h4>
+    <ol class="step-list">
+      <li data-en="<strong>Return type</strong>: void (nothing) or a data type like int, double, String." data-es="<strong>Tipo de retorno</strong>: void (nada) o un tipo de dato como int, double, String."><strong>Return type</strong>: void (nothing) or a data type like int, double, String.</li>
+      <li data-en="<strong>Method name</strong>: descriptive camelCase name." data-es="<strong>Nombre del método</strong>: nombre descriptivo en camelCase."><strong>Method name</strong>: descriptive camelCase name.</li>
+      <li data-en="<strong>Parameters</strong>: input values inside ()." data-es="<strong>Parámetros</strong>: valores de entrada dentro de ()."><strong>Parameters</strong>: input values inside ().</li>
+      <li data-en="<strong>Body</strong>: code in {} that executes." data-es="<strong>Cuerpo</strong>: código en {} que se ejecuta."><strong>Body</strong>: code in {} that executes.</li>
+      <li data-en="<strong>return</strong>: sends a value back (not needed for void)." data-es="<strong>return</strong>: devuelve un valor (no necesario para void)."><strong>return</strong>: sends a value back (not needed for void).</li>
+    </ol>
+  </div>
+
+  <!-- TABS M6 -->
+  <div class="tab-btns" role="tablist" aria-label="Method examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m6-ex1" onclick="switchTab(this,'m6-ex1','m6-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m6-ex2" onclick="switchTab(this,'m6-ex2','m6-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m6-ex3" onclick="switchTab(this,'m6-ex3','m6-tabs')">Example 3</button>
+  </div>
+  <div id="m6-tabs">
+    <div id="m6-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📐 Area Calculator</h4>
+      <div class="code-block"><span class="kw">static double</span> rectangleArea(<span class="ty">double</span> w, <span class="ty">double</span> h) {
+    <span class="kw">return</span> w * h;
+}
+System.out.println(rectangleArea(<span class="num">5.0</span>, <span class="num">3.0</span>)); <span class="cmt">// 15.0</span>
+System.out.println(rectangleArea(<span class="num">4.5</span>, <span class="num">2.0</span>)); <span class="cmt">// 9.0</span></div>
+    </div>
+    <div id="m6-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔄 Method Calling Method</h4>
+      <div class="code-block"><span class="kw">static int</span> square(<span class="ty">int</span> n) { <span class="kw">return</span> n * n; }
+<span class="kw">static int</span> sumOfSquares(<span class="ty">int</span> a, <span class="ty">int</span> b) {
+    <span class="kw">return</span> square(a) + square(b);
+}
+System.out.println(sumOfSquares(<span class="num">3</span>, <span class="num">4</span>)); <span class="cmt">// 9+16 = 25</span></div>
+    </div>
+    <div id="m6-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎯 Boolean Return</h4>
+      <div class="code-block"><span class="kw">static boolean</span> isEven(<span class="ty">int</span> n) {
+    <span class="kw">return</span> n % <span class="num">2</span> == <span class="num">0</span>;
+}
+System.out.println(isEven(<span class="num">4</span>));  <span class="cmt">// true</span>
+System.out.println(isEven(<span class="num">7</span>));  <span class="cmt">// false</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M6 -->
+  <div class="trace-activity">
+    <h4>🔍 Method Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="kw">static int</span> mystery(<span class="ty">int</span> x) {
+    <span class="kw">return</span> x * x + <span class="num">1</span>;
+}
+System.out.println(mystery(<span class="num">3</span>));
+System.out.println(mystery(<span class="num">5</span>));</div>
+    <table class="trace-table">
+      <thead><tr><th>Call</th><th>x</th><th>x*x+1</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>mystery(3)</td><td>3</td><td><input class="trace-input" data-answer="10" id="m6t1"></td><td><input class="trace-input" data-answer="10" id="m6t2"></td></tr>
+        <tr><td>mystery(5)</td><td>5</td><td><input class="trace-input" data-answer="26" id="m6t3"></td><td><input class="trace-input" data-answer="26" id="m6t4"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m6',['m6t1','m6t2','m6t3','m6t4'])">✓ Check</button>
+    <div id="m6-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M6 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — A method that prints but returns nothing uses which return type?</h4>
+      <div class="attempts-info" id="m6q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m6q1-in" placeholder="type">
+      <button class="fill-btn" onclick="checkFill('m6q1','void','void means the method returns no value. / void significa que el método no retorna ningún valor.','Hint: it means &quot;empty&quot; or &quot;nothing&quot;. / Pista: significa &quot;vacío&quot; o &quot;nada&quot;.')">Submit</button>
+      <div id="m6q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — static int double(int n){ return n*2; } What does double(7) return?</h4>
+      <div class="attempts-info" id="m6q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m6q2-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m6q2','14','n=7, so n*2 = 7*2 = 14. / n=7, así que n*2 = 7*2 = 14.','Hint: substitute n=7 into the formula n*2. / Pista: sustituye n=7 en la fórmula n*2.')">Submit</button>
+      <div id="m6q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What keyword sends a value back from a method?</h4>
+      <div class="attempts-info" id="m6q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m6q3-in" placeholder="keyword">
+      <button class="fill-btn" onclick="checkFill('m6q3','return','return sends a value back to the caller and exits the method. / return envía un valor de regreso al llamador y sale del método.','Hint: it starts with &quot;r&quot;. / Pista: empieza con &quot;r&quot;.')">Submit</button>
+      <div id="m6q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What is the purpose of the <code>return</code> keyword in a Java method?</p>
+    <div class="attempts-info" id="m6mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m6mcq','A','C','return sends back a value — it doesn\'t print it.','return and println are different concepts.')"><span class="option-icon">🅐</span> To print a value to the screen</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m6mcq','B','C','Declaring a method uses the method signature, not return.','return is used inside a method, not to declare it.')"><span class="option-icon">🅑</span> To declare a new method</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m6mcq','C','C','Correct! return sends a value back to whoever called the method and exits it. / ¡Correcto! return envía un valor de regreso al llamador y sale del método.','This is correct!')"><span class="option-icon">🅒</span> To send a value back to the caller and exit the method</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m6mcq','D','C','return exits the method, not the whole program. System.exit() exits the program.','return only exits the current method.')"><span class="option-icon">🅓</span> To exit the entire program</button></li>
+    </ul>
+    <div id="m6mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(5)">← Arrays</button>
+    <button class="run-btn" onclick="switchModule(7)">Next: OOP →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--           MODULE 7 — CLASSES & OOP              -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod7">
+  <div class="mod-hero">
+    <h2 data-en="Module 7: <em>Classes</em> &amp; Objects" data-es="Módulo 7: <em>Clases</em> y Objetos">Module 7: <em>Classes</em> &amp; Objects</h2>
+    <p data-en="Object-Oriented Programming — model real-world things as objects with data and behavior." data-es="Programación Orientada a Objetos — modela cosas del mundo real como objetos con datos y comportamiento.">Object-Oriented Programming — model real-world things as objects with data and behavior.</p>
+    <span class="tag">class</span><span class="tag">constructor</span><span class="tag">fields</span><span class="tag">new</span><span class="tag">this</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🏗️</span>
+    <div>
+      <h3 data-en="Classes, Fields, Constructors" data-es="Clases, Campos, Constructores">Classes, Fields, Constructors</h3>
+      <p data-en="A class is a blueprint; an object is the built thing." data-es="Una clase es un plano; un objeto es lo construido.">A class is a blueprint; an object is the built thing.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="cmt">// CLASS DEFINITION / DEFINICIÓN DE CLASE</span>
+<span class="kw">class</span> <span class="ty">Student</span> {
+    <span class="cmt">// Fields (instance variables) / Campos (variables de instancia)</span>
+    <span class="ty">String</span> name;
+    <span class="ty">int</span>    age;
+    <span class="ty">double</span> gpa;
+
+    <span class="cmt">// Constructor / Constructor</span>
+    <span class="ty">Student</span>(<span class="ty">String</span> n, <span class="ty">int</span> a, <span class="ty">double</span> g) {
+        <span class="kw">this</span>.name = n;
+        <span class="kw">this</span>.age  = a;
+        <span class="kw">this</span>.gpa  = g;
+    }
+
+    <span class="cmt">// Method / Método</span>
+    <span class="kw">void</span> display() {
+        System.out.println(name + <span class="str">" | Age: "</span> + age + <span class="str">" | GPA: "</span> + gpa);
+    }
+}
+
+<span class="cmt">// CREATE OBJECTS / CREAR OBJETOS</span>
+<span class="ty">Student</span> s1 = <span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Ana"</span>, <span class="num">20</span>, <span class="num">3.9</span>);
+<span class="ty">Student</span> s2 = <span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Bob"</span>, <span class="num">22</span>, <span class="num">3.4</span>);
+s1.display(); <span class="cmt">// Ana | Age: 20 | GPA: 3.9</span>
+s2.display(); <span class="cmt">// Bob | Age: 22 | GPA: 3.4</span></div>
+    <div class="info-box tip"><span class="info-icon">💡</span>
+      <p data-en="<strong>this</strong> refers to the current object. Use it when the parameter name matches the field name to avoid ambiguity." data-es="<strong>this</strong> se refiere al objeto actual. Úsalo cuando el nombre del parámetro coincide con el nombre del campo para evitar ambigüedad."><strong>this</strong> refers to the current object. Use it when the parameter name matches the field name.</p>
+    </div>
+  </div>
+
+  <!-- TABS M7 -->
+  <div class="tab-btns" role="tablist" aria-label="OOP examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m7-ex1" onclick="switchTab(this,'m7-ex1','m7-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m7-ex2" onclick="switchTab(this,'m7-ex2','m7-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m7-ex3" onclick="switchTab(this,'m7-ex3','m7-tabs')">Example 3</button>
+  </div>
+  <div id="m7-tabs">
+    <div id="m7-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🚗 Car Class</h4>
+      <div class="code-block"><span class="kw">class</span> <span class="ty">Car</span> {
+    <span class="ty">String</span> brand;
+    <span class="ty">int</span>    year;
+    <span class="ty">Car</span>(<span class="ty">String</span> b, <span class="ty">int</span> y) { brand = b; year = y; }
+    <span class="kw">void</span> info() {
+        System.out.println(brand + <span class="str">" ("</span> + year + <span class="str">")"</span>);
+    }
+}
+<span class="ty">Car</span> c = <span class="kw">new</span> <span class="ty">Car</span>(<span class="str">"Toyota"</span>, <span class="num">2023</span>);
+c.info(); <span class="cmt">// Toyota (2023)</span></div>
+    </div>
+    <div id="m7-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🏦 Bank Account</h4>
+      <div class="code-block"><span class="kw">class</span> <span class="ty">BankAccount</span> {
+    <span class="ty">String</span> owner;
+    <span class="ty">double</span> balance;
+    <span class="ty">BankAccount</span>(<span class="ty">String</span> o, <span class="ty">double</span> b) { owner=o; balance=b; }
+    <span class="kw">void</span> deposit(<span class="ty">double</span> amt)  { balance += amt; }
+    <span class="kw">void</span> withdraw(<span class="ty">double</span> amt) { balance -= amt; }
+    <span class="kw">void</span> show() { System.out.println(owner + <span class="str">": $"</span> + balance); }
+}
+<span class="ty">BankAccount</span> acc = <span class="kw">new</span> <span class="ty">BankAccount</span>(<span class="str">"Ana"</span>, <span class="num">500</span>);
+acc.deposit(<span class="num">200</span>);
+acc.withdraw(<span class="num">100</span>);
+acc.show(); <span class="cmt">// Ana: $600.0</span></div>
+    </div>
+    <div id="m7-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📦 Array of Objects</h4>
+      <div class="code-block"><span class="ty">Student</span>[] roster = {
+    <span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Ana"</span>, <span class="num">20</span>, <span class="num">3.9</span>),
+    <span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Bob"</span>, <span class="num">21</span>, <span class="num">3.2</span>),
+    <span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Cara"</span>, <span class="num">19</span>, <span class="num">3.7</span>)
+};
+<span class="kw">for</span> (<span class="ty">Student</span> s : roster) {
+    s.display();
+}</div>
+      <div class="code-block"><span class="out">Ana | Age: 20 | GPA: 3.9
+Bob | Age: 21 | GPA: 3.2
+Cara | Age: 19 | GPA: 3.7</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M7 -->
+  <div class="trace-activity">
+    <h4>🔍 OOP Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="kw">class</span> <span class="ty">Box</span> {
+    <span class="ty">int</span> side;
+    <span class="ty">Box</span>(<span class="ty">int</span> s) { side = s; }
+    <span class="ty">int</span> volume() { <span class="kw">return</span> side * side * side; }
+}
+<span class="ty">Box</span> b = <span class="kw">new</span> <span class="ty">Box</span>(<span class="num">3</span>);
+System.out.println(b.volume());</div>
+    <table class="trace-table">
+      <thead><tr><th>Expression</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>b.side</td><td><input class="trace-input" data-answer="3" id="m7t1"></td></tr>
+        <tr><td>side * side</td><td><input class="trace-input" data-answer="9" id="m7t2"></td></tr>
+        <tr><td>side * side * side</td><td><input class="trace-input" data-answer="27" id="m7t3"></td></tr>
+        <tr><td>Output</td><td><input class="trace-input" data-answer="27" id="m7t4"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m7',['m7t1','m7t2','m7t3','m7t4'])">✓ Check</button>
+    <div id="m7-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M7 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — What keyword creates a new object from a class?</h4>
+      <div class="attempts-info" id="m7q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m7q1-in" placeholder="keyword">
+      <button class="fill-btn" onclick="checkFill('m7q1','new','new allocates memory and creates a new object instance. / new asigna memoria y crea una nueva instancia del objeto.','Hint: it\'s a 3-letter keyword. / Pista: es una palabra clave de 3 letras.')">Submit</button>
+      <div id="m7q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — A method with the same name as the class is called a ___?</h4>
+      <div class="attempts-info" id="m7q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m7q2-in" placeholder="term">
+      <button class="fill-btn" onclick="checkFill('m7q2','constructor','A constructor has the same name as the class and initializes the object. / Un constructor tiene el mismo nombre que la clase e inicializa el objeto.','Hint: it constructs the object when you use &quot;new&quot;. / Pista: construye el objeto cuando usas &quot;new&quot;.')">Submit</button>
+      <div id="m7q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — class Dog { String name; Dog(String n){ this.name=n; } } Dog d = new Dog("Rex"); What is d.name?</h4>
+      <div class="attempts-info" id="m7q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m7q3-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m7q3','Rex','The constructor sets this.name = n, and n is \"Rex\". So d.name is \"Rex\". / El constructor establece this.name = n, y n es \"Rex\". Así que d.name es \"Rex\".','Hint: what String was passed to new Dog(\"___\")? / Pista: ¿qué String se pasó a new Dog(\"___\")?')">Submit</button>
+      <div id="m7q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What is the relationship between a <strong>class</strong> and an <strong>object</strong> in Java?</p>
+    <div class="attempts-info" id="m7mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m7mcq','A','B','An object is created FROM a class — the class is the blueprint. / Un objeto se crea A PARTIR de una clase — la clase es el plano.','They are not the same thing.')"><span class="option-icon">🅐</span> A class and an object are the same thing</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m7mcq','B','B','Correct! A class is the blueprint (template), and an object is a specific instance created from that blueprint using new. / ¡Correcto! Una clase es el plano (plantilla) y un objeto es una instancia específica creada a partir de ese plano usando new.','This is correct!')"><span class="option-icon">🅑</span> A class is the blueprint; an object is an instance of it</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m7mcq','C','B','It is the opposite: an object is created from a class (not vice versa). / Es lo contrario: un objeto se crea a partir de una clase.','The class defines the structure; objects are created from it.')"><span class="option-icon">🅒</span> An object contains multiple classes</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m7mcq','D','B','Classes can have multiple constructors and methods — they are not limited to one method. / Las clases pueden tener múltiples constructores y métodos.','Classes can have any number of methods.')"><span class="option-icon">🅓</span> A class can only have one method</button></li>
+    </ul>
+    <div id="m7mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(6)">← Methods</button>
+    <button class="run-btn" onclick="switchModule(8)">Next: Inheritance →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--          MODULE 8 — INHERITANCE                 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod8">
+  <div class="mod-hero">
+    <h2 data-en="Module 8: <em>Inheritance</em>" data-es="Módulo 8: <em>Herencia</em>">Module 8: <em>Inheritance</em></h2>
+    <p data-en="Build new classes on top of existing ones — reuse, extend, and override." data-es="Construye nuevas clases sobre las existentes — reutiliza, extiende y sobreescribe.">Build new classes on top of existing ones — reuse, extend, and override.</p>
+    <span class="tag">extends</span><span class="tag">super</span><span class="tag">@Override</span><span class="tag">polymorphism</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🧬</span>
+    <div>
+      <h3 data-en="Parent &amp; Child Classes" data-es="Clases Padre e Hijo">Parent &amp; Child Classes</h3>
+      <p data-en="A child class inherits fields and methods from its parent." data-es="Una clase hija hereda campos y métodos de su clase padre.">A child class inherits fields and methods from its parent.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3 data-en="The extends Keyword" data-es="La Palabra Clave extends">The extends Keyword</h3>
+    <div class="code-block"><span class="cmt">// Parent class / Clase padre</span>
+<span class="kw">class</span> <span class="ty">Animal</span> {
+    <span class="ty">String</span> name;
+    <span class="ty">Animal</span>(<span class="ty">String</span> n) { name = n; }
+    <span class="kw">void</span> speak() { System.out.println(name + <span class="str">" makes a sound"</span>); }
+}
+
+<span class="cmt">// Child class inherits from Animal / Clase hija hereda de Animal</span>
+<span class="kw">class</span> <span class="ty">Dog</span> <span class="kw">extends</span> <span class="ty">Animal</span> {
+    <span class="ty">Dog</span>(<span class="ty">String</span> n) { <span class="kw">super</span>(n); }  <span class="cmt">// calls parent constructor</span>
+
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> speak() { System.out.println(name + <span class="str">" says: Woof!"</span>); }
+}
+
+<span class="cmt">// Usage / Uso</span>
+<span class="ty">Animal</span> a = <span class="kw">new</span> <span class="ty">Animal</span>(<span class="str">"Generic"</span>);
+<span class="ty">Dog</span>    d = <span class="kw">new</span> <span class="ty">Dog</span>(<span class="str">"Rex"</span>);
+a.speak(); <span class="cmt">// Generic makes a sound</span>
+d.speak(); <span class="cmt">// Rex says: Woof!</span></div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p data-en="<strong>super()</strong> calls the parent's constructor. Must be the first line in the child constructor. <strong>@Override</strong> tells Java you are replacing the parent's method." data-es="<strong>super()</strong> llama al constructor del padre. Debe ser la primera línea del constructor hijo. <strong>@Override</strong> le dice a Java que estás reemplazando el método del padre."><strong>super()</strong> calls the parent's constructor. Must be the first line in the child constructor.</p>
+    </div>
+    <h3 data-en="Polymorphism" data-es="Polimorfismo">Polymorphism</h3>
+    <p data-en="A parent-type variable can hold any child object. Java calls the correct overridden method at runtime." data-es="Una variable de tipo padre puede contener cualquier objeto hijo. Java llama al método sobreescrito correcto en tiempo de ejecución.">A parent-type variable can hold any child object.</p>
+    <div class="code-block"><span class="ty">Animal</span>[] zoo = { <span class="kw">new</span> <span class="ty">Animal</span>(<span class="str">"Cat"</span>), <span class="kw">new</span> <span class="ty">Dog</span>(<span class="str">"Rex"</span>) };
+<span class="kw">for</span> (<span class="ty">Animal</span> x : zoo) {
+    x.speak(); <span class="cmt">// calls the correct speak() for each object!</span>
+}
+<span class="cmt">// Output:</span>
+<span class="out">Cat makes a sound
+Rex says: Woof!</span></div>
+  </div>
+
+  <!-- TABS M8 -->
+  <div class="tab-btns" role="tablist" aria-label="Inheritance examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m8-ex1" onclick="switchTab(this,'m8-ex1','m8-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m8-ex2" onclick="switchTab(this,'m8-ex2','m8-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m8-ex3" onclick="switchTab(this,'m8-ex3','m8-tabs')">Example 3</button>
+  </div>
+  <div id="m8-tabs">
+    <div id="m8-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🚗 Vehicle Hierarchy</h4>
+      <div class="code-block"><span class="kw">class</span> <span class="ty">Vehicle</span> {
+    <span class="ty">int</span> speed;
+    <span class="ty">Vehicle</span>(<span class="ty">int</span> s) { speed = s; }
+    <span class="kw">void</span> move() { System.out.println(<span class="str">"Moving at "</span> + speed + <span class="str">" mph"</span>); }
+}
+<span class="kw">class</span> <span class="ty">Car</span> <span class="kw">extends</span> <span class="ty">Vehicle</span> {
+    <span class="ty">String</span> brand;
+    <span class="ty">Car</span>(<span class="ty">String</span> b, <span class="ty">int</span> s) { <span class="kw">super</span>(s); brand = b; }
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> move() { System.out.println(brand + <span class="str">" cruising at "</span> + speed + <span class="str">" mph"</span>); }
+}
+<span class="ty">Car</span> c = <span class="kw">new</span> <span class="ty">Car</span>(<span class="str">"Toyota"</span>, <span class="num">65</span>);
+c.move();</div>
+      <div class="code-block"><span class="out">Toyota cruising at 65 mph</span></div>
+    </div>
+    <div id="m8-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📐 Shape Area — super method call</h4>
+      <div class="code-block"><span class="kw">class</span> <span class="ty">Shape</span> {
+    <span class="ty">String</span> color;
+    <span class="ty">Shape</span>(<span class="ty">String</span> c) { color = c; }
+    <span class="kw">void</span> describe() { System.out.println(<span class="str">"Color: "</span> + color); }
+}
+<span class="kw">class</span> <span class="ty">Circle</span> <span class="kw">extends</span> <span class="ty">Shape</span> {
+    <span class="ty">double</span> radius;
+    <span class="ty">Circle</span>(<span class="ty">String</span> c, <span class="ty">double</span> r) { <span class="kw">super</span>(c); radius = r; }
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> describe() {
+        <span class="kw">super</span>.describe();  <span class="cmt">// call parent method first</span>
+        System.out.println(<span class="str">"Radius: "</span> + radius);
+    }
+}
+<span class="kw">new</span> <span class="ty">Circle</span>(<span class="str">"Red"</span>, <span class="num">5.0</span>).describe();</div>
+      <div class="code-block"><span class="out">Color: Red
+Radius: 5.0</span></div>
+    </div>
+    <div id="m8-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🏦 Multi-level Inheritance</h4>
+      <div class="code-block"><span class="kw">class</span> <span class="ty">Account</span> {
+    <span class="ty">double</span> balance;
+    <span class="ty">Account</span>(<span class="ty">double</span> b) { balance = b; }
+    <span class="kw">void</span> show() { System.out.println(<span class="str">"Balance: $"</span> + balance); }
+}
+<span class="kw">class</span> <span class="ty">SavingsAccount</span> <span class="kw">extends</span> <span class="ty">Account</span> {
+    <span class="ty">double</span> rate;
+    <span class="ty">SavingsAccount</span>(<span class="ty">double</span> b, <span class="ty">double</span> r) { <span class="kw">super</span>(b); rate = r; }
+    <span class="kw">void</span> addInterest() { balance += balance * rate; }
+}
+<span class="ty">SavingsAccount</span> sa = <span class="kw">new</span> <span class="ty">SavingsAccount</span>(<span class="num">1000</span>, <span class="num">0.05</span>);
+sa.addInterest();
+sa.show(); <span class="cmt">// inherits show() from Account</span></div>
+      <div class="code-block"><span class="out">Balance: $1050.0</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M8 -->
+  <div class="trace-activity">
+    <h4>🔍 Inheritance Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="kw">class</span> <span class="ty">A</span> { <span class="kw">void</span> greet() { System.out.println(<span class="str">"Hello from A"</span>); } }
+<span class="kw">class</span> <span class="ty">B</span> <span class="kw">extends</span> <span class="ty">A</span> {
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> greet() { System.out.println(<span class="str">"Hello from B"</span>); }
+}
+<span class="ty">A</span> obj = <span class="kw">new</span> <span class="ty">B</span>();
+obj.greet();</div>
+    <table class="trace-table">
+      <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+      <tbody>
+        <tr><td>Type of variable obj</td><td><input class="trace-input" data-answer="A" id="m8t1" style="width:80px"></td></tr>
+        <tr><td>Actual object created</td><td><input class="trace-input" data-answer="B" id="m8t2" style="width:80px"></td></tr>
+        <tr><td>Which greet() runs?</td><td><input class="trace-input" data-answer="B" id="m8t3" style="width:80px"></td></tr>
+        <tr><td>Output printed</td><td><input class="trace-input" data-answer="Hello from B" id="m8t4" style="width:130px"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m8',['m8t1','m8t2','m8t3','m8t4'])">✓ Check</button>
+    <div id="m8-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M8 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — What keyword makes a class inherit from another?</h4>
+      <div class="attempts-info" id="m8q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m8q1-in" placeholder="keyword">
+      <button class="fill-btn" onclick="checkFill('m8q1','extends','extends establishes an IS-A relationship between child and parent. / extends establece una relación ES-UN entre hijo y padre.','Hint: the child class ___ the parent class. / Pista: la clase hija ___ la clase padre.')">Submit</button>
+      <div id="m8q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — What does super() do inside a child constructor?</h4>
+      <div class="attempts-info" id="m8q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m8q2-in" placeholder="answer" style="width:200px">
+      <button class="fill-btn" onclick="checkFill('m8q2','calls the parent constructor','super() invokes the parent class constructor to initialize inherited fields. / super() invoca el constructor de la clase padre para inicializar los campos heredados.','Hint: it invokes the constructor of the... / Pista: invoca el constructor de la...')">Submit</button>
+      <div id="m8q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What annotation signals that a method overrides a parent method?</h4>
+      <div class="attempts-info" id="m8q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m8q3-in" placeholder="annotation">
+      <button class="fill-btn" onclick="checkFill('m8q3','@override','@Override tells the compiler you intend to override a parent method, helping catch typos. / @Override le dice al compilador que tienes intención de sobreescribir un método padre.','Hint: it starts with @ / Pista: empieza con @')">Submit</button>
+      <div id="m8q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>If class <code>Dog extends Animal</code>, which statement is true about polymorphism?</p>
+    <div class="attempts-info" id="m8mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m8mcq','A','C','A Dog IS an Animal, so Animal type can hold a Dog reference. / Un Dog ES un Animal, entonces el tipo Animal puede contener una referencia Dog.','The relationship is the opposite — Dog IS-A Animal.')"><span class="option-icon">🅐</span> Animal a = new Dog() is a compiler error</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m8mcq','B','C','Dog can inherit Animal\'s methods; it doesn\'t need to redeclare them unless it overrides. / Dog puede heredar los métodos de Animal; no necesita redeclararlos a menos que los sobreescriba.','Dog inherits Animal methods automatically.')"><span class="option-icon">🅑</span> Dog must redeclare all of Animal's methods</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m8mcq','C','C','Correct! Animal a = new Dog() is valid — the Dog IS-A Animal. Java calls Dog\'s overridden methods at runtime. / ¡Correcto! Animal a = new Dog() es válido — Dog ES-UN Animal. Java llama a los métodos sobreescritos de Dog en tiempo de ejecución.','This is correct! Polymorphism allows a parent reference to point to a child object.')"><span class="option-icon">🅒</span> Animal a = new Dog() is valid; Dog's overridden methods run</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m8mcq','D','C','Inheritance is at the class level, not the method level. / La herencia es a nivel de clase, no de método.','Inheritance applies to the whole class, not individual methods.')"><span class="option-icon">🅓</span> Only static methods can be inherited</button></li>
+    </ul>
+    <div id="m8mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(7)">← OOP</button>
+    <button class="run-btn" onclick="switchModule(9)">Next: ArrayList →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--        MODULE 9 — CONTINUE / ARRAYLIST          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod9">
+  <div class="mod-hero">
+    <h2 data-en="Module 9: <em>ArrayList</em> &amp; Collections" data-es="Módulo 9: <em>ArrayList</em> y Colecciones">Module 9: <em>ArrayList</em> &amp; Collections</h2>
+    <p data-en="Dynamic lists that grow and shrink automatically — more flexible than arrays." data-es="Listas dinámicas que crecen y se reducen automáticamente — más flexibles que los arreglos.">Dynamic lists that grow and shrink automatically — more flexible than arrays.</p>
+    <span class="tag">ArrayList</span><span class="tag">add()</span><span class="tag">remove()</span><span class="tag">get()</span><span class="tag">size()</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📝</span>
+    <div>
+      <h3 data-en="ArrayList vs Array" data-es="ArrayList vs Arreglo">ArrayList vs Array</h3>
+      <p data-en="Arrays have fixed size; ArrayLists resize automatically." data-es="Los arreglos tienen tamaño fijo; los ArrayList cambian tamaño automáticamente.">Arrays have fixed size; ArrayLists resize automatically.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <div class="code-block"><span class="kw">import</span> java.util.ArrayList;  <span class="cmt">// must import! / ¡debes importar!</span>
+
+<span class="cmt">// Create / Crear</span>
+<span class="ty">ArrayList</span>&lt;<span class="ty">String</span>&gt; names = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+
+<span class="cmt">// Add items / Agregar elementos</span>
+names.add(<span class="str">"Ana"</span>);
+names.add(<span class="str">"Bob"</span>);
+names.add(<span class="str">"Cara"</span>);
+
+<span class="cmt">// Access / Acceder  (note: use get(), not [])</span>
+System.out.println(names.get(<span class="num">0</span>));  <span class="cmt">// Ana</span>
+System.out.println(names.size());   <span class="cmt">// 3</span>
+
+<span class="cmt">// Remove / Eliminar</span>
+names.remove(<span class="str">"Bob"</span>);               <span class="cmt">// removes by value</span>
+names.remove(<span class="num">0</span>);                  <span class="cmt">// removes by index</span>
+
+<span class="cmt">// Loop / Recorrer</span>
+<span class="kw">for</span> (<span class="ty">String</span> n : names) {
+    System.out.println(n);
+}</div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p data-en="ArrayLists only store <strong>objects</strong>, not primitives. Use wrapper types: Integer, Double, Boolean instead of int, double, boolean." data-es="Los ArrayList solo almacenan <strong>objetos</strong>, no primitivos. Usa tipos envolventes: Integer, Double, Boolean en lugar de int, double, boolean.">ArrayLists only store <strong>objects</strong> — use Integer, Double, Boolean instead of int, double, boolean.</p>
+    </div>
+    <h3 data-en="Useful ArrayList Methods" data-es="Métodos Útiles de ArrayList">Useful ArrayList Methods</h3>
+    <div class="code-block"><span class="ty">ArrayList</span>&lt;<span class="ty">Integer</span>&gt; nums = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+nums.add(<span class="num">10</span>); nums.add(<span class="num">20</span>); nums.add(<span class="num">30</span>);
+
+nums.set(<span class="num">1</span>, <span class="num">99</span>);          <span class="cmt">// replace index 1 → [10, 99, 30]</span>
+nums.contains(<span class="num">10</span>);         <span class="cmt">// true — checks if value exists</span>
+nums.indexOf(<span class="num">30</span>);          <span class="cmt">// 2  — position of 30</span>
+nums.clear();               <span class="cmt">// removes everything</span>
+nums.isEmpty();             <span class="cmt">// true — nothing left</span></div>
+  </div>
+
+  <!-- TABS M9 -->
+  <div class="tab-btns" role="tablist" aria-label="ArrayList examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m9-ex1" onclick="switchTab(this,'m9-ex1','m9-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m9-ex2" onclick="switchTab(this,'m9-ex2','m9-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m9-ex3" onclick="switchTab(this,'m9-ex3','m9-tabs')">Example 3</button>
+  </div>
+  <div id="m9-tabs">
+    <div id="m9-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🛒 Shopping Cart</h4>
+      <div class="code-block"><span class="ty">ArrayList</span>&lt;<span class="ty">String</span>&gt; cart = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+cart.add(<span class="str">"Milk"</span>); cart.add(<span class="str">"Bread"</span>); cart.add(<span class="str">"Eggs"</span>);
+System.out.println(<span class="str">"Items: "</span> + cart.size());
+cart.remove(<span class="str">"Bread"</span>);
+System.out.println(<span class="str">"After removing Bread: "</span> + cart);</div>
+      <div class="code-block"><span class="out">Items: 3
+After removing Bread: [Milk, Eggs]</span></div>
+    </div>
+    <div id="m9-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📊 Sum of Integer ArrayList</h4>
+      <div class="code-block"><span class="ty">ArrayList</span>&lt;<span class="ty">Integer</span>&gt; scores = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+scores.add(<span class="num">88</span>); scores.add(<span class="num">92</span>); scores.add(<span class="num">79</span>);
+<span class="ty">int</span> total = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> s : scores) total += s;
+System.out.println(<span class="str">"Average: "</span> + (total / scores.size()));</div>
+      <div class="code-block"><span class="out">Average: 86</span></div>
+    </div>
+    <div id="m9-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🏫 ArrayList of Objects</h4>
+      <div class="code-block"><span class="ty">ArrayList</span>&lt;<span class="ty">Student</span>&gt; roster = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+roster.add(<span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Ana"</span>, <span class="num">20</span>, <span class="num">3.9</span>));
+roster.add(<span class="kw">new</span> <span class="ty">Student</span>(<span class="str">"Bob"</span>, <span class="num">21</span>, <span class="num">3.2</span>));
+<span class="kw">for</span> (<span class="ty">Student</span> s : roster) s.display();</div>
+      <div class="code-block"><span class="out">Ana | Age: 20 | GPA: 3.9
+Bob | Age: 21 | GPA: 3.2</span></div>
+    </div>
+  </div>
+
+  <!-- TRACE M9 -->
+  <div class="trace-activity">
+    <h4>🔍 ArrayList Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="ty">ArrayList</span>&lt;<span class="ty">Integer</span>&gt; list = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+list.add(<span class="num">5</span>);
+list.add(<span class="num">10</span>);
+list.add(<span class="num">15</span>);
+list.remove(<span class="num">0</span>);        <span class="cmt">// removes index 0</span>
+System.out.println(list.get(<span class="num">0</span>));
+System.out.println(list.size());</div>
+    <table class="trace-table">
+      <thead><tr><th>Step</th><th>List State / Contents</th></tr></thead>
+      <tbody>
+        <tr><td>After 3 adds</td><td><input class="trace-input" data-answer="[5, 10, 15]" id="m9t1" style="width:120px"></td></tr>
+        <tr><td>After remove(0)</td><td><input class="trace-input" data-answer="[10, 15]" id="m9t2" style="width:120px"></td></tr>
+        <tr><td>get(0) output</td><td><input class="trace-input" data-answer="10" id="m9t3"></td></tr>
+        <tr><td>size() output</td><td><input class="trace-input" data-answer="2" id="m9t4"></td></tr>
+      </tbody>
+    </table>
+    <button class="trace-check-btn" onclick="checkTrace('m9',['m9t1','m9t2','m9t3','m9t4'])">✓ Check</button>
+    <div id="m9-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M9 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — What import statement is needed for ArrayList?</h4>
+      <div class="attempts-info" id="m9q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m9q1-in" placeholder="import ..." style="width:220px">
+      <button class="fill-btn" onclick="checkFill('m9q1','import java.util.arraylist','ArrayList is in the java.util package. You can also use import java.util.*; / ArrayList está en el paquete java.util. También puedes usar import java.util.*;','Hint: ArrayList lives in the java.util package. / Pista: ArrayList está en el paquete java.util.')">Submit</button>
+      <div id="m9q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — ArrayList&lt;String&gt; list has 4 items. What does list.size() return?</h4>
+      <div class="attempts-info" id="m9q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m9q2-in" placeholder="value">
+      <button class="fill-btn" onclick="checkFill('m9q2','4','size() returns the number of elements currently in the ArrayList. / size() devuelve el número de elementos que hay actualmente en el ArrayList.','Hint: size() counts elements just like array.length. / Pista: size() cuenta elementos igual que array.length.')">Submit</button>
+      <div id="m9q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What method replaces an element at a specific index in an ArrayList?</h4>
+      <div class="attempts-info" id="m9q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m9q3-in" placeholder="method">
+      <button class="fill-btn" onclick="checkFill('m9q3','set','set(index, value) replaces the element at the given index. / set(índice, valor) reemplaza el elemento en el índice dado.','Hint: list.___( index, newValue ) / Pista: list.___( índice, nuevoValor )')">Submit</button>
+      <div id="m9q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What is the main advantage of an ArrayList over a regular array in Java?</p>
+    <div class="attempts-info" id="m9mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m9mcq','A','C','Arrays can also store any type; that\'s not the key difference. / Los arreglos también pueden almacenar cualquier tipo; esa no es la diferencia clave.','Both can store different types with generics or Object.')"><span class="option-icon">🅐</span> ArrayList can store any data type, arrays cannot</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m9mcq','B','C','Arrays are actually faster for indexed access than ArrayList. / Los arreglos son en realidad más rápidos para acceso por índice que ArrayList.','Performance is actually better with raw arrays for simple indexed access.')"><span class="option-icon">🅑</span> ArrayList is always faster than an array</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m9mcq','C','C','Correct! ArrayList automatically resizes as you add or remove elements. Arrays have a fixed size set at creation. / ¡Correcto! ArrayList cambia de tamaño automáticamente al agregar o eliminar elementos. Los arreglos tienen tamaño fijo.','This is the key advantage — dynamic sizing.')"><span class="option-icon">🅒</span> ArrayList resizes dynamically; arrays have a fixed size</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m9mcq','D','C','ArrayList is in the java.util package and must be imported. / ArrayList está en el paquete java.util y debe importarse.','ArrayList actually requires an import statement.')"><span class="option-icon">🅓</span> ArrayList requires no import statement</button></li>
+    </ul>
+    <div id="m9mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(8)">← Inheritance</button>
+    <button class="run-btn" onclick="switchModule(10)">Next: Exceptions &amp; I/O →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--     MODULE 10 — EXCEPTION HANDLING & FILE I/O   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod10">
+  <div class="mod-hero">
+    <h2 data-en="Module 10: <em>Exception Handling</em> &amp; File I/O" data-es="Módulo 10: <em>Manejo de Excepciones</em> y E/S de Archivos">Module 10: <em>Exception Handling</em> &amp; File I/O</h2>
+    <p data-en="Handle errors gracefully and read/write files — write programs that survive the real world." data-es="Maneja errores con elegancia y lee/escribe archivos — escribe programas que sobreviven en el mundo real.">Handle errors gracefully and read/write files — write programs that survive the real world.</p>
+    <span class="tag">try-catch</span><span class="tag">finally</span><span class="tag">throws</span><span class="tag">FileWriter</span><span class="tag">Scanner</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🛡️</span>
+    <div>
+      <h3 data-en="Exception Handling" data-es="Manejo de Excepciones">Exception Handling</h3>
+      <p data-en="Catch runtime errors instead of crashing." data-es="Captura errores en tiempo de ejecución en lugar de que el programa se cierre abruptamente.">Catch runtime errors instead of crashing.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3 data-en="try-catch-finally" data-es="try-catch-finally">try-catch-finally</h3>
+    <div class="code-block"><span class="kw">try</span> {
+    <span class="cmt">// code that might throw an exception</span>
+    <span class="ty">int</span> result = <span class="num">10</span> / <span class="num">0</span>;  <span class="cmt">// ArithmeticException!</span>
+    System.out.println(result);
+} <span class="kw">catch</span> (<span class="ty">ArithmeticException</span> e) {
+    System.out.println(<span class="str">"Error: "</span> + e.getMessage()); <span class="cmt">// / by zero</span>
+} <span class="kw">finally</span> {
+    System.out.println(<span class="str">"This always runs"</span>);
+}</div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p data-en="<strong>try</strong> — code to attempt. <strong>catch</strong> — what to do if an exception occurs. <strong>finally</strong> — always runs, even if no exception (great for cleanup)." data-es="<strong>try</strong> — código a intentar. <strong>catch</strong> — qué hacer si ocurre una excepción. <strong>finally</strong> — siempre se ejecuta, incluso si no hay excepción (ideal para limpieza)."><strong>try</strong>: code to attempt. <strong>catch</strong>: runs if exception occurs. <strong>finally</strong>: always runs (use for cleanup).</p>
+    </div>
+    <h3 data-en="Common Exception Types" data-es="Tipos Comunes de Excepción">Common Exception Types</h3>
+    <div class="code-block"><span class="ty">ArithmeticException</span>     <span class="cmt">// division by zero / división por cero</span>
+<span class="ty">NullPointerException</span>    <span class="cmt">// using a null reference / usar referencia null</span>
+<span class="ty">ArrayIndexOutOfBoundsException</span>  <span class="cmt">// bad array index</span>
+<span class="ty">NumberFormatException</span>   <span class="cmt">// "abc" parsed as int / parsear texto como int</span>
+<span class="ty">IOException</span>             <span class="cmt">// file read/write problems / problemas con archivos</span></div>
+    <h3 data-en="File I/O — Writing &amp; Reading" data-es="E/S de Archivos — Escritura y Lectura">File I/O — Writing &amp; Reading</h3>
+    <div class="code-block"><span class="kw">import</span> java.io.*;
+
+<span class="cmt">// WRITING to a file / ESCRIBIR en un archivo</span>
+<span class="kw">try</span> (<span class="ty">FileWriter</span> fw = <span class="kw">new</span> <span class="ty">FileWriter</span>(<span class="str">"output.txt"</span>)) {
+    fw.write(<span class="str">"Hello, File World!\n"</span>);
+    fw.write(<span class="str">"Second line"</span>);
+} <span class="kw">catch</span> (<span class="ty">IOException</span> e) {
+    System.out.println(<span class="str">"Write error: "</span> + e.getMessage());
+}
+
+<span class="cmt">// READING from a file / LEER de un archivo</span>
+<span class="kw">try</span> (<span class="ty">Scanner</span> sc = <span class="kw">new</span> <span class="ty">Scanner</span>(<span class="kw">new</span> <span class="ty">File</span>(<span class="str">"output.txt"</span>))) {
+    <span class="kw">while</span> (sc.hasNextLine()) {
+        System.out.println(sc.nextLine());
+    }
+} <span class="kw">catch</span> (<span class="ty">FileNotFoundException</span> e) {
+    System.out.println(<span class="str">"File not found!"</span>);
+}</div>
+  </div>
+
+  <!-- TABS M10 -->
+  <div class="tab-btns" role="tablist" aria-label="Exception examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m10-ex1" onclick="switchTab(this,'m10-ex1','m10-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m10-ex2" onclick="switchTab(this,'m10-ex2','m10-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m10-ex3" onclick="switchTab(this,'m10-ex3','m10-tabs')">Example 3</button>
+  </div>
+  <div id="m10-tabs">
+    <div id="m10-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔢 NumberFormatException</h4>
+      <div class="code-block"><span class="ty">String</span> input = <span class="str">"abc"</span>;
+<span class="kw">try</span> {
+    <span class="ty">int</span> n = Integer.parseInt(input);
+    System.out.println(<span class="str">"Parsed: "</span> + n);
+} <span class="kw">catch</span> (<span class="ty">NumberFormatException</span> e) {
+    System.out.println(<span class="str">"Invalid number: "</span> + input);
+}</div>
+      <div class="code-block"><span class="out">Invalid number: abc</span></div>
+    </div>
+    <div id="m10-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🪣 Multiple catch Blocks</h4>
+      <div class="code-block"><span class="ty">int</span>[] arr = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>};
+<span class="kw">try</span> {
+    System.out.println(arr[<span class="num">10</span>]);  <span class="cmt">// index out of bounds</span>
+} <span class="kw">catch</span> (<span class="ty">ArrayIndexOutOfBoundsException</span> e) {
+    System.out.println(<span class="str">"Bad index!"</span>);
+} <span class="kw">catch</span> (<span class="ty">Exception</span> e) {
+    System.out.println(<span class="str">"General error: "</span> + e.getMessage());
+} <span class="kw">finally</span> {
+    System.out.println(<span class="str">"Done."</span>);
+}</div>
+      <div class="code-block"><span class="out">Bad index!
+Done.</span></div>
+    </div>
+    <div id="m10-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📋 throws Declaration</h4>
+      <div class="code-block"><span class="cmt">// Method declares it might throw an exception</span>
+<span class="kw">static void</span> readFile(<span class="ty">String</span> path) <span class="kw">throws</span> <span class="ty">IOException</span> {
+    <span class="ty">Scanner</span> sc = <span class="kw">new</span> <span class="ty">Scanner</span>(<span class="kw">new</span> <span class="ty">File</span>(path));
+    <span class="kw">while</span> (sc.hasNextLine()) {
+        System.out.println(sc.nextLine());
+    }
+    sc.close();
+}
+<span class="cmt">// Caller must handle it</span>
+<span class="kw">try</span> { readFile(<span class="str">"data.txt"</span>); }
+<span class="kw">catch</span> (<span class="ty">IOException</span> e) { System.out.println(<span class="str">"Error!"</span>); }</div>
+    </div>
+  </div>
+
+  <!-- TRACE M10 -->
+  <div class="trace-activity">
+    <h4>🔍 Exception Flow Trace</h4>
+    <div class="code-block" style="margin-bottom:10px;"><span class="kw">try</span> {
+    System.out.println(<span class="str">"A"</span>);
+    <span class="ty">int</span> x = <span class="num">5</span> / <span class="num">0</span>;
+    System.out.println(<span class="str">"B"</span>);
+} <span class="kw">catch</span> (<span class="ty">ArithmeticException</span> e) {
+    System.out.println(<span class="str">"C"</span>);
+} <span class="kw">finally</span> {
+    System.out.println(<span class="str">"D"</span>);
+}</div>
+    <table class="trace-table">
+      <thead><tr><th>Line</th><th>Does it execute? / ¿Se ejecuta?</th></tr></thead>
+      <tbody>
+        <tr><td>println("A")</td><td><input class="trace-input" data-answer="yes" id="m10t1" style="width:70px"></td></tr>
+        <tr><td>int x = 5/0</td><td><input class="trace-input" data-answer="yes" id="m10t2" style="width:70px"></td></tr>
+        <tr><td>println("B")</td><td><input class="trace-input" data-answer="no" id="m10t3" style="width:70px"></td></tr>
+        <tr><td>println("C")</td><td><input class="trace-input" data-answer="yes" id="m10t4" style="width:70px"></td></tr>
+        <tr><td>println("D")</td><td><input class="trace-input" data-answer="yes" id="m10t5" style="width:70px"></td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--muted);font-size:.82rem;margin-top:6px;">Type "yes" or "no" for each line. / Escribe "yes" o "no" para cada línea.</p>
+    <button class="trace-check-btn" onclick="checkTrace('m10',['m10t1','m10t2','m10t3','m10t4','m10t5'])">✓ Check</button>
+    <div id="m10-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M10 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — What block always executes in a try-catch structure?</h4>
+      <div class="attempts-info" id="m10q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m10q1-in" placeholder="block name">
+      <button class="fill-btn" onclick="checkFill('m10q1','finally','finally always runs whether or not an exception occurred — ideal for closing files/resources. / finally siempre se ejecuta, haya o no excepción — ideal para cerrar archivos/recursos.','Hint: there are 3 blocks: try, catch, and... / Pista: hay 3 bloques: try, catch, y...')">Submit</button>
+      <div id="m10q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — What exception is thrown when dividing by zero?</h4>
+      <div class="attempts-info" id="m10q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m10q2-in" placeholder="ExceptionType" style="width:220px">
+      <button class="fill-btn" onclick="checkFill('m10q2','arithmeticexception','ArithmeticException is thrown for illegal arithmetic operations like dividing by zero. / ArithmeticException se lanza para operaciones aritméticas ilegales como dividir entre cero.','Hint: it relates to _____metic operations. / Pista: está relacionado con operaciones _____méticas.')">Submit</button>
+      <div id="m10q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What class is used to write text to a file in Java?</h4>
+      <div class="attempts-info" id="m10q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m10q3-in" placeholder="ClassName">
+      <button class="fill-btn" onclick="checkFill('m10q3','filewriter','FileWriter is the standard class to write text to a file. BufferedWriter wraps it for efficiency. / FileWriter es la clase estándar para escribir texto en un archivo. BufferedWriter lo envuelve para eficiencia.','Hint: File + Writer → ___Writer / Pista: File + Writer → ___Writer')">Submit</button>
+      <div id="m10q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What is the purpose of the <code>catch</code> block in a try-catch statement?</p>
+    <div class="attempts-info" id="m10mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m10mcq','A','C','try contains the code to attempt, not catch. / try contiene el código a intentar, no catch.','The try block holds the code that might throw an exception.')"><span class="option-icon">🅐</span> To contain the code that might throw an exception</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m10mcq','B','C','finally, not catch, is the block that always runs. / finally, no catch, es el bloque que siempre se ejecuta.','That describes the finally block, not catch.')"><span class="option-icon">🅑</span> To run code that always executes, even without errors</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m10mcq','C','C','Correct! catch handles the exception — it runs only when an exception of the specified type is thrown. / ¡Correcto! catch maneja la excepción — solo se ejecuta cuando se lanza una excepción del tipo especificado.','This is correct! catch is the error-handling block.')"><span class="option-icon">🅒</span> To handle a specific exception that was thrown in the try block</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m10mcq','D','C','catch does not prevent exceptions — it responds to them after they occur. / catch no previene excepciones — responde a ellas después de que ocurren.','catch does not prevent exceptions, it handles them.')"><span class="option-icon">🅓</span> To prevent exceptions from being thrown</button></li>
+    </ul>
+    <div id="m10mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(9)">← ArrayList</button>
+    <button class="run-btn" onclick="switchModule(11)">Next: GUI →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--            MODULE 11 — GUI BASICS               -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod11">
+  <div class="mod-hero">
+    <h2 data-en="Module 11: <em>GUI Basics</em>" data-es="Módulo 11: <em>GUI Básico</em>">Module 11: <em>GUI Basics</em></h2>
+    <p data-en="Build desktop applications with windows, buttons, and text fields using Java Swing." data-es="Construye aplicaciones de escritorio con ventanas, botones y campos de texto usando Java Swing.">Build desktop applications with windows, buttons, and text fields using Java Swing.</p>
+    <span class="tag">JFrame</span><span class="tag">JButton</span><span class="tag">JLabel</span><span class="tag">JTextField</span><span class="tag">ActionListener</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🖥️</span>
+    <div>
+      <h3 data-en="Java Swing — Core Components" data-es="Java Swing — Componentes Principales">Java Swing — Core Components</h3>
+      <p data-en="Swing is Java's built-in GUI toolkit — no extra installs needed." data-es="Swing es el kit de interfaz gráfica integrado de Java — no se necesita instalación adicional.">Swing is Java's built-in GUI toolkit — no extra installs needed.</p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3 data-en="Your First Window" data-es="Tu Primera Ventana">Your First Window</h3>
+    <div class="code-block"><span class="kw">import</span> javax.swing.*;   <span class="cmt">// import all Swing classes</span>
+
+<span class="kw">public class</span> <span class="ty">HelloGUI</span> {
+    <span class="kw">public static void</span> main(<span class="ty">String</span>[] args) {
+        <span class="cmt">// 1. Create window (JFrame)</span>
+        <span class="ty">JFrame</span> frame = <span class="kw">new</span> <span class="ty">JFrame</span>(<span class="str">"My First App"</span>);
+        frame.setSize(<span class="num">400</span>, <span class="num">300</span>);
+        frame.setDefaultCloseOperation(<span class="ty">JFrame</span>.EXIT_ON_CLOSE);
+
+        <span class="cmt">// 2. Create components</span>
+        <span class="ty">JLabel</span>  label  = <span class="kw">new</span> <span class="ty">JLabel</span>(<span class="str">"Hello, World!"</span>);
+        <span class="ty">JButton</span> btn    = <span class="kw">new</span> <span class="ty">JButton</span>(<span class="str">"Click Me"</span>);
+
+        <span class="cmt">// 3. Add to frame</span>
+        frame.setLayout(<span class="kw">new</span> <span class="ty">FlowLayout</span>());
+        frame.add(label);
+        frame.add(btn);
+
+        <span class="cmt">// 4. Make visible</span>
+        frame.setVisible(<span class="kw">true</span>);
+    }
+}</div>
+    <h3 data-en="Handling Button Clicks" data-es="Manejo de Clics en Botones">Handling Button Clicks</h3>
+    <div class="code-block"><span class="ty">JButton</span> btn = <span class="kw">new</span> <span class="ty">JButton</span>(<span class="str">"Click Me"</span>);
+
+<span class="cmt">// Lambda-style ActionListener (Java 8+)</span>
+btn.addActionListener(e -> {
+    System.out.println(<span class="str">"Button clicked!"</span>);
+    <span class="ty">JOptionPane</span>.showMessageDialog(<span class="kw">null</span>, <span class="str">"You clicked!"</span>);
+});</div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p data-en="<strong>Key Swing components:</strong> JFrame (window), JLabel (text display), JButton (clickable button), JTextField (text input), JTextArea (multi-line input), JPanel (container for grouping components)." data-es="<strong>Componentes Swing principales:</strong> JFrame (ventana), JLabel (texto), JButton (botón), JTextField (entrada de texto), JTextArea (texto multilínea), JPanel (contenedor para agrupar componentes)."><strong>Key components:</strong> JFrame (window), JLabel (text), JButton (button), JTextField (input), JPanel (container).</p>
+    </div>
+    <h3 data-en="GUI App Pattern" data-es="Patrón de App GUI">GUI App Pattern</h3>
+    <ol class="step-list">
+      <li data-en="Create JFrame and set size/close operation." data-es="Crear JFrame y establecer tamaño/operación de cierre.">Create JFrame and set size/close operation.</li>
+      <li data-en="Create components (JLabel, JButton, JTextField…)." data-es="Crear componentes (JLabel, JButton, JTextField…).">Create components (JLabel, JButton, JTextField…).</li>
+      <li data-en="Add ActionListeners to interactive components." data-es="Agregar ActionListeners a los componentes interactivos.">Add ActionListeners to interactive components.</li>
+      <li data-en="Set a layout manager (FlowLayout, BorderLayout, GridLayout)." data-es="Establecer un gestor de diseño (FlowLayout, BorderLayout, GridLayout).">Set a layout manager (FlowLayout, BorderLayout, GridLayout).</li>
+      <li data-en="Add components to frame (or to a JPanel first)." data-es="Agregar componentes al frame (o a un JPanel primero).">Add components to frame (or to a JPanel first).</li>
+      <li data-en="Call frame.setVisible(true) last." data-es="Llamar frame.setVisible(true) al final.">Call frame.setVisible(true) last.</li>
+    </ol>
+  </div>
+
+  <!-- TABS M11 -->
+  <div class="tab-btns" role="tablist" aria-label="GUI examples">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m11-ex1" onclick="switchTab(this,'m11-ex1','m11-tabs')">Example 1</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m11-ex2" onclick="switchTab(this,'m11-ex2','m11-tabs')">Example 2</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m11-ex3" onclick="switchTab(this,'m11-ex3','m11-tabs')">Example 3</button>
+  </div>
+  <div id="m11-tabs">
+    <div id="m11-ex1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🖩 Simple Calculator UI</h4>
+      <div class="code-block"><span class="ty">JFrame</span>     frame  = <span class="kw">new</span> <span class="ty">JFrame</span>(<span class="str">"Calc"</span>);
+<span class="ty">JTextField</span>  num1   = <span class="kw">new</span> <span class="ty">JTextField</span>(<span class="num">5</span>);
+<span class="ty">JTextField</span>  num2   = <span class="kw">new</span> <span class="ty">JTextField</span>(<span class="num">5</span>);
+<span class="ty">JLabel</span>      result = <span class="kw">new</span> <span class="ty">JLabel</span>(<span class="str">"= ?"</span>);
+<span class="ty">JButton</span>     add    = <span class="kw">new</span> <span class="ty">JButton</span>(<span class="str">"Add"</span>);
+
+add.addActionListener(e -> {
+    <span class="ty">int</span> sum = Integer.parseInt(num1.getText())
+            + Integer.parseInt(num2.getText());
+    result.setText(<span class="str">"= "</span> + sum);
+});
+
+frame.setLayout(<span class="kw">new</span> <span class="ty">FlowLayout</span>());
+frame.add(num1); frame.add(num2);
+frame.add(add); frame.add(result);
+frame.setSize(<span class="num">300</span>,<span class="num">100</span>); frame.setVisible(<span class="kw">true</span>);</div>
+    </div>
+    <div id="m11-ex2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 Layout Managers</h4>
+      <div class="code-block"><span class="ty">JFrame</span> frame = <span class="kw">new</span> <span class="ty">JFrame</span>(<span class="str">"Layout Demo"</span>);
+<span class="ty">JPanel</span> panel = <span class="kw">new</span> <span class="ty">JPanel</span>();
+
+<span class="cmt">// BorderLayout divides frame into 5 regions</span>
+frame.setLayout(<span class="kw">new</span> <span class="ty">BorderLayout</span>());
+frame.add(<span class="kw">new</span> <span class="ty">JButton</span>(<span class="str">"North"</span>),  <span class="ty">BorderLayout</span>.NORTH);
+frame.add(<span class="kw">new</span> <span class="ty">JButton</span>(<span class="str">"South"</span>),  <span class="ty">BorderLayout</span>.SOUTH);
+frame.add(<span class="kw">new</span> <span class="ty">JButton</span>(<span class="str">"Center"</span>), <span class="ty">BorderLayout</span>.CENTER);
+frame.setSize(<span class="num">300</span>, <span class="num">200</span>);
+frame.setVisible(<span class="kw">true</span>);</div>
+    </div>
+    <div id="m11-ex3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📋 JOptionPane Dialogs</h4>
+      <div class="code-block"><span class="cmt">// Show an information message</span>
+<span class="ty">JOptionPane</span>.showMessageDialog(<span class="kw">null</span>,
+    <span class="str">"Welcome to Java GUI!"</span>,
+    <span class="str">"Info"</span>,
+    <span class="ty">JOptionPane</span>.INFORMATION_MESSAGE);
+
+<span class="cmt">// Get user input as String</span>
+<span class="ty">String</span> name = <span class="ty">JOptionPane</span>.showInputDialog(<span class="str">"Enter your name:"</span>);
+System.out.println(<span class="str">"Hello, "</span> + name);
+
+<span class="cmt">// Yes/No dialog</span>
+<span class="ty">int</span> ans = <span class="ty">JOptionPane</span>.showConfirmDialog(<span class="kw">null</span>, <span class="str">"Continue?"</span>);
+<span class="kw">if</span> (ans == <span class="ty">JOptionPane</span>.YES_OPTION) System.out.println(<span class="str">"OK!"</span>);</div>
+    </div>
+  </div>
+
+  <!-- TRACE M11 -->
+  <div class="trace-activity">
+    <h4>🔍 GUI Component Trace</h4>
+    <p style="color:var(--muted);font-size:.88rem;margin-bottom:10px;">Match each Swing class to its role. / Empareja cada clase Swing con su función.</p>
+    <table class="trace-table">
+      <thead><tr><th>Class / Clase</th><th>Role / Función</th></tr></thead>
+      <tbody>
+        <tr><td>JFrame</td><td><input class="trace-input" data-answer="window" id="m11t1" style="width:110px"></td></tr>
+        <tr><td>JButton</td><td><input class="trace-input" data-answer="button" id="m11t2" style="width:110px"></td></tr>
+        <tr><td>JTextField</td><td><input class="trace-input" data-answer="text input" id="m11t3" style="width:110px"></td></tr>
+        <tr><td>JLabel</td><td><input class="trace-input" data-answer="text display" id="m11t4" style="width:110px"></td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--muted);font-size:.8rem;margin-top:6px;">Use: window / button / text input / text display</p>
+    <button class="trace-check-btn" onclick="checkTrace('m11',['m11t1','m11t2','m11t3','m11t4'])">✓ Check</button>
+    <div id="m11-trace-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <!-- EXERCISES M11 -->
+  <div class="concept-card">
+    <h3>🧩 Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q1 — What is the main container/window class in Java Swing?</h4>
+      <div class="attempts-info" id="m11q1-att">Attempts: 2</div>
+      <input class="fill-input" id="m11q1-in" placeholder="class name">
+      <button class="fill-btn" onclick="checkFill('m11q1','jframe','JFrame is the top-level window container in Swing. Every Swing app starts with one. / JFrame es el contenedor de ventana de nivel superior en Swing. Toda app Swing comienza con uno.','Hint: it starts with J and ends with Frame. / Pista: empieza con J y termina con Frame.')">Submit</button>
+      <div id="m11q1-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q2 — What method makes a JFrame appear on screen?</h4>
+      <div class="attempts-info" id="m11q2-att">Attempts: 2</div>
+      <input class="fill-input" id="m11q2-in" placeholder="method">
+      <button class="fill-btn" onclick="checkFill('m11q2','setvisible','setVisible(true) makes the JFrame visible. Without it, the window exists but is hidden. / setVisible(true) hace el JFrame visible. Sin él, la ventana existe pero está oculta.','Hint: frame.set_____(true) / Pista: frame.set_____(true)')">Submit</button>
+      <div id="m11q2-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q3 — What interface do you implement to respond to button clicks?</h4>
+      <div class="attempts-info" id="m11q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m11q3-in" placeholder="interface name" style="width:180px">
+      <button class="fill-btn" onclick="checkFill('m11q3','actionlistener','ActionListener is the interface for handling user actions like button clicks. Its actionPerformed() method runs on each click. / ActionListener es la interfaz para manejar acciones del usuario como clics en botones.','Hint: ___Listener — it listens for Actions. / Pista: ___Listener — escucha Actions.')">Submit</button>
+      <div id="m11q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>❓ MCQ — 1 Point</h4>
+    <p>What must you call <strong>last</strong> when setting up a JFrame so the window appears?</p>
+    <div class="attempts-info" id="m11mcq-att">Attempts: 2</div>
+    <ul class="options-list">
+      <li><button class="option-btn" onclick="checkMCQ('m11mcq','A','D','frame.add() adds components but doesn\'t make the window visible. / frame.add() agrega componentes pero no hace visible la ventana.','add() is for adding components, not making the frame visible.')"><span class="option-icon">🅐</span> frame.add()</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m11mcq','B','D','new JFrame() creates the frame but doesn\'t display it. / new JFrame() crea el frame pero no lo muestra.','Creating the frame object doesn\'t make it visible automatically.')"><span class="option-icon">🅑</span> new JFrame()</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m11mcq','C','D','setSize() sets dimensions but doesn\'t show the window. / setSize() establece las dimensiones pero no muestra la ventana.','setSize() controls the window dimensions, not visibility.')"><span class="option-icon">🅒</span> frame.setSize()</button></li>
+      <li><button class="option-btn" onclick="checkMCQ('m11mcq','D','D','Correct! frame.setVisible(true) is the final step that displays the window on screen. Always call it last after adding all components. / ¡Correcto! frame.setVisible(true) es el último paso que muestra la ventana en pantalla. Siempre llámalo al final.','This is correct! setVisible(true) makes the window appear.')"><span class="option-icon">🅓</span> frame.setVisible(true)</button></li>
+    </ul>
+    <div id="m11mcq-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:24px;">
+    <button class="hint-btn" onclick="switchModule(10)">← Exceptions &amp; I/O</button>
+    <button class="run-btn" onclick="showResults()">🏆 See Final Results</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--               FINAL RESULTS                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="module-panel" id="mod-results">
+  <div id="results-section" class="show">
+    <h2>🎓 Course Complete! / ¡Curso Completo!</h2>
+    <div class="result-score" id="final-score">0 / 110</div>
+    <div class="result-pct" id="final-pct">0%</div>
+    <div id="final-grade" class="result-grade grade-d">Grade: —</div>
+    <div class="result-msg" id="final-msg">Complete all modules to see your result.</div>
+
+    <div class="mod-results-grid" id="mod-results-grid"></div>
+
+    <div style="margin-top:20px;">
+      <button class="run-btn" onclick="switchModule(1)" style="margin:6px;">↺ Restart Course</button>
+    </div>
+    <div style="color:var(--muted);font-size:.85rem;margin-top:12px;">SCORM score recorded / Puntuación SCORM registrada</div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════
+//             GLOBAL STATE
+// ═══════════════════════════════════════════
+let score = 0;
+const MAX_SCORE = 110;
+const answered = {};
+const attempts = {};
+const modScores = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0};
+const MOD_MAX = 10;
+let lang = 'en';
+let currentMod = 1;
+
+// ═══════════════════════════════════════════
+//             LANGUAGE TOGGLE
+// ═══════════════════════════════════════════
+function toggleLang() {
+  lang = lang === 'en' ? 'es' : 'en';
+  const btn = document.getElementById('lang-toggle');
+  btn.textContent = lang === 'en' ? '🌐 Español' : '🌐 English';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + lang);
+  });
+}
+
+// ═══════════════════════════════════════════
+//             MODULE NAVIGATION
+// ═══════════════════════════════════════════
+function switchModule(mod) {
+  document.querySelectorAll('.module-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.mod-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected','false');
+  });
+
+  const panelId = mod === 'results' ? 'mod-results' : 'mod' + mod;
+  const panel = document.getElementById(panelId);
+  if (panel) { panel.classList.add('active'); panel.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+  const tabs = document.querySelectorAll('.mod-tab');
+  const idx = mod === 'results' ? 11 : mod - 1;
+  if (tabs[idx]) { tabs[idx].classList.add('active'); tabs[idx].setAttribute('aria-selected','true'); }
+
+  if (mod !== 'results') currentMod = mod;
+  if (mod === 'results') buildResultsGrid();
+  announce('Navigated to module ' + mod);
+}
+
+function showResults() {
+  switchModule('results');
+  buildResultsGrid();
+  const pct = Math.round((score / MAX_SCORE) * 100);
+  document.getElementById('final-score').textContent = score + ' / ' + MAX_SCORE;
+  document.getElementById('final-pct').textContent = pct + '%';
+  const grade = document.getElementById('final-grade');
+  const msg = document.getElementById('final-msg');
+  if (pct >= 90) { grade.className='result-grade grade-a'; grade.textContent='A — Outstanding!'; msg.textContent='🎉 Excellent! You have mastered the fundamentals of Java. Outstanding performance!'; }
+  else if (pct >= 80) { grade.className='result-grade grade-b'; grade.textContent='B — Great Job!'; msg.textContent='👏 Great work! You have a solid Java foundation. Review any missed questions for 100%.'; }
+  else if (pct >= 70) { grade.className='result-grade grade-c'; grade.textContent='C — Good Effort!'; msg.textContent='💪 Good effort! Review the modules where you lost points and retry the exercises.'; }
+  else { grade.className='result-grade grade-d'; grade.textContent='D — Keep Studying!'; msg.textContent='📖 Keep going! Go back to each module, use the simulators, and try again.'; }
+  scormSetScore(pct);
+}
+
+function buildResultsGrid() {
+  const names = ['Variables','Operators','Conditionals','Loops','Arrays','Methods','OOP','Inheritance','ArrayList','Exceptions & I/O','GUI Basics'];
+  const grid = document.getElementById('mod-results-grid');
+  grid.innerHTML = '';
+  names.forEach((n,i) => {
+    const mod = i + 1;
+    const pts = Object.keys(answered).filter(k => k.startsWith('m'+mod) && answered[k] === true).length;
+    const card = document.createElement('div');
+    card.className = 'mod-result-card';
+    card.innerHTML = '<h5>M'+ mod +': '+n+'</h5><div class="mod-score">'+pts+' / '+MOD_MAX+' pts</div>';
+    grid.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════
+//             SCORING
+// ═══════════════════════════════════════════
+function updateScoreBar() {
+  document.getElementById('score-num').textContent = score;
+  const pct = (score / MAX_SCORE) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  const pb = document.querySelector('[role="progressbar"]');
+  pb.setAttribute('aria-valuenow', score);
+  pb.setAttribute('aria-valuemax', MAX_SCORE);
+}
+
+function awardPoint(qid) {
+  if (!answered[qid]) {
+    answered[qid] = true;
+    score = Math.min(score + 1, MAX_SCORE);
+    updateScoreBar();
+    // Mark mod tab complete if all 5 questions answered
+    const mod = parseInt(qid[1]);
+    if (!isNaN(mod)) {
+      const modQ = ['q1','q2','q3','mcq','trace'].map(s => 'm'+mod+s);
+      if (modQ.every(id => answered[id])) {
+        const tabs = document.querySelectorAll('.mod-tab');
+        if (tabs[mod-1]) tabs[mod-1].classList.add('completed');
+      }
+    }
+  }
+}
+
+function announce(msg) {
+  const el = document.getElementById('aria-live');
+  el.textContent = '';
+  setTimeout(()=>{ el.textContent = msg; }, 50);
+}
+
+// ═══════════════════════════════════════════
+//             TABS
+// ═══════════════════════════════════════════
+function switchTab(btn, panelId, groupId) {
+  const group = document.getElementById(groupId);
+  if (!group) return;
+  group.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const panelEl = document.getElementById(panelId);
+  if (panelEl) panelEl.classList.add('active');
+  // Update sibling tabs
+  btn.closest('[role="tablist"]').querySelectorAll('.tab-btn').forEach(b => b.setAttribute('aria-selected','false'));
+  btn.setAttribute('aria-selected','true');
+}
+
+// ═══════════════════════════════════════════
+//             MCQ
+// ═══════════════════════════════════════════
+function checkMCQ(qid, chosen, correct, correctExp, wrongExp) {
+  const att = attempts[qid] || 0;
+  if (answered[qid] || att >= 2) return;
+  attempts[qid] = att + 1;
+  const fb = document.getElementById(qid + '-feedback');
+  const attEl = document.getElementById(qid + '-att');
+
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct show';
+    fb.innerHTML = '<span class="feedback-icon">✅</span><span>' + correctExp + '</span>';
+    awardPoint(qid);
+    disableMCQBtns(qid);
+    if (attEl) attEl.textContent = '✓ Correct!';
+    announce('Correct! ' + correctExp);
+  } else if (attempts[qid] === 1) {
+    fb.className = 'feedback-box hint show';
+    fb.innerHTML = '<span class="feedback-icon">💡</span><span>Hint: ' + wrongExp + '</span>';
+    if (attEl) attEl.textContent = 'Attempts: 1';
+    announce('Incorrect. ' + wrongExp);
+  } else {
+    fb.className = 'feedback-box incorrect show';
+    fb.innerHTML = '<span class="feedback-icon">❌</span><span>Correct answer: <strong>' + correct + '</strong>. ' + correctExp + '</span>';
+    answered[qid] = 'no-point';
+    disableMCQBtns(qid);
+    if (attEl) attEl.textContent = 'No more attempts.';
+    announce('Incorrect. ' + correctExp);
+  }
+}
+
+function disableMCQBtns(qid) {
+  const fb = document.getElementById(qid + '-feedback');
+  if (!fb) return;
+  fb.closest('.quiz-card').querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+}
+
+// ═══════════════════════════════════════════
+//             FILL-IN
+// ═══════════════════════════════════════════
+function checkFill(qid, correct, correctExp, hintMsg) {
+  const att = attempts[qid] || 0;
+  if (answered[qid] || att >= 2) return;
+  attempts[qid] = att + 1;
+  const input = document.getElementById(qid + '-in');
+  const fb = document.getElementById(qid + '-feedback');
+  const attEl = document.getElementById(qid + '-att');
+  const userVal = (input.value || '').trim().toLowerCase();
+  const correctNorm = correct.toLowerCase().replace(/\s+/g,' ').trim();
+
+  const isRight = userVal === correctNorm ||
+    userVal.replace(/\s+/g,'') === correctNorm.replace(/\s+/g,'') ||
+    (correct === 'unlimited' && (userVal === 'unlimited' || userVal === 'any' || userVal === 'infinite')) ||
+    (correct === 'calls the parent constructor' && (userVal.includes('parent') || userVal.includes('padre') || userVal.includes('super'))) ||
+    (correct === '@override' && (userVal === '@override' || userVal === 'override')) ||
+    (correct === 'import java.util.arraylist' && (userVal.includes('java.util') || userVal === 'import java.util.*;' || userVal === 'java.util.arraylist')) ||
+    (correct === 'arithmeticexception' && userVal.replace(/\s+/g,'') === 'arithmeticexception') ||
+    (correct === 'filewriter' && userVal === 'filewriter') ||
+    (correct === 'jframe' && userVal === 'jframe') ||
+    (correct === 'setvisible' && (userVal === 'setvisible' || userVal === 'setvisible(true)' || userVal === 'frame.setvisible(true)')) ||
+    (correct === 'actionlistener' && userVal === 'actionlistener');
+
+  if (isRight) {
+    fb.className = 'feedback-box correct show';
+    fb.innerHTML = '<span class="feedback-icon">✅</span><span><strong>Correct!</strong> ' + correctExp + '</span>';
+    awardPoint(qid);
+    input.disabled = true; input.style.borderColor = '#166534';
+    if (attEl) attEl.textContent = '✓ Correct!';
+    announce('Correct! ' + correctExp);
+  } else if (attempts[qid] === 1) {
+    fb.className = 'feedback-box hint show';
+    fb.innerHTML = '<span class="feedback-icon">💡</span><span>' + hintMsg + '</span>';
+    if (attEl) attEl.textContent = 'Attempts: 1';
+    announce('Incorrect. ' + hintMsg);
+  } else {
+    fb.className = 'feedback-box incorrect show';
+    fb.innerHTML = '<span class="feedback-icon">❌</span><span>Answer: <strong>' + correct + '</strong>. ' + correctExp + '</span>';
+    answered[qid] = 'no-point';
+    input.disabled = true; input.style.borderColor = '#991b1b';
+    if (attEl) attEl.textContent = 'No more attempts.';
+    announce('The correct answer is ' + correct);
+  }
+}
+
+// ═══════════════════════════════════════════
+//             TRACE
+// ═══════════════════════════════════════════
+function checkTrace(prefix, ids) {
+  const fbId = prefix + '-trace-feedback';
+  const fb = document.getElementById(fbId);
+  let allOk = true;
+  const answers = [];
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    const expected = (el.dataset.answer || '').trim().toLowerCase();
+    const actual = (el.value || '').trim().toLowerCase();
+    answers.push(el.dataset.answer);
+    if (actual === expected || actual.replace(/\s+/g,'') === expected.replace(/\s+/g,'')) {
+      el.style.borderColor = '#166534';
+    } else {
+      allOk = false;
+      el.style.borderColor = '#991b1b';
+    }
+  });
+
+  if (allOk) {
+    fb.className = 'feedback-box correct show';
+    fb.innerHTML = '<span class="feedback-icon">✅</span><span>All correct! Great tracing! / ¡Todo correcto!</span>';
+    awardPoint(prefix + 'trace');
+    ids.forEach(id => { const el = document.getElementById(id); if(el) el.disabled = true; });
+    announce('Code trace correct!');
+  } else {
+    fb.className = 'feedback-box incorrect show';
+    fb.innerHTML = '<span class="feedback-icon">❌</span><span>Some values are off. Answers: ' + answers.join(', ') + '</span>';
+    announce('Some trace values are incorrect. Correct answers: ' + answers.join(', '));
+  }
+}
+
+// ═══════════════════════════════════════════
+//        MODULE 4 SIMULATOR (Loops)
+// ═══════════════════════════════════════════
+let m4i = 1, m4Step = 0, m4Out = '';
+function m4SimReset() {
+  m4i=1; m4Step=0; m4Out='';
+  document.getElementById('m4-sim-i').textContent='—';
+  document.getElementById('m4-sim-cond').textContent='—';
+  document.getElementById('m4-sim-step').textContent='Click ▶ to start';
+  document.getElementById('m4-sim-out').textContent='';
+  document.getElementById('m4-sim-info').textContent='';
+}
+function m4SimStep() {
+  const stepEl=document.getElementById('m4-sim-step');
+  const outEl=document.getElementById('m4-sim-out');
+  const infoEl=document.getElementById('m4-sim-info');
+  const iEl=document.getElementById('m4-sim-i');
+  const condEl=document.getElementById('m4-sim-cond');
+  if (m4i > 4) { stepEl.textContent='🏁 Loop done! i='+m4i+' > 4'; condEl.textContent='false — STOP'; return; }
+  const phase = m4Step % 3;
+  if (m4Step === 0) {
+    iEl.textContent=1; m4i=1;
+    stepEl.textContent='▶ INIT: int i = 1';
+    infoEl.textContent='Counter i initialized to 1.'; m4Step++; return;
+  }
+  if (phase === 1) {
+    condEl.textContent=m4i+' <= 4 → '+(m4i<=4?'true ✓':'false ✗');
+    stepEl.textContent='🔍 CHECK: i('+m4i+') <= 4 → '+(m4i<=4?'TRUE':'FALSE');
+    infoEl.textContent=m4i<=4?'Condition true — run body.':'Condition false — exit loop.';
+    if (m4i>4) return;
+    m4Step++;
+  } else if (phase === 2) {
+    m4Out+=m4i*m4i+'\n'; outEl.textContent=m4Out;
+    stepEl.textContent='📢 BODY: println('+m4i+' * '+m4i+') → '+m4i*m4i;
+    infoEl.textContent='Printed '+m4i*m4i+' ('+m4i+'²)'; m4Step++;
+  } else {
+    m4i++;
+    iEl.textContent=m4i;
+    stepEl.textContent='🔁 UPDATE: i++ → i = '+m4i;
+    infoEl.textContent='i incremented to '+m4i+'. Back to condition check.';
+    m4Step++;
+    if (m4i>4){ setTimeout(()=>{ stepEl.textContent='🏁 Loop finished!'; condEl.textContent='false — STOP'; },100); }
+  }
+}
+
+// ═══════════════════════════════════════════
+//             SCORM 1.2
+// ═══════════════════════════════════════════
+var API = null;
+function findAPI(w){ var t=0; while(!w.API&&w.parent&&w.parent!==w&&t<7){w=w.parent;t++;} return w.API||null; }
+function scormInit(){ API=findAPI(window); if(API){API.LMSInitialize('');API.LMSSetValue('cmi.core.lesson_status','incomplete');} }
+function scormSetScore(pct){
+  if(!API)API=findAPI(window);
+  if(API){
+    API.LMSSetValue('cmi.core.score.raw',pct);
+    API.LMSSetValue('cmi.core.score.min','0');
+    API.LMSSetValue('cmi.core.score.max','100');
+    API.LMSSetValue('cmi.core.lesson_status',pct>=70?'passed':'failed');
+    API.LMSCommit('');API.LMSFinish('');
+  }
+}
+window.addEventListener('load',()=>{ scormInit(); updateScoreBar(); });
+</script>
+</body>
+</html>

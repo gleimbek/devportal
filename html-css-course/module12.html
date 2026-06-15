@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 12 — Incorporating Video and Audio</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 12: <em>Incorporating Video</em> and Audio</h2>
+    <p>Embed native HTML5 media, provide multiple formats, add captions, and embed third-party players like YouTube.</p>
+    <span class="tag">&lt;video&gt;</span><span class="tag">&lt;audio&gt;</span><span class="tag">&lt;source&gt;</span>
+    <span class="tag">&lt;track&gt;</span><span class="tag">controls</span><span class="tag">iframe embed</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🎬</span>
+    <div><h3>The &lt;video&gt; Element</h3><p>Native HTML5 video with full browser controls.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Video Element — Full Example</h3>
+    <div class="code-block"><span class="cmt">&lt;!-- Basic video with controls --&gt;</span>
+&lt;<span class="tag-name">video</span>
+  <span class="attr">width</span>=<span class="str">"800"</span>
+  <span class="attr">height</span>=<span class="str">"450"</span>
+  <span class="attr">controls</span>
+  <span class="attr">poster</span>=<span class="str">"thumbnail.jpg"</span>
+  <span class="attr">preload</span>=<span class="str">"metadata"</span>
+&gt;
+  <span class="cmt">&lt;!-- Multiple formats for browser compatibility --&gt;</span>
+  &lt;<span class="tag-name">source</span> <span class="attr">src</span>=<span class="str">"video.webm"</span> <span class="attr">type</span>=<span class="str">"video/webm"</span>&gt;
+  &lt;<span class="tag-name">source</span> <span class="attr">src</span>=<span class="str">"video.mp4"</span>  <span class="attr">type</span>=<span class="str">"video/mp4"</span>&gt;
+
+  <span class="cmt">&lt;!-- Captions / subtitles --&gt;</span>
+  &lt;<span class="tag-name">track</span>
+    <span class="attr">kind</span>=<span class="str">"subtitles"</span>
+    <span class="attr">src</span>=<span class="str">"captions-en.vtt"</span>
+    <span class="attr">srclang</span>=<span class="str">"en"</span>
+    <span class="attr">label</span>=<span class="str">"English"</span>
+    <span class="attr">default</span>
+  &gt;
+  &lt;<span class="tag-name">track</span> <span class="attr">kind</span>=<span class="str">"subtitles"</span> <span class="attr">src</span>=<span class="str">"captions-es.vtt"</span> <span class="attr">srclang</span>=<span class="str">"es"</span> <span class="attr">label</span>=<span class="str">"Español"</span>&gt;
+
+  <span class="cmt">&lt;!-- Fallback for very old browsers --&gt;</span>
+  &lt;<span class="tag-name">p</span>&gt;Your browser doesn't support HTML5 video.
+    &lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"video.mp4"</span>&gt;Download the video&lt;/<span class="tag-name">a</span>&gt;.
+  &lt;/<span class="tag-name">p</span>&gt;
+&lt;/<span class="tag-name">video</span>&gt;</div>
+
+    <h3>Video Attributes Reference</h3>
+    <div class="code-block"><span class="attr">controls</span>     <span class="cmt">— Show browser play/pause/volume controls</span>
+<span class="attr">autoplay</span>     <span class="cmt">— Play automatically (requires muted on most browsers)</span>
+<span class="attr">muted</span>        <span class="cmt">— Start without sound (needed for autoplay)</span>
+<span class="attr">loop</span>         <span class="cmt">— Repeat when it ends</span>
+<span class="attr">poster</span>       <span class="cmt">— Image shown before playback starts</span>
+<span class="attr">preload</span>      <span class="cmt">— none | metadata | auto</span>
+<span class="attr">playsinline</span>  <span class="cmt">— Play inline on iOS (not fullscreen)</span>
+<span class="attr">width/height</span> <span class="cmt">— Prevents layout shift (like with images)</span></div>
+    <div class="info-box warning">
+      <span class="info-icon">⚠️</span>
+      <p><strong>Never autoplay with sound.</strong> Browsers block it by default. If you need autoplay (e.g. for background video), always add the <code>muted</code> attribute.</p>
+    </div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="Media topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m12-t1" onclick="switchTab(this,'m12-t1','m12-tabs')">Audio Element</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m12-t2" onclick="switchTab(this,'m12-t2','m12-tabs')">YouTube Embed</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m12-t3" onclick="switchTab(this,'m12-t3','m12-tabs')">CSS Styling</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m12-t4" onclick="switchTab(this,'m12-t4','m12-tabs')">Captions (.vtt)</button>
+  </div>
+  <div id="m12-tabs">
+    <div id="m12-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔊 The &lt;audio&gt; Element</h4>
+      <div class="code-block">&lt;<span class="tag-name">audio</span> <span class="attr">controls</span> <span class="attr">preload</span>=<span class="str">"metadata"</span>&gt;
+  &lt;<span class="tag-name">source</span> <span class="attr">src</span>=<span class="str">"podcast.ogg"</span> <span class="attr">type</span>=<span class="str">"audio/ogg"</span>&gt;
+  &lt;<span class="tag-name">source</span> <span class="attr">src</span>=<span class="str">"podcast.mp3"</span> <span class="attr">type</span>=<span class="str">"audio/mpeg"</span>&gt;
+  &lt;<span class="tag-name">p</span>&gt;Browser doesn't support audio.
+     &lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"podcast.mp3"</span>&gt;Download MP3&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">p</span>&gt;
+&lt;/<span class="tag-name">audio</span>&gt;
+
+<span class="cmt">/* Audio formats:
+   MP3  — Universal (most widely used)
+   OGG  — Open source, good quality
+   WAV  — Uncompressed, large file size
+   AAC  — High quality (Apple/iOS)
+   WebM — Modern, excellent compression */</span></div>
+    </div>
+    <div id="m12-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">▶ Embedding YouTube / Vimeo</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- YouTube embed — use the /embed/ URL --&gt;</span>
+&lt;<span class="tag-name">iframe</span>
+  <span class="attr">width</span>=<span class="str">"560"</span>
+  <span class="attr">height</span>=<span class="str">"315"</span>
+  <span class="attr">src</span>=<span class="str">"https://www.youtube.com/embed/VIDEO_ID"</span>
+  <span class="attr">title</span>=<span class="str">"Video title for accessibility"</span>
+  <span class="attr">frameborder</span>=<span class="str">"0"</span>
+  <span class="attr">allow</span>=<span class="str">"accelerometer; autoplay; clipboard-write;
+         encrypted-media; gyroscope; picture-in-picture"</span>
+  <span class="attr">allowfullscreen</span>
+  <span class="attr">loading</span>=<span class="str">"lazy"</span>
+&gt;&lt;/<span class="tag-name">iframe</span>&gt;
+
+<span class="cmt">/* Responsive 16:9 iframe wrapper */</span>
+<span class="prop">.video-wrap</span> {
+  <span class="attr">position</span>: <span class="val">relative</span>;
+  <span class="attr">padding-bottom</span>: <span class="val">56.25%</span>; <span class="cmt">/* 16:9 ratio */</span>
+  <span class="attr">height</span>: <span class="val">0</span>;
+  <span class="attr">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="prop">.video-wrap iframe</span> {
+  <span class="attr">position</span>: <span class="val">absolute</span>;
+  <span class="attr">top</span>: <span class="val">0</span>; <span class="attr">left</span>: <span class="val">0</span>;
+  <span class="attr">width</span>: <span class="val">100%</span>; <span class="attr">height</span>: <span class="val">100%</span>;
+}</div>
+    </div>
+    <div id="m12-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 Styling Video Elements</h4>
+      <div class="code-block"><span class="cmt">/* Always responsive */</span>
+<span class="prop">video</span> {
+  <span class="attr">max-width</span>: <span class="val">100%</span>;
+  <span class="attr">height</span>: <span class="val">auto</span>;
+  <span class="attr">display</span>: <span class="val">block</span>;
+  <span class="attr">border-radius</span>: <span class="val">12px</span>;
+}
+
+<span class="cmt">/* Background video hero */</span>
+<span class="prop">.hero</span> {
+  <span class="attr">position</span>: <span class="val">relative</span>;
+  <span class="attr">overflow</span>: <span class="val">hidden</span>;
+  <span class="attr">height</span>: <span class="val">100vh</span>;
+}
+<span class="prop">.hero video</span> {
+  <span class="attr">position</span>: <span class="val">absolute</span>;
+  <span class="attr">top</span>: <span class="val">50%</span>; <span class="attr">left</span>: <span class="val">50%</span>;
+  <span class="attr">transform</span>: <span class="val">translate(-50%, -50%)</span>;
+  <span class="attr">min-width</span>: <span class="val">100%</span>;
+  <span class="attr">min-height</span>: <span class="val">100%</span>;
+  <span class="attr">object-fit</span>: <span class="val">cover</span>;
+}
+<span class="cmt">/* Overlay for readability */</span>
+<span class="prop">.hero::after</span> {
+  <span class="attr">content</span>: <span class="val">''</span>;
+  <span class="attr">position</span>: <span class="val">absolute</span>;
+  <span class="attr">inset</span>: <span class="val">0</span>;
+  <span class="attr">background</span>: <span class="val">rgba(0,0,0,.5)</span>;
+}</div>
+    </div>
+    <div id="m12-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📝 WebVTT Caption Format</h4>
+      <div class="code-block"><span class="cmt">/* captions-en.vtt */</span>
+WEBVTT
+
+<span class="out">00:00:00.000 --> 00:00:03.500</span>
+Welcome to our HTML and CSS course.
+
+<span class="out">00:00:03.500 --> 00:00:07.000</span>
+In this module, we'll learn about
+video and audio elements.
+
+<span class="out">00:00:07.000 --> 00:00:11.000</span>
+&lt;<span class="tag-name">v Speaker</span>&gt;The &lt;video&gt; element gives you
+full control over media playback.</div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p>Captions are <strong>required for accessibility</strong> under WCAG 2.1. They also benefit users in noisy environments or who prefer reading over listening.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ Video Embed Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">media.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m12-editor" rows="26">&lt;style&gt;
+  body { font-family: sans-serif; padding: 20px; background: #0f172a; color: #f1f5f9; }
+  h2 { color: #60a5fa; }
+  .video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  audio {
+    width: 100%;
+    margin-top: 16px;
+  }
+&lt;/style&gt;
+
+&lt;h2&gt;🎬 Responsive YouTube Embed&lt;/h2&gt;
+&lt;div class="video-wrap"&gt;
+  &lt;iframe
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="Demo YouTube video"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p style="color:#94a3b8;font-size:.85rem"&gt;Try resizing the preview — it stays 16:9!&lt;/p&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m12-editor','m12-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m12-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — Which attribute on &lt;video&gt; shows browser-native play/pause/volume controls?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m12q1" data-val="a" onclick="checkMC('m12q1','a','c','src specifies the video source file, not the controls.')"><span class="option-icon">○</span> src</button></li>
+      <li><button class="option-btn" data-q="m12q1" data-val="b" onclick="checkMC('m12q1','b','c','autoplay starts the video but does not show controls.')"><span class="option-icon">○</span> autoplay</button></li>
+      <li><button class="option-btn" data-q="m12q1" data-val="c" onclick="checkMC('m12q1','c','c','Correct! The controls attribute (no value needed) shows the browser\'s built-in media controls.')"><span class="option-icon">○</span> controls</button></li>
+      <li><button class="option-btn" data-q="m12q1" data-val="d" onclick="checkMC('m12q1','d','c','poster sets the thumbnail shown before playback.')"><span class="option-icon">○</span> poster</button></li>
+    </ul>
+    <div id="m12q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — What element adds subtitles or captions to a &lt;video&gt;?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m12q2" data-val="a" onclick="checkMC('m12q2','a','c','&lt;caption&gt; is used inside tables, not video.')"><span class="option-icon">○</span> &lt;caption&gt;</button></li>
+      <li><button class="option-btn" data-q="m12q2" data-val="b" onclick="checkMC('m12q2','b','c','&lt;subtitle&gt; is not a valid HTML element.')"><span class="option-icon">○</span> &lt;subtitle&gt;</button></li>
+      <li><button class="option-btn" data-q="m12q2" data-val="c" onclick="checkMC('m12q2','c','c','Correct! &lt;track&gt; links a .vtt caption file to the video, supporting multiple languages.')"><span class="option-icon">○</span> &lt;track&gt;</button></li>
+      <li><button class="option-btn" data-q="m12q2" data-val="d" onclick="checkMC('m12q2','d','c','&lt;source&gt; provides alternative media file formats, not captions.')"><span class="option-icon">○</span> &lt;source&gt;</button></li>
+    </ul>
+    <div id="m12q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What CSS technique creates a responsive 16:9 video wrapper using padding?</h4>
+      <div class="attempts-info" id="m12q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m12q3-in" placeholder="padding-bottom: ...%">
+      <button class="fill-btn" onclick="checkFill('m12q3','56.25%','padding-bottom: 56.25% creates the 16:9 ratio (9÷16 = 0.5625). The iframe is then positioned absolutely inside.','Hint: 9 ÷ 16 × 100 = ?%')">Submit</button>
+      <div id="m12q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What attribute must you add to &lt;video autoplay&gt; so most browsers allow it?</h4>
+      <div class="attempts-info" id="m12q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m12q4-in" placeholder="attribute">
+      <button class="fill-btn" onclick="checkFill('m12q4','muted','Browsers block autoplay with sound by default to prevent annoying the user. Adding muted allows autoplay to work.','Hint: the video must be _____ to autoplay.')">Submit</button>
+      <div id="m12q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module11.html" style="margin-right:12px">← Module 11</a>
+    <a class="back-btn" href="../html-css-course/module13.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 13 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

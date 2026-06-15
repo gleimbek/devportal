@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 10 — Creating and Processing Web Forms</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<header id="top-bar" role="banner">
+  <h1
+    data-en="🌐 HTML &amp; CSS — Complete Interactive Course"
+    data-es="🌐 HTML &amp; CSS — Curso Interactivo Completo">
+    🌐 HTML &amp; CSS — Complete Interactive Course
+  </h1>
+  <div id="score-display"
+     data-en="Score: <span id='score-num'>0</span> / 110"
+     data-es="Puntuación: <span id='score-num'>0</span> / 110">
+    Score: <span id="score-num">0</span> / 110
+  </div>
+  <button id="lang-toggle" onclick="toggleLang()" aria-label="Switch language">🌐 Español</button>
+</header>
+
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2
+      data-en="Module 10: <em>Creating and Processing</em> Web Forms"
+      data-es="Módulo 10: <em>Creación y Procesamiento</em> de Formularios Web">
+      Module 10: <em>Creating and Processing</em> Web Forms
+    </h2>
+    <p
+      data-en="Forms are how the web collects data. Master every input type, built-in validation, accessibility patterns, and CSS styling for professional form design."
+      data-es="Los formularios son la forma en que la web recopila datos. Domina cada tipo de input, la validación integrada, los patrones de accesibilidad y el estilo CSS para formularios profesionales.">
+      Forms are how the web collects data. Master every input type, built-in validation, accessibility patterns, and CSS styling.
+    </p>
+    <span class="tag">&lt;form&gt;</span>
+    <span class="tag">&lt;input&gt;</span>
+    <span class="tag">&lt;select&gt;</span>
+    <span class="tag">validation</span>
+    <span class="tag">fieldset</span>
+    <span class="tag">labels</span>
+  </div>
+
+  <!-- SECTION 1: Form Basics -->
+  <div class="section-header">
+    <span class="section-icon">📋</span>
+    <div>
+      <h3
+        data-en="Form Structure &amp; the &lt;form&gt; Element"
+        data-es="Estructura del Formulario y el Elemento &lt;form&gt;">
+        Form Structure &amp; the &lt;form&gt; Element
+      </h3>
+      <p
+        data-en="Every form starts with &lt;form&gt; — it wraps all controls and defines how data is sent."
+        data-es="Todo formulario comienza con &lt;form&gt; — envuelve todos los controles y define cómo se envían los datos.">
+        Every form starts with &lt;form&gt; — it wraps all controls and defines how data is sent.
+      </p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+      data-en="The &lt;form&gt; Element"
+      data-es="El Elemento &lt;form&gt;">
+      The &lt;form&gt; Element
+    </h3>
+    <div class="code-block">&lt;<span class="tag-name">form</span>
+  <span class="attr">action</span>=<span class="str">"/submit"</span>     <span class="cmt">&lt;!-- where data is sent --&gt;</span>
+  <span class="attr">method</span>=<span class="str">"POST"</span>      <span class="cmt">&lt;!-- GET (URL) or POST (body) --&gt;</span>
+  <span class="attr">novalidate</span>         <span class="cmt">&lt;!-- disable built-in browser validation (for custom JS) --&gt;</span>
+  <span class="attr">autocomplete</span>=<span class="str">"on"</span> <span class="cmt">&lt;!-- enable browser autofill --&gt;</span>
+&gt;
+  <span class="cmt">&lt;!-- Form controls go here --&gt;</span>
+&lt;/<span class="tag-name">form</span>&gt;</div>
+
+    <h4
+      data-en="GET vs POST"
+      data-es="GET vs POST">
+      GET vs POST
+    </h4>
+    <ul class="step-list">
+      <li
+        data-en="<strong>GET</strong> — appends data to URL (?name=Ana&email=...). Use for search forms. Never for passwords or sensitive data."
+        data-es="<strong>GET</strong> — añade datos a la URL (?nombre=Ana&email=...). Usa para formularios de búsqueda. Nunca para contraseñas o datos sensibles.">
+        <strong>GET</strong> — appends data to URL. Use for search forms, never for passwords.
+      </li>
+      <li
+        data-en="<strong>POST</strong> — sends data in the request body (invisible in URL). Use for login, registration, any sensitive data."
+        data-es="<strong>POST</strong> — envía datos en el cuerpo de la solicitud (invisible en la URL). Usa para inicio de sesión, registro y cualquier dato sensible.">
+        <strong>POST</strong> — sends data in the request body (hidden). Use for login and sensitive data.
+      </li>
+    </ul>
+
+    <h4
+      data-en="The Label Connection — Critical for Accessibility"
+      data-es="La Conexión Label — Fundamental para la Accesibilidad">
+      The Label Connection — Critical for Accessibility
+    </h4>
+    <div class="code-block"><span class="cmt">&lt;!-- Method 1: for/id pairing (recommended) --&gt;</span>
+&lt;<span class="tag-name">label</span> <span class="attr">for</span>=<span class="str">"username"</span>&gt;Username&lt;/<span class="tag-name">label</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">id</span>=<span class="str">"username"</span> <span class="attr">name</span>=<span class="str">"username"</span>&gt;
+
+<span class="cmt">&lt;!-- Method 2: wrapping (implicit association) --&gt;</span>
+&lt;<span class="tag-name">label</span>&gt;
+  Password
+  &lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"password"</span> <span class="attr">name</span>=<span class="str">"password"</span>&gt;
+&lt;/<span class="tag-name">label</span>&gt;
+
+<span class="cmt">&lt;!-- ❌ WRONG — input with no label --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">placeholder</span>=<span class="str">"Username"</span>&gt; <span class="cmt">&lt;!-- placeholder ≠ label! --&gt;</span></div>
+    <div class="info-box warning">
+      <span class="info-icon">⚠️</span>
+      <p
+        data-en="<strong>Placeholder is NOT a label.</strong> Placeholder text disappears when the user starts typing, leaving them confused about what the field requires. Always use a visible &lt;label&gt;."
+        data-es="<strong>El placeholder NO es una etiqueta.</strong> El texto del placeholder desaparece cuando el usuario empieza a escribir, dejándolo confundido sobre qué requiere el campo. Usa siempre una &lt;label&gt; visible.">
+        <strong>Placeholder is NOT a label.</strong> It disappears when typing. Always use a visible &lt;label&gt;.
+      </p>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-btns" role="tablist" aria-label="Form topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m10-t1" onclick="switchTab(this,'m10-t1','m10-tabs')"
+      data-en="Input Types" data-es="Tipos de Input">Input Types</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m10-t2" onclick="switchTab(this,'m10-t2','m10-tabs')"
+      data-en="Validation" data-es="Validación">Validation</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m10-t3" onclick="switchTab(this,'m10-t3','m10-tabs')"
+      data-en="Fieldset &amp; Select" data-es="Fieldset y Select">Fieldset &amp; Select</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m10-t4" onclick="switchTab(this,'m10-t4','m10-tabs')"
+      data-en="CSS Styling" data-es="Estilo CSS">CSS Styling</button>
+  </div>
+
+  <div id="m10-tabs">
+    <!-- TAB 1: Input Types -->
+    <div id="m10-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="📝 All Input Types"
+        data-es="📝 Todos los Tipos de Input">
+        📝 All Input Types
+      </h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Text inputs --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"text"</span>&gt;         <span class="cmt">&lt;!-- single-line text --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"email"</span>&gt;        <span class="cmt">&lt;!-- validated email --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"password"</span>&gt;     <span class="cmt">&lt;!-- masked text --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"tel"</span>&gt;          <span class="cmt">&lt;!-- phone (numeric keyboard on mobile) --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"url"</span>&gt;          <span class="cmt">&lt;!-- validated URL --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"search"</span>&gt;       <span class="cmt">&lt;!-- search box (with clear button) --&gt;</span>
+&lt;<span class="tag-name">textarea</span> <span class="attr">rows</span>=<span class="str">"4"</span>&gt;&lt;/<span class="tag-name">textarea</span>&gt; <span class="cmt">&lt;!-- multi-line text --&gt;</span>
+
+<span class="cmt">&lt;!-- Numbers &amp; ranges --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"number"</span> <span class="attr">min</span>=<span class="str">"1"</span> <span class="attr">max</span>=<span class="str">"100"</span> <span class="attr">step</span>=<span class="str">"1"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"range"</span>  <span class="attr">min</span>=<span class="str">"0"</span> <span class="attr">max</span>=<span class="str">"100"</span>&gt;  <span class="cmt">&lt;!-- slider --&gt;</span>
+
+<span class="cmt">&lt;!-- Date &amp; time --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"date"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"time"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"datetime-local"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"month"</span>&gt;
+
+<span class="cmt">&lt;!-- Choices --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"checkbox"</span> <span class="attr">name</span>=<span class="str">"agree"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"radio"</span>    <span class="attr">name</span>=<span class="str">"plan"</span> <span class="attr">value</span>=<span class="str">"free"</span>&gt;
+
+<span class="cmt">&lt;!-- Other --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"color"</span>&gt;         <span class="cmt">&lt;!-- color picker --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"file"</span>  <span class="attr">accept</span>=<span class="str">".pdf,.jpg"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"hidden"</span> <span class="attr">value</span>=<span class="str">"csrf-token"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"submit"</span> <span class="attr">value</span>=<span class="str">"Send"</span>&gt;
+&lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"reset"</span>&gt;          <span class="cmt">&lt;!-- clears all fields --&gt;</span>
+&lt;<span class="tag-name">button</span> <span class="attr">type</span>=<span class="str">"submit"</span>&gt;Send&lt;/<span class="tag-name">button</span>&gt;</div>
+    </div>
+
+    <!-- TAB 2: Validation -->
+    <div id="m10-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="✅ HTML5 Built-in Validation"
+        data-es="✅ Validación Integrada de HTML5">
+        ✅ HTML5 Built-in Validation
+      </h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Validation attributes --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">required</span>&gt;                   <span class="cmt">&lt;!-- must not be empty --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">minlength</span>=<span class="str">"3"</span>&gt;           <span class="cmt">&lt;!-- min character count --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">maxlength</span>=<span class="str">"50"</span>&gt;           <span class="cmt">&lt;!-- max character count --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">min</span>=<span class="str">"18"</span> <span class="attr">max</span>=<span class="str">"99"</span>&gt;       <span class="cmt">&lt;!-- numeric range --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">pattern</span>=<span class="str">"[A-Za-z]{2,}"</span>&gt;  <span class="cmt">&lt;!-- regex pattern --&gt;</span>
+
+<span class="cmt">/* CSS to style valid/invalid states */</span>
+<span class="prop">input:valid</span>   { <span class="attr">border-color</span>: <span class="val">#22c55e</span>; }
+<span class="prop">input:invalid</span> { <span class="attr">border-color</span>: <span class="val">#ef4444</span>; }
+
+<span class="cmt">/* But only show red AFTER the user interacts */</span>
+<span class="prop">input:invalid:not(:placeholder-shown)</span> {
+  <span class="attr">border-color</span>: <span class="val">#ef4444</span>;
+  <span class="attr">background</span>: <span class="val">#fef2f2</span>;
+}</div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p
+          data-en="<strong>Combine client and server validation.</strong> HTML5 validation is a convenience feature — savvy users can bypass it with browser DevTools. Always validate on the server too."
+          data-es="<strong>Combina validación del cliente y del servidor.</strong> La validación HTML5 es una función de conveniencia: los usuarios con conocimientos técnicos pueden evitarla con DevTools. Valida siempre también en el servidor.">
+          <strong>Always validate on the server too.</strong> HTML5 validation is a convenience — users can bypass it with DevTools.
+        </p>
+      </div>
+    </div>
+
+    <!-- TAB 3: Fieldset & Select -->
+    <div id="m10-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="🗂️ Fieldset, Legend &amp; Select"
+        data-es="🗂️ Fieldset, Legend y Select">
+        🗂️ Fieldset, Legend &amp; Select
+      </h4>
+      <div class="code-block"><span class="cmt">&lt;!-- Fieldset groups related controls --&gt;</span>
+&lt;<span class="tag-name">fieldset</span>&gt;
+  &lt;<span class="tag-name">legend</span>&gt;Shipping Address&lt;/<span class="tag-name">legend</span>&gt;
+  &lt;<span class="tag-name">label</span> <span class="attr">for</span>=<span class="str">"city"</span>&gt;City&lt;/<span class="tag-name">label</span>&gt;
+  &lt;<span class="tag-name">input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">id</span>=<span class="str">"city"</span> <span class="attr">name</span>=<span class="str">"city"</span>&gt;
+&lt;/<span class="tag-name">fieldset</span>&gt;
+
+<span class="cmt">&lt;!-- Drop-down select --&gt;</span>
+&lt;<span class="tag-name">label</span> <span class="attr">for</span>=<span class="str">"country"</span>&gt;Country&lt;/<span class="tag-name">label</span>&gt;
+&lt;<span class="tag-name">select</span> <span class="attr">id</span>=<span class="str">"country"</span> <span class="attr">name</span>=<span class="str">"country"</span> <span class="attr">required</span>&gt;
+  &lt;<span class="tag-name">option</span> <span class="attr">value</span>=<span class="str">""</span>&gt;— Select a country —&lt;/<span class="tag-name">option</span>&gt;
+  &lt;<span class="tag-name">optgroup</span> <span class="attr">label</span>=<span class="str">"North America"</span>&gt;
+    &lt;<span class="tag-name">option</span> <span class="attr">value</span>=<span class="str">"mx"</span>&gt;Mexico&lt;/<span class="tag-name">option</span>&gt;
+    &lt;<span class="tag-name">option</span> <span class="attr">value</span>=<span class="str">"us"</span>&gt;United States&lt;/<span class="tag-name">option</span>&gt;
+  &lt;/<span class="tag-name">optgroup</span>&gt;
+&lt;/<span class="tag-name">select</span>&gt;
+
+<span class="cmt">&lt;!-- Multi-select --&gt;</span>
+&lt;<span class="tag-name">select</span> <span class="attr">name</span>=<span class="str">"skills"</span> <span class="attr">multiple</span>&gt;
+  &lt;<span class="tag-name">option</span>&gt;HTML&lt;/<span class="tag-name">option</span>&gt;
+  &lt;<span class="tag-name">option</span>&gt;CSS&lt;/<span class="tag-name">option</span>&gt;
+  &lt;<span class="tag-name">option</span>&gt;JavaScript&lt;/<span class="tag-name">option</span>&gt;
+&lt;/<span class="tag-name">select</span>&gt;
+
+<span class="cmt">&lt;!-- Datalist: free text + suggestions --&gt;</span>
+&lt;<span class="tag-name">input</span> <span class="attr">list</span>=<span class="str">"browsers"</span> <span class="attr">name</span>=<span class="str">"browser"</span>&gt;
+&lt;<span class="tag-name">datalist</span> <span class="attr">id</span>=<span class="str">"browsers"</span>&gt;
+  &lt;<span class="tag-name">option</span> <span class="attr">value</span>=<span class="str">"Chrome"</span>&gt;
+  &lt;<span class="tag-name">option</span> <span class="attr">value</span>=<span class="str">"Firefox"</span>&gt;
+  &lt;<span class="tag-name">option</span> <span class="attr">value</span>=<span class="str">"Safari"</span>&gt;
+&lt;/<span class="tag-name">datalist</span>&gt;</div>
+    </div>
+
+    <!-- TAB 4: CSS Styling -->
+    <div id="m10-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="🎨 Styling Forms with CSS"
+        data-es="🎨 Estilizar Formularios con CSS">
+        🎨 Styling Forms with CSS
+      </h4>
+      <div class="code-block"><span class="cmt">/* Reset browser defaults first */</span>
+<span class="prop">input, textarea, select, button</span> {
+  <span class="attr">font-family</span>: <span class="val">inherit</span>;
+  <span class="attr">font-size</span>: <span class="val">1rem</span>;
+  <span class="attr">box-sizing</span>: <span class="val">border-box</span>;
+}
+
+<span class="cmt">/* Style the field */</span>
+<span class="prop">input[type="text"],
+input[type="email"],
+textarea,
+select</span> {
+  <span class="attr">display</span>: <span class="val">block</span>;
+  <span class="attr">width</span>: <span class="val">100%</span>;
+  <span class="attr">padding</span>: <span class="val">10px 14px</span>;
+  <span class="attr">border</span>: <span class="val">2px solid #e2e8f0</span>;
+  <span class="attr">border-radius</span>: <span class="val">8px</span>;
+  <span class="attr">outline</span>: <span class="val">none</span>;
+  <span class="attr">transition</span>: <span class="val">border-color 0.2s, box-shadow 0.2s</span>;
+}
+
+<span class="prop">input:focus, textarea:focus, select:focus</span> {
+  <span class="attr">border-color</span>: <span class="val">#3b82f6</span>;
+  <span class="attr">box-shadow</span>: <span class="val">0 0 0 3px rgba(59,130,246,0.2)</span>;
+}
+
+<span class="cmt">/* Submit button */</span>
+<span class="prop">button[type="submit"]</span> {
+  <span class="attr">background</span>: <span class="val">#1d4ed8</span>;
+  <span class="attr">color</span>: <span class="val">#fff</span>;
+  <span class="attr">border</span>: <span class="val">none</span>;
+  <span class="attr">border-radius</span>: <span class="val">8px</span>;
+  <span class="attr">padding</span>: <span class="val">12px 28px</span>;
+  <span class="attr">font-weight</span>: <span class="val">700</span>;
+  <span class="attr">cursor</span>: <span class="val">pointer</span>;
+  <span class="attr">transition</span>: <span class="val">background 0.2s</span>;
+}
+<span class="prop">button[type="submit"]:hover</span> {
+  <span class="attr">background</span>: <span class="val">#1e40af</span>;
+}</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Complete Form Example -->
+  <div class="section-header">
+    <span class="section-icon">✏️</span>
+    <div>
+      <h3
+        data-en="Live Sandbox — Build a Registration Form"
+        data-es="Laboratorio Interactivo — Crea un Formulario de Registro">
+        Live Sandbox — Build a Registration Form
+      </h3>
+      <p
+        data-en="A complete styled form with validation, fieldsets, and all major input types."
+        data-es="Un formulario estilizado completo con validación, grupos y todos los tipos de input principales.">
+        A complete styled form with validation, fieldsets, and all major input types.
+      </p>
+    </div>
+  </div>
+
+  <div class="sandbox">
+    <h4
+      data-en="✏️ Registration Form — Edit &amp; Preview!"
+      data-es="✏️ Formulario de Registro — ¡Edita y previsualiza!">
+      ✏️ Registration Form — Edit &amp; Preview!
+    </h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">registration.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m10-editor" rows="52">&lt;style&gt;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; padding: 32px 16px; color: #1e293b; }
+  .form-card {
+    max-width: 520px; margin: 0 auto;
+    background: white; border-radius: 16px;
+    padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,.08);
+  }
+  h2 { font-size: 1.5rem; margin-bottom: 6px; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: .9rem; margin-bottom: 24px; }
+  fieldset { border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; }
+  legend { font-weight: 700; color: #1d4ed8; padding: 0 8px; font-size: .9rem; }
+  .field { margin-bottom: 14px; }
+  label { display: block; font-size: .85rem; font-weight: 600; color: #475569; margin-bottom: 4px; }
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="tel"], input[type="date"], select, textarea {
+    display: block; width: 100%; padding: 9px 13px;
+    border: 2px solid #e2e8f0; border-radius: 8px;
+    font-size: 1rem; font-family: inherit; outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+  }
+  input:valid:not(:placeholder-shown) { border-color: #22c55e; }
+  input:invalid:not(:placeholder-shown) { border-color: #ef4444; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .radio-group, .check-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .radio-group label, .check-group label {
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 400; font-size: .9rem; cursor: pointer; color: #334155;
+  }
+  .submit-btn {
+    width: 100%; padding: 13px; background: #1d4ed8;
+    color: white; border: none; border-radius: 10px;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
+    transition: background .2s, transform .1s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: #1e40af; transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+  .helper { font-size: .78rem; color: #94a3b8; margin-top: 3px; }
+&lt;/style&gt;
+
+&lt;div class="form-card"&gt;
+  &lt;h2&gt;Create Account&lt;/h2&gt;
+  &lt;p class="subtitle"&gt;Join thousands of learners today!&lt;/p&gt;
+
+  &lt;form action="#" method="POST"&gt;
+
+    &lt;!-- Personal Info --&gt;
+    &lt;fieldset&gt;
+      &lt;legend&gt;👤 Personal Information&lt;/legend&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="field"&gt;
+          &lt;label for="fname"&gt;First Name&lt;/label&gt;
+          &lt;input type="text" id="fname" name="fname"
+                 placeholder="Ana" required minlength="2"&gt;
+        &lt;/div&gt;
+        &lt;div class="field"&gt;
+          &lt;label for="lname"&gt;Last Name&lt;/label&gt;
+          &lt;input type="text" id="lname" name="lname"
+                 placeholder="García" required&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="field"&gt;
+        &lt;label for="bday"&gt;Date of Birth&lt;/label&gt;
+        &lt;input type="date" id="bday" name="birthdate"&gt;
+      &lt;/div&gt;
+    &lt;/fieldset&gt;
+
+    &lt;!-- Account Info --&gt;
+    &lt;fieldset&gt;
+      &lt;legend&gt;🔐 Account Details&lt;/legend&gt;
+      &lt;div class="field"&gt;
+        &lt;label for="email"&gt;Email Address&lt;/label&gt;
+        &lt;input type="email" id="email" name="email"
+               placeholder="ana@example.com" required autocomplete="email"&gt;
+      &lt;/div&gt;
+      &lt;div class="field"&gt;
+        &lt;label for="pass"&gt;Password&lt;/label&gt;
+        &lt;input type="password" id="pass" name="password"
+               minlength="8" required&gt;
+        &lt;p class="helper"&gt;At least 8 characters.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/fieldset&gt;
+
+    &lt;!-- Preferences --&gt;
+    &lt;fieldset&gt;
+      &lt;legend&gt;⚙️ Preferences&lt;/legend&gt;
+      &lt;div class="field"&gt;
+        &lt;label for="plan"&gt;Plan&lt;/label&gt;
+        &lt;select id="plan" name="plan"&gt;
+          &lt;option value=""&gt;— Choose a plan —&lt;/option&gt;
+          &lt;option value="free"&gt;Free (forever)&lt;/option&gt;
+          &lt;option value="pro"&gt;Pro — $9/month&lt;/option&gt;
+          &lt;option value="team"&gt;Team — $29/month&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class="field"&gt;
+        &lt;label&gt;I am a:&lt;/label&gt;
+        &lt;div class="radio-group"&gt;
+          &lt;label&gt;&lt;input type="radio" name="role" value="student"&gt; Student&lt;/label&gt;
+          &lt;label&gt;&lt;input type="radio" name="role" value="dev"&gt; Developer&lt;/label&gt;
+          &lt;label&gt;&lt;input type="radio" name="role" value="designer"&gt; Designer&lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="field"&gt;
+        &lt;div class="check-group"&gt;
+          &lt;label&gt;
+            &lt;input type="checkbox" name="terms" required&gt;
+            I agree to the &lt;a href="#"&gt;Terms of Service&lt;/a&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/fieldset&gt;
+
+    &lt;button type="submit" class="submit-btn"&gt;Create Account →&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m10-editor','m10-preview')"
+        data-en="▶ Preview" data-es="▶ Vista previa">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m10-preview" style="min-height:300px;">
+      <em style="color:var(--muted);font-size:.85rem"
+        data-en="Click ▶ Preview to render the form."
+        data-es="Haz clic en ▶ Vista previa para mostrar el formulario.">
+        Click ▶ Preview to render the form.
+      </em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div>
+      <h3
+        data-en="Exercises &amp; Quiz"
+        data-es="Ejercicios y Cuestionario">
+        Exercises &amp; Quiz
+      </h3>
+      <p
+        data-en="Test your knowledge of HTML forms."
+        data-es="Pon a prueba tus conocimientos de formularios HTML.">
+        Test your knowledge of HTML forms.
+      </p>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+      data-en="Q1 — What attribute links a &lt;label&gt; to its input field?"
+      data-es="P1 — ¿Qué atributo vincula un &lt;label&gt; a su campo de entrada?">
+      Q1 — What attribute links a &lt;label&gt; to its input field?
+    </h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m10q1" data-val="a"
+        onclick="checkMC('m10q1','a','b','The name attribute groups radio buttons but does not link labels to inputs.')">
+        <span class="option-icon">○</span>
+        <span data-en="name" data-es="name">name</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m10q1" data-val="b"
+        onclick="checkMC('m10q1','b','b','Correct! The for attribute on &lt;label&gt; must match the id attribute of the input. When clicked, the label focuses its input.')">
+        <span class="option-icon">○</span>
+        <span data-en="for (matching the input's id)" data-es="for (coincidiendo con el id del input)">for (matching the input's id)</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m10q1" data-val="c"
+        onclick="checkMC('m10q1','c','b','class does not link labels to inputs.')">
+        <span class="option-icon">○</span>
+        <span data-en="class" data-es="class">class</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m10q1" data-val="d"
+        onclick="checkMC('m10q1','d','b','target is not a label attribute.')">
+        <span class="option-icon">○</span>
+        <span data-en="target" data-es="target">target</span>
+      </button></li>
+    </ul>
+    <div id="m10q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+      data-en="Q2 — Which input type shows a native date picker in modern browsers?"
+      data-es="P2 — ¿Qué tipo de input muestra un selector de fecha nativo en navegadores modernos?">
+      Q2 — Which input type shows a native date picker in modern browsers?
+    </h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m10q2" data-val="a"
+        onclick="checkMC('m10q2','a','c','type=text gives a plain text field — no date picker.')">
+        <span class="option-icon">○</span> type="text"
+      </button></li>
+      <li><button class="option-btn" data-q="m10q2" data-val="b"
+        onclick="checkMC('m10q2','b','c','type=number shows a numeric spinner, not a date picker.')">
+        <span class="option-icon">○</span> type="number"
+      </button></li>
+      <li><button class="option-btn" data-q="m10q2" data-val="c"
+        onclick="checkMC('m10q2','c','c','Correct! type=date shows a native date picker widget in all modern browsers. The value is always in YYYY-MM-DD format.')">
+        <span class="option-icon">○</span> type="date"
+      </button></li>
+      <li><button class="option-btn" data-q="m10q2" data-val="d"
+        onclick="checkMC('m10q2','d','c','type=calendar is not a valid HTML input type.')">
+        <span class="option-icon">○</span> type="calendar"
+      </button></li>
+    </ul>
+    <div id="m10q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+      data-en="Q3 — What element groups related form controls together with a visible border and title?"
+      data-es="P3 — ¿Qué elemento agrupa controles de formulario relacionados con un borde visible y un título?">
+      Q3 — What element groups related form controls with a border and title?
+    </h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m10q3" data-val="a"
+        onclick="checkMC('m10q3','a','c','&lt;section&gt; is a semantic grouping element but does not create the fieldset border or work with &lt;legend&gt;.')">
+        <span class="option-icon">○</span> &lt;section&gt;
+      </button></li>
+      <li><button class="option-btn" data-q="m10q3" data-val="b"
+        onclick="checkMC('m10q3','b','c','&lt;div&gt; is a generic container with no semantic meaning for forms.')">
+        <span class="option-icon">○</span> &lt;div&gt;
+      </button></li>
+      <li><button class="option-btn" data-q="m10q3" data-val="c"
+        onclick="checkMC('m10q3','c','c','Correct! &lt;fieldset&gt; groups related controls and &lt;legend&gt; provides the visible title. Together they improve form accessibility.')">
+        <span class="option-icon">○</span> &lt;fieldset&gt; with &lt;legend&gt;
+      </button></li>
+      <li><button class="option-btn" data-q="m10q3" data-val="d"
+        onclick="checkMC('m10q3','d','c','&lt;group&gt; is not a valid HTML element.')">
+        <span class="option-icon">○</span> &lt;group&gt;
+      </button></li>
+    </ul>
+    <div id="m10q3-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+      data-en="🧩 Fill-in Exercises"
+      data-es="🧩 Ejercicios para completar">
+      🧩 Fill-in Exercises
+    </h3>
+
+    <div class="fill-exercise">
+      <h4
+        data-en="Q4 — What attribute makes a field mandatory — the form cannot be submitted if it's empty?"
+        data-es="P4 — ¿Qué atributo hace obligatorio un campo? El formulario no puede enviarse si está vacío.">
+        Q4 — What attribute makes a field mandatory (form cannot submit if empty)?
+      </h4>
+      <div class="attempts-info" id="m10q4-att"
+        data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m10q4-in" placeholder="attribute">
+      <button class="fill-btn"
+        onclick="checkFill('m10q4','required','The required attribute is a boolean — just its presence makes the field mandatory. The browser will show a validation message if it is empty on submit.','Hint: it is a single word, 8 letters.')"
+        data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m10q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+
+    <div class="fill-exercise">
+      <h4
+        data-en="Q5 — What attribute on multiple radio buttons groups them so only ONE can be selected at a time?"
+        data-es="P5 — ¿Qué atributo en múltiples radio buttons los agrupa para que solo se pueda seleccionar UNO a la vez?">
+        Q5 — What attribute groups radio buttons so only one can be selected?
+      </h4>
+      <div class="attempts-info" id="m10q5-att"
+        data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m10q5-in" placeholder="attribute">
+      <button class="fill-btn"
+        onclick="checkFill('m10q5','name','All radio buttons in a group must have the same name attribute. The browser ensures only one value per name group can be selected. The value attribute determines what is submitted.','Hint: it is 4 letters and every input has one.')"
+        data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m10q5-feedback" class="feedback-box" role="alert"></div>
+    </div>
+
+    <div class="fill-exercise">
+      <h4
+        data-en="Q6 — What HTML element gives a text input a dropdown list of suggestions (while still allowing free text)?"
+        data-es="P6 — ¿Qué elemento HTML le da a un input de texto una lista desplegable de sugerencias (permitiendo texto libre)?">
+        Q6 — What element adds autocomplete suggestions to a text input?
+      </h4>
+      <div class="attempts-info" id="m10q6-att"
+        data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m10q6-in" placeholder="&lt;tag&gt;">
+      <button class="fill-btn"
+        onclick="checkFill('m10q6','&lt;datalist&gt;','&lt;datalist&gt; works with &lt;input list=&quot;id&quot;&gt;. It offers suggestions but does NOT restrict input — the user can type anything. For a restricted set of options use &lt;select&gt; instead.','Hint: it starts with &lt;data...')"
+        data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m10q6-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module09.html" style="margin-right:12px"
+      data-en="← Module 9" data-es="← Módulo 9">← Module 9</a>
+    <a class="back-btn" href="../html-css-course/module11.html"
+      style="background:var(--accent);color:#fff;border-color:var(--accent)"
+      data-en="Module 11 →" data-es="Módulo 11 →">Module 11 →</a>
+  </div>
+
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

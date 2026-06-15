@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2 — Structuring Content in a Web Document</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+    <div id="progress-fill"></div>
+  </div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 2: <em>Structuring Content</em> in a Web Document</h2>
+    <p>Use semantic HTML5 elements to give meaning to your content — better for users, search engines, and accessibility.</p>
+    <span class="tag">&lt;header&gt;</span><span class="tag">&lt;nav&gt;</span><span class="tag">&lt;main&gt;</span>
+    <span class="tag">&lt;section&gt;</span><span class="tag">&lt;article&gt;</span><span class="tag">&lt;footer&gt;</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🏛️</span>
+    <div><h3>Semantic HTML5 Layout Elements</h3><p>Tags that describe their purpose, not just their appearance.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Why Semantics Matter</h3>
+    <p>A <code>&lt;div&gt;</code> says nothing about what it contains. A <code>&lt;nav&gt;</code> tells everyone — browsers, screen readers, search bots — that this is navigation. Semantic HTML improves:</p>
+    <ul class="step-list">
+      <li><strong>Accessibility</strong> — screen readers announce landmark regions.</li>
+      <li><strong>SEO</strong> — search engines understand your page structure.</li>
+      <li><strong>Maintainability</strong> — other developers instantly understand the layout.</li>
+    </ul>
+    <h4>Full Page Layout Example</h4>
+    <div class="code-block">&lt;<span class="tag-name">body</span>&gt;
+  &lt;<span class="tag-name">header</span>&gt;           <span class="cmt">&lt;!-- site logo, banner --&gt;</span>
+    &lt;<span class="tag-name">nav</span>&gt;…&lt;/<span class="tag-name">nav</span>&gt;    <span class="cmt">&lt;!-- main navigation --&gt;</span>
+  &lt;/<span class="tag-name">header</span>&gt;
+
+  &lt;<span class="tag-name">main</span>&gt;             <span class="cmt">&lt;!-- unique page content (only ONE per page) --&gt;</span>
+    &lt;<span class="tag-name">section</span>&gt;        <span class="cmt">&lt;!-- thematic grouping --&gt;</span>
+      &lt;<span class="tag-name">article</span>&gt;      <span class="cmt">&lt;!-- self-contained content (blog post, card) --&gt;</span>
+        &lt;<span class="tag-name">h2</span>&gt;Post Title&lt;/<span class="tag-name">h2</span>&gt;
+        &lt;<span class="tag-name">p</span>&gt;Content…&lt;/<span class="tag-name">p</span>&gt;
+      &lt;/<span class="tag-name">article</span>&gt;
+    &lt;/<span class="tag-name">section</span>&gt;
+    &lt;<span class="tag-name">aside</span>&gt;…&lt;/<span class="tag-name">aside</span>&gt;   <span class="cmt">&lt;!-- sidebar, related links --&gt;</span>
+  &lt;/<span class="tag-name">main</span>&gt;
+
+  &lt;<span class="tag-name">footer</span>&gt;…&lt;/<span class="tag-name">footer</span>&gt;   <span class="cmt">&lt;!-- copyright, contact info --&gt;</span>
+&lt;/<span class="tag-name">body</span>&gt;</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-btns" role="tablist" aria-label="Semantic elements">
+    <button class="tab-btn" role="tab" aria-selected="true" aria-controls="m2-t1" onclick="switchTab(this,'m2-t1','m2-tabs')">Layout Elements</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m2-t2" onclick="switchTab(this,'m2-t2','m2-tabs')">Text Structure</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m2-t3" onclick="switchTab(this,'m2-t3','m2-tabs')">Headings Rules</button>
+  </div>
+  <div id="m2-tabs">
+    <div id="m2-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🏗️ HTML5 Landmark Elements</h4>
+      <div class="code-block">&lt;<span class="tag-name">header</span>&gt;   Site/section header (logo, banner)
+&lt;<span class="tag-name">nav</span>&gt;      Navigation links
+&lt;<span class="tag-name">main</span>&gt;     Primary content (unique, one per page)
+&lt;<span class="tag-name">section</span>&gt; Thematic grouping with a heading
+&lt;<span class="tag-name">article</span>&gt; Self-contained syndicate-able content
+&lt;<span class="tag-name">aside</span>&gt;   Secondary content / sidebar
+&lt;<span class="tag-name">footer</span>&gt;  Bottom info: copyright, links
+&lt;<span class="tag-name">address</span>&gt; Contact info for nearest article/body</div>
+    </div>
+    <div id="m2-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📝 Text Structure Elements</h4>
+      <div class="code-block">&lt;<span class="tag-name">p</span>&gt;Paragraph — the basic text block&lt;/<span class="tag-name">p</span>&gt;
+
+&lt;<span class="tag-name">blockquote</span>&gt;
+  Longer quotation from another source.
+&lt;/<span class="tag-name">blockquote</span>&gt;
+
+&lt;<span class="tag-name">figure</span>&gt;
+  &lt;<span class="tag-name">img</span> <span class="attr">src</span>=<span class="str">"chart.png"</span> <span class="attr">alt</span>=<span class="str">"Sales chart"</span>&gt;
+  &lt;<span class="tag-name">figcaption</span>&gt;Q4 2024 Sales&lt;/<span class="tag-name">figcaption</span>&gt;
+&lt;/<span class="tag-name">figure</span>&gt;
+
+&lt;<span class="tag-name">details</span>&gt;
+  &lt;<span class="tag-name">summary</span>&gt;Click to expand&lt;/<span class="tag-name">summary</span>&gt;
+  Hidden content revealed on click.
+&lt;/<span class="tag-name">details</span>&gt;</div>
+    </div>
+    <div id="m2-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📊 Heading Hierarchy</h4>
+      <div class="code-block"><span class="cmt">&lt;!-- ✅ CORRECT — one h1, logical order --&gt;</span>
+&lt;<span class="tag-name">h1</span>&gt;Page Title&lt;/<span class="tag-name">h1</span>&gt;
+  &lt;<span class="tag-name">h2</span>&gt;Chapter 1&lt;/<span class="tag-name">h2</span>&gt;
+    &lt;<span class="tag-name">h3</span>&gt;Sub-section&lt;/<span class="tag-name">h3</span>&gt;
+  &lt;<span class="tag-name">h2</span>&gt;Chapter 2&lt;/<span class="tag-name">h2</span>&gt;
+
+<span class="cmt">&lt;!-- ❌ WRONG — skipping levels, multiple h1s --&gt;</span>
+&lt;<span class="tag-name">h1</span>&gt;Title&lt;/<span class="tag-name">h1</span>&gt;
+&lt;<span class="tag-name">h1</span>&gt;Another Title&lt;/<span class="tag-name">h1</span>&gt;  <span class="cmt">&lt;!-- Only one h1! --&gt;</span>
+&lt;<span class="tag-name">h4</span>&gt;Skipped h2 &amp; h3!&lt;/<span class="tag-name">h4</span>&gt;</div>
+      <div class="info-box tip">
+        <span class="info-icon">💡</span>
+        <p>Each page should have <strong>exactly one &lt;h1&gt;</strong>. Never skip heading levels (h1 → h3) as it breaks accessibility.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="section-header">
+    <span class="section-icon">✏️</span>
+    <div><h3>Live Sandbox</h3><p>Build a semantic page layout.</p></div>
+  </div>
+  <div class="sandbox">
+    <h4>✏️ Semantic Structure — Try It!</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">page.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m2-editor" rows="14">&lt;header&gt;
+  &lt;h1&gt;My Blog&lt;/h1&gt;
+  &lt;nav&gt;&lt;a href="#"&gt;Home&lt;/a&gt; | &lt;a href="#"&gt;About&lt;/a&gt;&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;My First Post&lt;/h2&gt;
+    &lt;p&gt;Learning &lt;strong&gt;semantic HTML&lt;/strong&gt; is fun!&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;&lt;p&gt;&amp;copy; 2025 My Blog&lt;/p&gt;&lt;/footer&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m2-editor','m2-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m2-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — Which element wraps the primary unique content of a page?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m2q1" data-val="a" onclick="checkMC('m2q1','a','b','&lt;main&gt; wraps the primary content. There should be only one &lt;main&gt; per page.')"><span class="option-icon">○</span> &lt;section&gt;</button></li>
+      <li><button class="option-btn" data-q="m2q1" data-val="b" onclick="checkMC('m2q1','b','b','&lt;main&gt; wraps the primary content. There should be only one &lt;main&gt; per page.')"><span class="option-icon">○</span> &lt;main&gt;</button></li>
+      <li><button class="option-btn" data-q="m2q1" data-val="c" onclick="checkMC('m2q1','c','b','&lt;main&gt; wraps the primary content. There should be only one &lt;main&gt; per page.')"><span class="option-icon">○</span> &lt;body&gt;</button></li>
+      <li><button class="option-btn" data-q="m2q1" data-val="d" onclick="checkMC('m2q1','d','b','&lt;main&gt; wraps the primary content. There should be only one &lt;main&gt; per page.')"><span class="option-icon">○</span> &lt;div&gt;</button></li>
+    </ul>
+    <div id="m2q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — Which element is best for a self-contained blog post that could be syndicated?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m2q2" data-val="a" onclick="checkMC('m2q2','a','b','&lt;article&gt; is for self-contained content that makes sense on its own (blog post, news story, forum post).')"><span class="option-icon">○</span> &lt;section&gt;</button></li>
+      <li><button class="option-btn" data-q="m2q2" data-val="b" onclick="checkMC('m2q2','b','b','&lt;article&gt; is for self-contained content that makes sense independently.')"><span class="option-icon">○</span> &lt;article&gt;</button></li>
+      <li><button class="option-btn" data-q="m2q2" data-val="c" onclick="checkMC('m2q2','c','b','&lt;article&gt; is for self-contained content.')"><span class="option-icon">○</span> &lt;aside&gt;</button></li>
+      <li><button class="option-btn" data-q="m2q2" data-val="d" onclick="checkMC('m2q2','d','b','&lt;article&gt; is for self-contained content.')"><span class="option-icon">○</span> &lt;div&gt;</button></li>
+    </ul>
+    <div id="m2q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — Which tag adds a caption to an image inside a &lt;figure&gt;?</h4>
+      <div class="attempts-info" id="m2q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m2q3-in" placeholder="&lt;tag&gt;">
+      <button class="fill-btn" onclick="checkFill('m2q3','&lt;figcaption&gt;','&lt;figcaption&gt; provides a caption for the &lt;figure&gt; element.','Hint: it starts with fig...')">Submit</button>
+      <div id="m2q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What element creates a collapsible disclosure widget?</h4>
+      <div class="attempts-info" id="m2q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m2q4-in" placeholder="&lt;tag&gt;">
+      <button class="fill-btn" onclick="checkFill('m2q4','&lt;details&gt;','&lt;details&gt; with &lt;summary&gt; creates a native browser accordion — no JS needed!','Hint: it starts with &lt;det...')">Submit</button>
+      <div id="m2q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module01.html" style="margin-right:12px">← Module 1</a>
+    <a class="back-btn" href="../html-css-course/module03.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 3 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

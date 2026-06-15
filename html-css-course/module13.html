@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 13 — Programming Web Pages with JavaScript</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+<header id="top-bar" role="banner">
+  <h1>🌐 HTML &amp; CSS Course</h1>
+  <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="progress-fill"></div></div>
+  <div id="score-display">Score: <span id="score-num">0</span> / <span id="score-max">10</span></div>
+  <a class="back-btn" href="index.html">← Course Home</a>
+</header>
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2>Module 13: <em>Programming Web Pages</em> with JavaScript</h2>
+    <p>Add interactivity with JavaScript: select DOM elements, respond to events, change styles, and update content dynamically.</p>
+    <span class="tag">DOM</span><span class="tag">querySelector</span><span class="tag">addEventListener</span>
+    <span class="tag">classList</span><span class="tag">innerHTML</span><span class="tag">&lt;script&gt;</span>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">⚙️</span>
+    <div><h3>Adding JavaScript to HTML</h3><p>Three ways to connect JS to your page.</p></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>Linking JavaScript</h3>
+    <div class="code-block"><span class="cmt">&lt;!-- 1. External file (recommended) — place before &lt;/body&gt; --&gt;</span>
+&lt;<span class="tag-name">script</span> <span class="attr">src</span>=<span class="str">"app.js"</span> <span class="attr">defer</span>&gt;&lt;/<span class="tag-name">script</span>&gt;
+
+<span class="cmt">&lt;!-- 2. Inline script — for small snippets --&gt;</span>
+&lt;<span class="tag-name">script</span>&gt;
+  console.log('Hello from inline JS!');
+&lt;/<span class="tag-name">script</span>&gt;
+
+<span class="cmt">&lt;!-- 3. defer vs async on external scripts --&gt;</span>
+&lt;<span class="cmt">&lt;!-- defer: runs after HTML parsed (keeps order) ✅ --&gt;</span>
+&lt;<span class="tag-name">script</span> <span class="attr">src</span>=<span class="str">"app.js"</span> <span class="attr">defer</span>&gt;&lt;/<span class="tag-name">script</span>&gt;
+<span class="cmt">&lt;!-- async: runs as soon as downloaded (no order guarantee) --&gt;</span>
+&lt;<span class="tag-name">script</span> <span class="attr">src</span>=<span class="str">"analytics.js"</span> <span class="attr">async</span>&gt;&lt;/<span class="tag-name">script</span>&gt;</div>
+
+    <h3>Selecting DOM Elements</h3>
+    <div class="code-block"><span class="cmt">// Modern: querySelector (returns first match)</span>
+<span class="val">const</span> btn   = document.<span class="attr">querySelector</span>(<span class="str">'.my-btn'</span>);
+<span class="val">const</span> hero  = document.<span class="attr">querySelector</span>(<span class="str">'#hero'</span>);
+<span class="val">const</span> input = document.<span class="attr">querySelector</span>(<span class="str">'input[type="email"]'</span>);
+
+<span class="cmt">// Returns all matches as NodeList</span>
+<span class="val">const</span> cards = document.<span class="attr">querySelectorAll</span>(<span class="str">'.card'</span>);
+
+<span class="cmt">// Iterate over NodeList</span>
+cards.<span class="attr">forEach</span>(card =&gt; {
+  card.style.background = <span class="str">'#eff6ff'</span>;
+});</div>
+  </div>
+
+  <div class="tab-btns" role="tablist" aria-label="JavaScript topics">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m13-t1" onclick="switchTab(this,'m13-t1','m13-tabs')">Events</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m13-t2" onclick="switchTab(this,'m13-t2','m13-tabs')">Changing the DOM</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m13-t3" onclick="switchTab(this,'m13-t3','m13-tabs')">classList API</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m13-t4" onclick="switchTab(this,'m13-t4','m13-tabs')">Forms + JS</button>
+  </div>
+  <div id="m13-tabs">
+    <div id="m13-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🖱️ Event Listeners</h4>
+      <div class="code-block"><span class="val">const</span> btn = document.<span class="attr">querySelector</span>(<span class="str">'#my-btn'</span>);
+
+<span class="cmt">// addEventListener(event, callback)</span>
+btn.<span class="attr">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(event) {
+  console.<span class="attr">log</span>(<span class="str">'Button clicked!'</span>, event);
+});
+
+<span class="cmt">// Arrow function shorthand</span>
+btn.<span class="attr">addEventListener</span>(<span class="str">'click'</span>, (e) =&gt; {
+  e.<span class="attr">preventDefault</span>();    <span class="cmt">// stop default action (e.g. form submit)</span>
+  e.<span class="attr">stopPropagation</span>();  <span class="cmt">// don't bubble to parent</span>
+});
+
+<span class="cmt">// Common events</span>
+<span class="cmt">// click, dblclick, mouseenter, mouseleave</span>
+<span class="cmt">// keydown, keyup, keypress</span>
+<span class="cmt">// submit, input, change, focus, blur</span>
+<span class="cmt">// scroll, resize, load, DOMContentLoaded</span></div>
+    </div>
+    <div id="m13-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🔧 Changing the DOM</h4>
+      <div class="code-block"><span class="val">const</span> el = document.<span class="attr">querySelector</span>(<span class="str">'#target'</span>);
+
+<span class="cmt">// Read/write text content (safe — no HTML)</span>
+el.textContent = <span class="str">'Updated text!'</span>;
+
+<span class="cmt">// Read/write HTML (use with trusted content only)</span>
+el.innerHTML = <span class="str">'&lt;strong&gt;Bold text&lt;/strong&gt;'</span>;
+
+<span class="cmt">// Change styles directly</span>
+el.style.color       = <span class="str">'#1d4ed8'</span>;
+el.style.display     = <span class="str">'none'</span>;
+el.style.cssText     = <span class="str">'color: red; font-size: 1.2rem;'</span>;
+
+<span class="cmt">// Read/write attributes</span>
+el.<span class="attr">setAttribute</span>(<span class="str">'aria-hidden'</span>, <span class="str">'true'</span>);
+el.<span class="attr">getAttribute</span>(<span class="str">'href'</span>);
+el.<span class="attr">removeAttribute</span>(<span class="str">'disabled'</span>);
+
+<span class="cmt">// Create and append new elements</span>
+<span class="val">const</span> newDiv = document.<span class="attr">createElement</span>(<span class="str">'div'</span>);
+newDiv.textContent = <span class="str">'I was created by JS!'</span>;
+document.body.<span class="attr">appendChild</span>(newDiv);</div>
+    </div>
+    <div id="m13-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">🎨 classList API — Toggling CSS Classes</h4>
+      <div class="code-block"><span class="val">const</span> menu = document.<span class="attr">querySelector</span>(<span class="str">'.menu'</span>);
+
+<span class="cmt">// Add a class</span>
+menu.classList.<span class="attr">add</span>(<span class="str">'is-open'</span>);
+
+<span class="cmt">// Remove a class</span>
+menu.classList.<span class="attr">remove</span>(<span class="str">'is-open'</span>);
+
+<span class="cmt">// Toggle — adds if missing, removes if present</span>
+menu.classList.<span class="attr">toggle</span>(<span class="str">'is-open'</span>);
+
+<span class="cmt">// Check if class exists</span>
+<span class="kw">if</span> (menu.classList.<span class="attr">contains</span>(<span class="str">'is-open'</span>)) {
+  console.<span class="attr">log</span>(<span class="str">'Menu is open!'</span>);
+}
+
+<span class="cmt">/* In CSS: */</span>
+<span class="prop">.menu</span>         { <span class="attr">max-height</span>: <span class="val">0</span>; <span class="attr">overflow</span>: <span class="val">hidden</span>; <span class="attr">transition</span>: <span class="val">max-height .3s</span>; }
+<span class="prop">.menu.is-open</span> { <span class="attr">max-height</span>: <span class="val">400px</span>; }</div>
+    </div>
+    <div id="m13-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px">📋 Handling Forms with JavaScript</h4>
+      <div class="code-block"><span class="val">const</span> form = document.<span class="attr">querySelector</span>(<span class="str">'#signup-form'</span>);
+
+form.<span class="attr">addEventListener</span>(<span class="str">'submit'</span>, (e) =&gt; {
+  e.<span class="attr">preventDefault</span>();  <span class="cmt">// stop page reload</span>
+
+  <span class="val">const</span> email = document.<span class="attr">querySelector</span>(<span class="str">'#email'</span>).value.<span class="attr">trim</span>();
+  <span class="val">const</span> name  = document.<span class="attr">querySelector</span>(<span class="str">'#name'</span>).value.<span class="attr">trim</span>();
+
+  <span class="kw">if</span> (!email || !name) {
+    <span class="attr">showError</span>(<span class="str">'Please fill in all fields.'</span>);
+    <span class="kw">return</span>;
+  }
+
+  <span class="kw">if</span> (!email.<span class="attr">includes</span>(<span class="str">'@'</span>)) {
+    <span class="attr">showError</span>(<span class="str">'Please enter a valid email.'</span>);
+    <span class="kw">return</span>;
+  }
+
+  console.<span class="attr">log</span>(<span class="str">'Submitting:'</span>, { name, email });
+  <span class="cmt">// fetch('/api/signup', { method: 'POST', body: JSON.stringify({name,email}) })</span>
+});</div>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="sandbox">
+    <h4>✏️ JavaScript Interactivity Sandbox</h4>
+    <div class="sandbox-editor">
+      <div class="sandbox-editor-header">
+        <span class="ed-dot" style="background:#ff5f56"></span>
+        <span class="ed-dot" style="background:#ffbd2e"></span>
+        <span class="ed-dot" style="background:#27c93f"></span>
+        <span style="margin-left:8px">interactive.html</span>
+      </div>
+      <textarea class="sandbox-textarea" id="m13-editor" rows="36">&lt;style&gt;
+  body { font-family: sans-serif; padding: 24px; background: #f8fafc; }
+  .counter-box {
+    background: #1d4ed8; color: #fff;
+    border-radius: 12px; padding: 24px;
+    text-align: center; max-width: 300px; margin: 0 auto 24px;
+  }
+  .count-num { font-size: 3rem; font-weight: 800; display: block; }
+  .btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 12px; }
+  button { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 700; }
+  .btn-dec { background: #ef4444; color: #fff; }
+  .btn-inc { background: #22c55e; color: #fff; }
+  .btn-rst { background: rgba(255,255,255,.2); color: #fff; }
+  .theme-toggle {
+    display: block; margin: 0 auto;
+    padding: 10px 28px; background: #1e293b; color: #f1f5f9;
+    border: none; border-radius: 8px; cursor: pointer; font-size: .95rem;
+  }
+  .dark { background: #0f172a; color: #f1f5f9; }
+&lt;/style&gt;
+
+&lt;div class="counter-box"&gt;
+  &lt;span class="count-num" id="count"&gt;0&lt;/span&gt;
+  &lt;div class="btn-row"&gt;
+    &lt;button class="btn-dec" onclick="change(-1)"&gt;−&lt;/button&gt;
+    &lt;button class="btn-rst" onclick="reset()"&gt;Reset&lt;/button&gt;
+    &lt;button class="btn-inc" onclick="change(1)"&gt;+&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;button class="theme-toggle" onclick="toggleTheme()"&gt;🌙 Toggle Dark Mode&lt;/button&gt;
+
+&lt;script&gt;
+  let n = 0;
+  const display = document.getElementById('count');
+  function change(v) { n += v; display.textContent = n; }
+  function reset() { n = 0; display.textContent = n; }
+  function toggleTheme() { document.body.classList.toggle('dark'); }
+&lt;/script&gt;</textarea>
+    </div>
+    <div class="sandbox-actions">
+      <button class="run-btn" onclick="livePreview('m13-editor','m13-preview')">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m13-preview">
+      <em style="color:var(--muted);font-size:.85rem">Click ▶ Preview to render.</em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div><h3>Exercises</h3></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q1 — What method selects the FIRST element matching a CSS selector?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m13q1" data-val="a" onclick="checkMC('m13q1','a','b','getElementById selects by ID only, not CSS selectors.')"><span class="option-icon">○</span> getElementById()</button></li>
+      <li><button class="option-btn" data-q="m13q1" data-val="b" onclick="checkMC('m13q1','b','b','Correct! querySelector() accepts any CSS selector and returns the first matching element.')"><span class="option-icon">○</span> querySelector()</button></li>
+      <li><button class="option-btn" data-q="m13q1" data-val="c" onclick="checkMC('m13q1','c','b','querySelectorAll() returns ALL matches as a NodeList, not just the first.')"><span class="option-icon">○</span> querySelectorAll()</button></li>
+      <li><button class="option-btn" data-q="m13q1" data-val="d" onclick="checkMC('m13q1','d','b','getElement() is not a valid DOM method.')"><span class="option-icon">○</span> getElement()</button></li>
+    </ul>
+    <div id="m13q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4>Q2 — Which classList method adds a class if missing and removes it if present?</h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m13q2" data-val="a" onclick="checkMC('m13q2','a','c','add() always adds the class, even if it already exists.')"><span class="option-icon">○</span> classList.add()</button></li>
+      <li><button class="option-btn" data-q="m13q2" data-val="b" onclick="checkMC('m13q2','b','c','contains() only checks for the class, doesn\'t modify it.')"><span class="option-icon">○</span> classList.contains()</button></li>
+      <li><button class="option-btn" data-q="m13q2" data-val="c" onclick="checkMC('m13q2','c','c','Correct! classList.toggle() is perfect for open/close, show/hide, and dark-mode toggling.')"><span class="option-icon">○</span> classList.toggle()</button></li>
+      <li><button class="option-btn" data-q="m13q2" data-val="d" onclick="checkMC('m13q2','d','c','classList.switch() is not a real DOM method.')"><span class="option-icon">○</span> classList.switch()</button></li>
+    </ul>
+    <div id="m13q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3>🧩 Fill-in Exercises</h3>
+    <div class="fill-exercise">
+      <h4>Q3 — What method attaches an event handler to a DOM element?</h4>
+      <div class="attempts-info" id="m13q3-att">Attempts: 2</div>
+      <input class="fill-input" id="m13q3-in" placeholder="element.___()">
+      <button class="fill-btn" onclick="checkFill('m13q3','addEventListener','addEventListener(event, callback) is the modern way to attach events. It supports multiple handlers on the same element.','Hint: element.add___Listener()')">Submit</button>
+      <div id="m13q3-feedback" class="feedback-box" role="alert"></div>
+    </div>
+    <div class="fill-exercise">
+      <h4>Q4 — What script attribute makes an external JS file run AFTER the HTML is fully parsed?</h4>
+      <div class="attempts-info" id="m13q4-att">Attempts: 2</div>
+      <input class="fill-input" id="m13q4-in" placeholder="attribute">
+      <button class="fill-btn" onclick="checkFill('m13q4','defer','defer tells the browser to download the script in the background and execute it after the DOM is ready — no need to put scripts at the bottom of the page.','Hint: it sounds like delaying something.')">Submit</button>
+      <div id="m13q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module12.html" style="margin-right:12px">← Module 12</a>
+    <a class="back-btn" href="../html-css-course/module14.html" style="background:var(--accent);color:#fff;border-color:var(--accent)">Module 14 →</a>
+  </div>
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>

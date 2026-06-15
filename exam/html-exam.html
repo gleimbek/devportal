@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML Certification Exam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/exam.css">
+</head>
+
+<body>
+
+<header class="navbar">
+   <div style="text-align:center;margin:40px 0 20px;">
+		<a class="back-btn" href="../index.html" style="margin-right:12px" data-en="← Home" data-es="← Inicio">← Home</a>
+   </div>
+  <div class="logo"
+       data-en="HTML Certification Exam"
+       data-es="Examen de Certificación HTML">
+       HTML Certification Exam
+  </div>
+  <div class="lang-switch">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('es')">ES</button>
+  </div>
+
+</header>
+
+<div id="result"></div>
+<section class="section">
+
+<!-- STUDENT REGISTRATION -->
+<section id="registerSection" class="register-box">
+ <form id="registerForm">
+  <h2
+	data-en="Student Registration"
+	data-es="Registro del Estudiante">
+	Student Registration
+  </h2>
+
+  <p
+	data-en="You must complete this form before starting the exam."
+	data-es="Debes completar este formulario antes de iniciar el examen.">
+	You must complete this form before starting the exam.
+  </p>
+
+  <label
+	data-en="Full Name"
+	data-es="Nombre Completo">
+	Full Name
+  </label>
+
+  <input type="text" id="studentName" required>
+
+  <label
+	data-en="Email Address"
+	data-es="Correo Electrónico">
+	Email Address
+  </label>
+
+  <input type="email" id="studentEmail" required>
+
+  <button
+	type="submit"
+	data-en="Start Exam"
+	data-es="Iniciar Examen">
+	Start Exam
+  </button>
+
+  </form>
+
+</section>
+
+<form id="examForm" class="hidden">
+<h2
+data-en="HTML5 Final Exam - 50 Questions"
+data-es="Examen Final HTML5 - 50 Preguntas">
+HTML5 Final Exam - 50 Questions
+</h2>
+<h3
+data-en="Choose the correct answer for each question."
+data-es="Seleccione la respuesta correcta para cada pregunta.">
+Choose the correct answer for each question.
+</h3>
+<!-- 1 -->
+<p 
+data-en="1. What does HTML stand for?"
+data-es="1. ¿Qué significan las siglas HTML?">
+1. What does HTML stand for?
+</p>
+
+<label><input type="radio" name="q1" value="Hyper Text Makeup Language"> Hyper Text Makeup Language</label>
+<label><input type="radio" name="q1" value="Hyper Text Markup Language"> Hyper Text Markup Language</label>
+<label><input type="radio" name="q1" value="High Text Machine Language"> High Text Machine Language</label>
+
+<!-- 2 -->
+<p
+data-en="2. Which tag is used for the largest heading?"
+data-es="2. ¿Qué etiqueta se utiliza para el encabezado de mayor tamaño?">
+2. Which tag is used for the largest heading?
+</p>
+<label><input type="radio" name="q2" value="<h6>">&lt;h6&gt;</label>
+<label><input type="radio" name="q2" value="<heading>">&lt;heading&gt;</label>
+<label><input type="radio" name="q2" value="<h1>">&lt;h1&gt;</label>
+
+<!-- 3 -->
+<p
+data-en="3. Which HTML element is used for a paragraph?"
+data-es="3. ¿Qué elemento HTML se utiliza para un párrafo?">
+3. Which HTML element is used for a paragraph?
+</p>
+<label><input type="radio" name="q3" value="<paragraph>">&lt;paragraph&gt;</label>
+<label><input type="radio" name="q3" value="<p>">&lt;p&gt;</label>
+<label><input type="radio" name="q3" value="<para>">&lt;para&gt;</label>
+
+<!-- 4 -->
+<p
+data-en="4. Which tag creates a hyperlink?"
+data-es="4. ¿Qué etiqueta crea un hipervínculo?">
+4. Which tag creates a hyperlink?
+</p>
+<label><input type="radio" name="q4" value="<a>">&lt;a&gt;</label>
+<label><input type="radio" name="q4" value="<link>">&lt;link&gt;</label>
+<label><input type="radio" name="q4" value="<href>">&lt;href&gt;</label>
+
+<!-- 5 -->
+<p
+data-en="5. What attribute is used for links?"
+data-es="5. ¿Qué atributo se utiliza para los enlaces?">
+5. What attribute is used for links?
+</p>
+<label><input type="radio" name="q5" value="src">src</label>
+<label><input type="radio" name="q5" value="href">href</label>
+<label><input type="radio" name="q5" value="link">link</label>
+
+<!-- 6 -->
+<p
+data-en="6. Which tag is used for images?"
+data-es="6. ¿Qué etiqueta se utiliza para las imágenes?">
+6. Which tag is used for images?
+</p>
+<label><input type="radio" name="q6" value="<image>">&lt;image&gt;</label>
+<label><input type="radio" name="q6" value="<pic>">&lt;pic&gt;</label>
+<label><input type="radio" name="q6" value="<img>">&lt;img&gt;</label>
+
+<!-- 7 -->
+<p
+data-en="7. What attribute defines image source?"
+data-es="7. ¿Qué atributo define la fuente de la imagen?">
+7. What attribute defines image source?
+</p>
+<label><input type="radio" name="q7" value="href">href</label>
+<label><input type="radio" name="q7" value="src">src</label>
+<label><input type="radio" name="q7" value="link">link</label>
+
+<!-- 8 -->
+<p
+data-en="8. Which tag creates a list item?"
+data-es="8. ¿Qué etiqueta crea un elemento de lista?">
+8. Which tag creates a list item?
+</p>
+<label><input type="radio" name="q8" value="<li>">&lt;li&gt;</label>
+<label><input type="radio" name="q8" value="<ul>">&lt;ul&gt;</label>
+<label><input type="radio" name="q8" value="<list>">&lt;list&gt;</label>
+
+<!-- 9 -->
+<p
+data-en="9. Which tag creates an unordered list?"
+data-es="9. ¿Qué etiqueta crea una lista desordenada?">
+9. Which tag creates an unordered list?
+</p>
+<label><input type="radio" name="q9" value="<ol>">&lt;ol&gt;</label>
+<label><input type="radio" name="q9" value="<ul>">&lt;ul&gt;</label>
+<label><input type="radio" name="q9" value="<list>">&lt;list&gt;</label>
+
+<!-- 10 -->
+<p
+data-en="10. Which tag creates a table row?"
+data-es="10. ¿Qué etiqueta crea una fila de tabla?">
+10. Which tag creates a table row?
+</p>
+<label><input type="radio" name="q10" value="<tr>">&lt;tr&gt;</label>
+<label><input type="radio" name="q10" value="<td>">&lt;td&gt;</label>
+<label><input type="radio" name="q10" value="<table>">&lt;table&gt;</label>
+
+<!-- 11 -->
+<p
+data-en="11. Which tag defines table data?"
+data-es="11. ¿Qué etiqueta define los datos de una tabla?">
+11. Which tag defines table data?
+</p>
+<label><input type="radio" name="q11" value="<th>">&lt;th&gt;</label>
+<label><input type="radio" name="q11" value="<tr>">&lt;tr&gt;</label>
+<label><input type="radio" name="q11" value="<td>">&lt;td&gt;</label>
+
+<!-- 12 -->
+<p
+data-en="12. Which tag defines a form?"
+data-es="12. ¿Qué etiqueta define un formulario?">
+12. Which tag defines a form?
+</p>
+<label><input type="radio" name="q12" value="<input>">&lt;input&gt;</label>
+<label><input type="radio" name="q12" value="<form>">&lt;form&gt;</label>
+<label><input type="radio" name="q12" value="<fieldset>">&lt;fieldset&gt;</label>
+
+<!-- 13 -->
+<p
+data-en="13. Which input type is for email?"
+data-es="13. ¿Qué tipo de entrada es para el correo electrónico?">
+13. Which input type is for email?
+</p>
+<label><input type="radio" name="q13" value="text">text</label>
+<label><input type="radio" name="q13" value="email">email</label>
+<label><input type="radio" name="q13" value="mail">mail</label>
+
+<!-- 14 -->
+<p
+data-en="14. Which attribute makes a field required?"
+data-es="14. ¿Qué atributo hace que un campo sea obligatorio?">
+14. Which attribute makes a field required?
+</p>
+<label><input type="radio" name="q14" value="required">required</label>
+<label><input type="radio" name="q14" value="validate">validate</label>
+<label><input type="radio" name="q14" value="important">important</label>
+
+<!-- 15 -->
+<p
+data-en="15. What does DOCTYPE declare?"
+data-es="15. ¿Qué declara DOCTYPE?">
+15. What does DOCTYPE declare?
+</p>
+<label><input type="radio" name="q15" value="CSS version">CSS version</label>
+<label><input type="radio" name="q15" value="HTML version">HTML version</label>
+<label><input type="radio" name="q15" value="JavaScript version">JavaScript version</label>
+
+<!-- 16 -->
+<p
+data-en="16. Which tag is used for line break?"
+data-es="16. ¿Qué etiqueta se utiliza para un salto de línea?">
+16. Which tag is used for line break?
+</p>
+<label><input type="radio" name="q16" value="<br>">&lt;br&gt;</label>
+<label><input type="radio" name="q16" value="<lb>">&lt;lb&gt;</label>
+<label><input type="radio" name="q16" value="<break>">&lt;break&gt;</label>
+
+<!-- 17 -->
+<p
+data-en="17. Which tag is used for bold text?"
+data-es="17. ¿Qué etiqueta se utiliza para texto en negrita?">
+17. Which tag is used for bold text?
+</p>
+<label><input type="radio" name="q17" value="<b>">&lt;b&gt;</label>
+<label><input type="radio" name="q17" value="<strong>">&lt;strong&gt;</label>
+<label><input type="radio" name="q17" value="Both">Both</label>
+
+<!-- 18 -->
+<p
+data-en="18. Which tag is semantic for important text?"
+data-es="18. ¿Qué etiqueta es semántica para texto importante?">
+18. Which tag is semantic for important text?
+</p>
+<label><input type="radio" name="q18" value="<strong>">&lt;strong&gt;</label>
+<label><input type="radio" name="q18" value="<bold>">&lt;bold&gt;</label>
+<label><input type="radio" name="q18" value="<b>">&lt;b&gt;</label>
+
+<!-- 19 -->
+<p
+data-en="19. Which tag is italic text?"
+data-es="19. ¿Qué etiqueta corresponde al texto en cursiva?">
+19. Which tag is italic text?
+</p>
+<label><input type="radio" name="q19" value="<italic>">&lt;italic&gt;</label>
+<label><input type="radio" name="q19" value="<emphasis>">&lt;emphasis&gt;</label>
+<label><input type="radio" name="q19" value="<i>">&lt;i&gt;</label>
+
+<!-- 20 -->
+<p
+data-en="20. Which tag is semantic emphasis?"
+data-es="20. ¿Qué etiqueta indica énfasis semántico?">
+20. Which tag is semantic emphasis?
+</p>
+<label><input type="radio" name="q20" value="<em>">&lt;em&gt;</label>
+<label><input type="radio" name="q20" value="<i>">&lt;i&gt;</label>
+<label><input type="radio" name="q20" value="<italic>">&lt;italic&gt;</label>
+
+<!-- 21–50 (continuación compacta pero completa) -->
+
+<!-- 21 -->
+<p
+data-en="21. Which tag is used for navigation?"
+data-es="21. ¿Qué etiqueta se utiliza para la navegación?">
+21. Which tag is used for navigation?
+</p>
+<label><input type="radio" name="q21" value="<navigation>">&lt;navigation&gt;</label>
+<label><input type="radio" name="q21" value="<nav>">&lt;nav&gt;</label>
+<label><input type="radio" name="q21" value="<menu>">&lt;menu&gt;</label>
+
+<!-- 22 -->
+<p
+data-en="22. Which tag is footer?"
+data-es="22. ¿Qué etiqueta corresponde al pie de página?">
+22. Which tag is footer?
+</p>
+<label><input type="radio" name="q22" value="<footer>">&lt;footer&gt;</label>
+<label><input type="radio" name="q22" value="<bottom>">&lt;bottom&gt;</label>
+<label><input type="radio" name="q22" value="<section>">&lt;section&gt;</label>
+
+<!-- 23 -->
+<p
+data-en="23. Which tag is header?"
+data-es="23. ¿Qué etiqueta corresponde al encabezado?">
+23. Which tag is header?
+</p>
+<label><input type="radio" name="q23" value="<head>">&lt;head&gt;</label>
+<label><input type="radio" name="q23" value="<header>">&lt;header&gt;</label>
+<label><input type="radio" name="q23" value="<top>">&lt;top&gt;</label>
+
+<!-- 24 -->
+<p
+data-en="24. Which tag defines main content?"
+data-es="24. ¿Qué etiqueta define el contenido principal?">
+24. Which tag defines main content?
+</p>
+<label><input type="radio" name="q24" value="<body>">&lt;body&gt;</label>
+<label><input type="radio" name="q24" value="<content>">&lt;content&gt;</label>
+<label><input type="radio" name="q24" value="<main>">&lt;main&gt;</label>
+
+<!-- 25 -->
+<p
+data-en="25. Which tag defines a section?"
+data-es="25. ¿Qué etiqueta define una sección?">
+25. Which tag defines a section?
+</p>
+<label><input type="radio" name="q25" value="<section>">&lt;section&gt;</label>
+<label><input type="radio" name="q25" value="<div>">&lt;div&gt;</label>
+<label><input type="radio" name="q25" value="<article>">&lt;article&gt;</label>
+
+<!-- 26 -->
+<p
+data-en="26. Which tag is self-closing?"
+data-es="26. ¿Qué etiqueta es de autocierre?">
+26. Which tag is self-closing?
+</p>
+<label><input type="radio" name="q26" value="<div>">&lt;div&gt;</label>
+<label><input type="radio" name="q26" value="<p>">&lt;p&gt;</label>
+<label><input type="radio" name="q26" value="<img>">&lt;img&gt;</label>
+
+<!-- 27 -->
+<p
+data-en="27. Which tag is for metadata?"
+data-es="27. ¿Qué etiqueta se utiliza para los metadatos?">
+27. Which tag is for metadata?
+</p>
+<label><input type="radio" name="q27" value="<meta>">&lt;meta&gt;</label>
+<label><input type="radio" name="q27" value="<data>">&lt;data&gt;</label>
+<label><input type="radio" name="q27" value="<info>">&lt;info&gt;</label>
+
+<!-- 28 -->
+<p
+data-en="28. Which attribute opens link in new tab?"
+data-es="28. ¿Qué atributo abre el enlace en una nueva pestaña?">
+28. Which attribute opens link in new tab?
+</p>
+<label><input type="radio" name="q28" value="new">new="true"</label>
+<label><input type="radio" name="q28" value='target="_blank"'>target="_blank"</label>
+<label><input type="radio" name="q28" value="open">open="new"</label>
+
+<!-- 29 -->
+<p
+data-en="29. Which tag is used for audio?"
+data-es="29. ¿Qué etiqueta se utiliza para el audio?">
+29. Which tag is used for audio?
+</p>
+<label><input type="radio" name="q29" value="<sound>">&lt;sound&gt;</label>
+<label><input type="radio" name="q29" value="<audio>">&lt;audio&gt;</label>
+<label><input type="radio" name="q29" value="<music>">&lt;music&gt;</label>
+
+<!-- 30 -->
+<p
+data-en="30. Which tag is used for video?"
+data-es="30. ¿Qué etiqueta se utiliza para video?">
+30. Which tag is used for video?
+</p>
+<label><input type="radio" name="q30" value="<video>">&lt;video&gt;</label>
+<label><input type="radio" name="q30" value="<movie>">&lt;movie&gt;</label>
+<label><input type="radio" name="q30" value="<media>">&lt;media&gt;</label>
+
+<!-- 31 -->
+<p
+data-en="31. What is semantic HTML?"
+data-es="31. ¿Qué es el HTML semántico?">
+31. What is semantic HTML?
+</p>
+<label><input type="radio" name="q31" value="HTML with CSS">HTML with CSS</label>
+<label><input type="radio" name="q31" value="HTML with scripts">HTML with scripts</label>
+<label><input type="radio" name="q31" value="HTML with meaning">HTML with meaning</label>
+
+<!-- 32 -->
+<p
+data-en="32. Which tag is for article?"
+data-es="32. ¿Qué etiqueta se utiliza para un artículo?">
+32. Which tag is for article?
+</p>
+<label><input type="radio" name="q32" value="<article>">&lt;article&gt;</label>
+<label><input type="radio" name="q32" value="<post>">&lt;post&gt;</label>
+<label><input type="radio" name="q32" value="<text>">&lt;text&gt;</label>
+
+<!-- 33 -->
+<p
+data-en="33. Which tag groups content?"
+data-es="33. ¿Qué etiqueta agrupa el contenido?">
+33. Which tag groups content?
+</p>
+<label><input type="radio" name="q33" value="<group>">&lt;group&gt;</label>
+<label><input type="radio" name="q33" value="<container>">&lt;container&gt;</label>
+<label><input type="radio" name="q33" value="<div>">&lt;div&gt;</label>
+
+<!-- 34 -->
+<p
+data-en="34. Which tag is inline element?"
+data-es="34. ¿Qué etiqueta es un elemento en línea?">
+34. Which tag is inline element?
+</p>
+<label><input type="radio" name="q34" value="<span>">&lt;span&gt;</label>
+<label><input type="radio" name="q34" value="<div>">&lt;div&gt;</label>
+<label><input type="radio" name="q34" value="<section>">&lt;section&gt;</label>
+
+<!-- 35 -->
+<p
+data-en="35. Which tag is block element?"
+data-es="35. ¿Qué etiqueta es un elemento de bloque?">
+35. Which tag is block element?
+</p>
+<label><input type="radio" name="q35" value="<div>">&lt;div&gt;</label>
+<label><input type="radio" name="q35" value="<span>">&lt;span&gt;</label>
+<label><input type="radio" name="q35" value="<a>">&lt;a&gt;</label>
+
+<!-- 36 -->
+<p
+data-en="36. Which attribute stores extra info?"
+data-es="36. ¿Qué atributo almacena información adicional?">
+36. Which attribute stores extra info?
+</p>
+<label><input type="radio" name="q36" value="info">info</label>
+<label><input type="radio" name="q36" value="data-*">data-*</label>
+<label><input type="radio" name="q36" value="meta">meta</label>
+
+<!-- 37 -->
+<p
+data-en="37. Which tag is for dropdown?"
+data-es="37. ¿Qué etiqueta se utiliza para una lista desplegable?">
+37. Which tag is for dropdown?
+</p>
+<label><input type="radio" name="q37" value="<dropdown>">&lt;dropdown&gt;</label>
+<label><input type="radio" name="q37" value="<select>">&lt;select&gt;</label>
+<label><input type="radio" name="q37" value="<list>">&lt;list&gt;</label>
+
+<!-- 38 -->
+<p
+data-en="38. Which tag defines option?"
+data-es="38. ¿Qué etiqueta define una opción?">
+38. Which tag defines option?
+</p>
+<label><input type="radio" name="q38" value="<option>">&lt;option&gt;</label>
+<label><input type="radio" name="q38" value="<item>">&lt;item&gt;</label>
+<label><input type="radio" name="q38" value="<value>">&lt;value&gt;</label>
+
+<!-- 39 -->
+<p
+data-en="39. Which tag defines button?"
+data-es="39. ¿Qué etiqueta define un botón?">
+39. Which tag defines button?
+</p>
+<label><input type="radio" name="q39" value="<click>">&lt;click&gt;</label>
+<label><input type="radio" name="q39" value="<input-button>">&lt;input-button&gt;</label>
+<label><input type="radio" name="q39" value="<button>">&lt;button&gt;</label>
+
+<!-- 40 -->
+<p
+data-en="40. Which input type is password?"
+data-es="40. ¿Qué tipo de entrada es «password»?">
+40. Which input type is password?
+</p>
+<label><input type="radio" name="q40" value="password">password</label>
+<label><input type="radio" name="q40" value="secure">secure</label>
+<label><input type="radio" name="q40" value="hidden">hidden</label>
+
+<!-- 41 -->
+<p
+data-en="41. Which tag is used for comments?"
+data-es="41. ¿Qué etiqueta se utiliza para los comentarios?">
+41. Which tag is used for comments?
+</p>
+<label><input type="radio" name="q41" value="<comment>">&lt;comment&gt;</label>
+<label><input type="radio" name="q41" value="<!-- -->">&lt;!-- --&gt;</label>
+<label><input type="radio" name="q41" value="//">//</label>
+
+<!-- 42 -->
+<p
+data-en="42. Which tag is for favicon link?"
+data-es="42. ¿Qué etiqueta se utiliza para el enlace al favicon?">
+42. Which tag is for favicon link?
+</p>
+<label><input type="radio" name="q42" value="<link>">&lt;link&gt;</label>
+<label><input type="radio" name="q42" value="<icon>">&lt;icon&gt;</label>
+<label><input type="radio" name="q42" value="<favicon>">&lt;favicon&gt;</label>
+
+<!-- 43 -->
+<p
+data-en="43. Which element defines document body?"
+data-es="43. ¿Qué elemento define el cuerpo del documento?">
+43. Which element defines document body?
+</p>
+<label><input type="radio" name="q43" value="<main>">&lt;main&gt;</label>
+<label><input type="radio" name="q43" value="<html>">&lt;html&gt;</label>
+<label><input type="radio" name="q43" value="<body>">&lt;body&gt;</label>
+
+<!-- 44 -->
+<p
+data-en="44. Which tag defines HTML root?"
+data-es="44. ¿Qué etiqueta define la raíz de HTML?">
+44. Which tag defines HTML root?
+</p>
+<label><input type="radio" name="q44" value="<root>">&lt;root&gt;</label>
+<label><input type="radio" name="q44" value="<html>">&lt;html&gt;</label>
+<label><input type="radio" name="q44" value="<document>">&lt;document&gt;</label>
+
+<!-- 45 -->
+<p
+data-en="45. Which tag defines title of page?"
+data-es="45. ¿Qué etiqueta define el título de la página?">
+45. Which tag defines title of page?
+</p>
+<label><input type="radio" name="q45" value="<title>">&lt;title&gt;</label>
+<label><input type="radio" name="q45" value="<head>">&lt;head&gt;</label>
+<label><input type="radio" name="q45" value="<meta>">&lt;meta&gt;</label>
+
+<!-- 46 -->
+<p
+data-en="46. Which tag is for iframe?"
+data-es="46. ​​¿Qué etiqueta corresponde a iframe?">
+46. Which tag is for iframe?
+</p>
+<label><input type="radio" name="q46" value="<frame>">&lt;frame&gt;</label>
+<label><input type="radio" name="q46" value="<iframe>">&lt;iframe&gt;</label>
+<label><input type="radio" name="q46" value="<embed>">&lt;embed&gt;</label>
+
+<!-- 47 -->
+<p
+data-en="47. Which tag defines strong importance?"
+data-es="47. ¿Qué etiqueta define una importancia fuerte?">
+47. Which tag defines strong importance?
+</p>
+<label><input type="radio" name="q47" value="<strong>">&lt;strong&gt;</label>
+<label><input type="radio" name="q47" value="<b>">&lt;b&gt;</label>
+<label><input type="radio" name="q47" value="<important>">&lt;important&gt;</label>
+
+<!-- 48 -->
+<p
+data-en="48. Which tag is used for time?"
+data-es="48. ¿Qué etiqueta se utiliza para la hora?">
+48. Which tag is used for time?
+</p>
+<label><input type="radio" name="q48" value="<time>">&lt;time&gt;</label>
+<label><input type="radio" name="q48" value="<clock>">&lt;clock&gt;</label>
+<label><input type="radio" name="q48" value="<date>">&lt;date&gt;</label>
+
+<!-- 49 -->
+<p
+data-en="49. Which tag is for progress bar?"
+data-es="49. ¿Qué etiqueta se utiliza para la barra de progreso?">
+49. Which tag is for progress bar?
+</p>
+<label><input type="radio" name="q49" value="<bar>">&lt;bar&gt;</label>
+<label><input type="radio" name="q49" value="<loading>">&lt;loading&gt;</label>
+<label><input type="radio" name="q49" value="<progress>">&lt;progress&gt;</label>
+
+<!-- 50 -->
+<p
+data-en="50. HTML is primarily used for?"
+data-es="50. ¿Para qué se utiliza principalmente el HTML?">
+50. HTML is primarily used for?
+</p>
+<label><input type="radio" name="q50" value="Styling websites">Styling websites</label>
+<label><input type="radio" name="q50" value="Structuring content">Structuring content</label>
+<label><input type="radio" name="q50" value="Database management">Database management</label>
+
+<br><br>
+<button type="submit">Submit Exam</button>
+
+</form>
+
+</section>
+<!-- RESULT MODAL -->
+<div id="resultModal" class="modal">
+  <div class="modal-content">
+
+    <h2 id="modalTitle">Result</h2>
+
+    <p id="modalScore"></p>
+    <p id="modalMessage"></p>
+	<div id="certificateArea"></div>
+
+    <div class="modal-buttons">
+      <button onclick="retryExam()">Try Again</button>
+      <button onclick="closeModal()">Close</button>
+    </div>
+
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../js/exam.js"></script>
+</body>
+</html>

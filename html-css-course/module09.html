@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 9 — Implementing Responsive Design</title>
+<link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div id="aria-live" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<header id="top-bar" role="banner">
+  <h1
+    data-en="🌐 HTML &amp; CSS — Complete Interactive Course"
+    data-es="🌐 HTML &amp; CSS — Curso Interactivo Completo">
+    🌐 HTML &amp; CSS — Complete Interactive Course
+  </h1>
+  <div id="score-display"
+     data-en="Score: <span id='score-num'>0</span> / 110"
+     data-es="Puntuación: <span id='score-num'>0</span> / 110">
+    Score: <span id="score-num">0</span> / 110
+  </div>
+  <button id="lang-toggle" onclick="toggleLang()" aria-label="Switch language">🌐 Español</button>
+</header>
+
+<main id="main-content">
+<div class="module-panel">
+
+  <div class="mod-hero">
+    <h2
+      data-en="Module 9: <em>Implementing</em> Responsive Design"
+      data-es="Módulo 9: <em>Implementación</em> del Diseño Responsivo">
+      Module 9: <em>Implementing</em> Responsive Design
+    </h2>
+    <p
+      data-en="Build layouts that look great on every screen — from a 320px phone to a 4K monitor. Master media queries, fluid grids, and the mobile-first approach."
+      data-es="Crea diseños que luzcan perfectos en cualquier pantalla — desde un teléfono de 320px hasta un monitor 4K. Domina las media queries, las cuadrículas fluidas y el enfoque mobile-first.">
+      Build layouts that look great on every screen — from a 320px phone to a 4K monitor. Master media queries, fluid grids, and the mobile-first approach.
+    </p>
+    <span class="tag">@media</span>
+    <span class="tag">mobile-first</span>
+    <span class="tag">viewport</span>
+    <span class="tag">fluid layout</span>
+    <span class="tag">breakpoints</span>
+    <span class="tag">clamp()</span>
+  </div>
+
+  <!-- SECTION 1: Why Responsive -->
+  <div class="section-header">
+    <span class="section-icon">📱</span>
+    <div>
+      <h3
+        data-en="Why Responsive Design?"
+        data-es="¿Por qué el Diseño Responsivo?">
+        Why Responsive Design?
+      </h3>
+      <p
+        data-en="Over 60% of web traffic comes from mobile devices."
+        data-es="Más del 60% del tráfico web proviene de dispositivos móviles.">
+        Over 60% of web traffic comes from mobile devices.
+      </p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+      data-en="The Viewport Meta Tag — Required First Step"
+      data-es="El Meta Tag Viewport — Primer Paso Obligatorio">
+      The Viewport Meta Tag — Required First Step
+    </h3>
+    <p
+      data-en="Without this tag, mobile browsers zoom out to fit the desktop layout — your responsive CSS will be ignored."
+      data-es="Sin esta etiqueta, los navegadores móviles aplican zoom para mostrar el diseño de escritorio y tu CSS responsivo será ignorado.">
+      Without this tag, mobile browsers zoom out to fit the desktop layout — your responsive CSS will be ignored.
+    </p>
+    <div class="code-block"><span class="cmt">&lt;!-- REQUIRED in every &lt;head&gt; --&gt;</span>
+&lt;<span class="tag-name">meta</span> <span class="attr">name</span>=<span class="str">"viewport"</span> <span class="attr">content</span>=<span class="str">"width=device-width, initial-scale=1.0"</span>&gt;
+
+<span class="cmt">&lt;!-- width=device-width → use actual screen width
+     initial-scale=1.0  → no zoom on load --&gt;</span></div>
+
+    <h4
+      data-en="Common Breakpoints (reference, not rules)"
+      data-es="Puntos de Quiebre Comunes (referencia, no reglas)">
+      Common Breakpoints (reference, not rules)
+    </h4>
+    <div class="code-block"><span class="cmt">/* Tailwind-inspired breakpoints — widely used */</span>
+<span class="prop">sm</span>:  @<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">640px</span>)   <span class="cmt">/* large phones */</span>
+<span class="prop">md</span>:  @<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">768px</span>)   <span class="cmt">/* tablets */</span>
+<span class="prop">lg</span>:  @<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">1024px</span>)  <span class="cmt">/* laptops */</span>
+<span class="prop">xl</span>:  @<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">1280px</span>)  <span class="cmt">/* desktops */</span>
+<span class="prop">2xl</span>: @<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">1536px</span>)  <span class="cmt">/* wide screens */</span></div>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p
+        data-en="<strong>Let content dictate breakpoints.</strong> Add a breakpoint when the layout <em>breaks</em>, not at every standard device size. Your design might need breakpoints at 480px, 900px, or 1100px — whatever fits your content."
+        data-es="<strong>Deja que el contenido dicte los puntos de quiebre.</strong> Añade un breakpoint cuando el diseño <em>se rompe</em>, no en cada tamaño estándar de dispositivo. Tu diseño puede necesitar breakpoints en 480px, 900px o 1100px, según tu contenido.">
+        <strong>Let content dictate breakpoints.</strong> Add a breakpoint when the layout <em>breaks</em>, not at every standard device size.
+      </p>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-btns" role="tablist" aria-label="Responsive design techniques">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="m9-t1" onclick="switchTab(this,'m9-t1','m9-tabs')"
+      data-en="Mobile First" data-es="Mobile First">Mobile First</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m9-t2" onclick="switchTab(this,'m9-t2','m9-tabs')"
+      data-en="Media Queries" data-es="Media Queries">Media Queries</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m9-t3" onclick="switchTab(this,'m9-t3','m9-tabs')"
+      data-en="Fluid Layouts" data-es="Diseños Fluidos">Fluid Layouts</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="m9-t4" onclick="switchTab(this,'m9-t4','m9-tabs')"
+      data-en="Responsive Nav" data-es="Nav Responsiva">Responsive Nav</button>
+  </div>
+
+  <div id="m9-tabs">
+    <!-- TAB 1: Mobile First -->
+    <div id="m9-t1" class="tab-panel active" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="📱 The Mobile-First Approach"
+        data-es="📱 El Enfoque Mobile-First">
+        📱 The Mobile-First Approach
+      </h4>
+      <p
+        data-en="Write base CSS for mobile, then use <code>min-width</code> queries to add complexity for larger screens. This is better than starting with desktop and then trying to compress for mobile."
+        data-es="Escribe el CSS base para móvil y luego usa consultas <code>min-width</code> para agregar complejidad en pantallas más grandes. Esto es mejor que empezar con escritorio e intentar comprimir para móvil.">
+        Write base CSS for mobile, then use <code>min-width</code> queries to enhance for larger screens.
+      </p>
+      <div class="code-block"><span class="cmt">/* ✅ MOBILE-FIRST — start small, scale up */</span>
+
+<span class="prop">.grid</span> {
+  <span class="attr">display</span>: <span class="val">grid</span>;
+  <span class="attr">grid-template-columns</span>: <span class="val">1fr</span>;       <span class="cmt">/* 1 col: mobile */</span>
+  <span class="attr">gap</span>: <span class="val">16px</span>;
+}
+
+@<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">640px</span>) {
+  <span class="prop">.grid</span> { <span class="attr">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; } <span class="cmt">/* tablet */</span>
+}
+
+@<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">1024px</span>) {
+  <span class="prop">.grid</span> { <span class="attr">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>; } <span class="cmt">/* desktop */</span>
+}
+
+<span class="cmt">/* ❌ DESKTOP-FIRST — harder to maintain */</span>
+<span class="prop">.grid</span> { <span class="attr">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>; }
+@<span class="kw">media</span> (<span class="attr">max-width</span>: <span class="val">1024px</span>) {
+  <span class="prop">.grid</span> { <span class="attr">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; }
+}
+@<span class="kw">media</span> (<span class="attr">max-width</span>: <span class="val">640px</span>) {
+  <span class="prop">.grid</span> { <span class="attr">grid-template-columns</span>: <span class="val">1fr</span>; }
+}</div>
+    </div>
+
+    <!-- TAB 2: Media Queries -->
+    <div id="m9-t2" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="📐 Media Query Syntax"
+        data-es="📐 Sintaxis de Media Queries">
+        📐 Media Query Syntax
+      </h4>
+      <div class="code-block"><span class="cmt">/* Basic syntax */</span>
+@<span class="kw">media</span> <span class="val">media-type</span> (<span class="val">feature</span>: <span class="val">value</span>) { <span class="cmt">/* CSS rules */</span> }
+
+<span class="cmt">/* Screen only (vs print) */</span>
+@<span class="kw">media</span> <span class="val">screen</span> <span class="kw">and</span> (<span class="attr">min-width</span>: <span class="val">768px</span>) { ... }
+
+<span class="cmt">/* OR condition */</span>
+@<span class="kw">media</span> (<span class="attr">max-width</span>: <span class="val">480px</span>), (<span class="attr">orientation</span>: <span class="val">portrait</span>) { ... }
+
+<span class="cmt">/* Combining min AND max */</span>
+@<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">640px</span>) <span class="kw">and</span> (<span class="attr">max-width</span>: <span class="val">1023px</span>) { ... }
+
+<span class="cmt">/* Dark mode preference */</span>
+@<span class="kw">media</span> (<span class="attr">prefers-color-scheme</span>: <span class="val">dark</span>) {
+  <span class="prop">body</span> { <span class="attr">background</span>: <span class="val">#0f172a</span>; <span class="attr">color</span>: <span class="val">#f8fafc</span>; }
+}
+
+<span class="cmt">/* Reduced motion — respect user preferences */</span>
+@<span class="kw">media</span> (<span class="attr">prefers-reduced-motion</span>: <span class="val">reduce</span>) {
+  <span class="prop">*</span> { <span class="attr">animation-duration</span>: <span class="val">0.01ms</span> <span class="val">!important</span>; }
+}
+
+<span class="cmt">/* Print styles */</span>
+@<span class="kw">media</span> <span class="val">print</span> {
+  <span class="prop">nav, footer, .ads</span> { <span class="attr">display</span>: <span class="val">none</span>; }
+}</div>
+    </div>
+
+    <!-- TAB 3: Fluid Layouts -->
+    <div id="m9-t3" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="💧 Fluid Typography &amp; Layout"
+        data-es="💧 Tipografía y Diseño Fluido">
+        💧 Fluid Typography &amp; Layout
+      </h4>
+      <div class="code-block"><span class="cmt">/* clamp(min, preferred, max) — fluid without media queries */</span>
+<span class="prop">h1</span> { <span class="attr">font-size</span>: <span class="val">clamp(1.8rem, 5vw, 3.5rem)</span>; }
+<span class="prop">p</span>  { <span class="attr">font-size</span>: <span class="val">clamp(1rem, 1.5vw, 1.25rem)</span>; }
+
+<span class="cmt">/* Fluid padding */</span>
+<span class="prop">.section</span> { <span class="attr">padding</span>: <span class="val">clamp(24px, 5vw, 80px)</span> <span class="val">clamp(16px, 4vw, 48px)</span>; }
+
+<span class="cmt">/* Auto-responsive grid — no media queries needed! */</span>
+<span class="prop">.auto-grid</span> {
+  <span class="attr">display</span>: <span class="val">grid</span>;
+  <span class="attr">grid-template-columns</span>: <span class="val">repeat(auto-fill, minmax(240px, 1fr))</span>;
+  <span class="attr">gap</span>: <span class="val">clamp(12px, 2vw, 24px)</span>;
+}
+
+<span class="cmt">/* Container with max-width */</span>
+<span class="prop">.container</span> {
+  <span class="attr">width</span>: <span class="val">min(100% - 48px, 1200px)</span>; <span class="cmt">/* never wider than 1200px */</span>
+  <span class="attr">margin-inline</span>: <span class="val">auto</span>;              <span class="cmt">/* centered */</span>
+}
+
+<span class="cmt">/* Responsive images */</span>
+<span class="prop">img</span> { <span class="attr">max-width</span>: <span class="val">100%</span>; <span class="attr">height</span>: <span class="val">auto</span>; }</div>
+    </div>
+
+    <!-- TAB 4: Responsive Nav -->
+    <div id="m9-t4" class="tab-panel" role="tabpanel">
+      <h4 style="color:var(--blue);margin-bottom:8px"
+        data-en="🧭 Responsive Navigation Pattern"
+        data-es="🧭 Patrón de Navegación Responsiva">
+        🧭 Responsive Navigation Pattern
+      </h4>
+      <div class="code-block"><span class="cmt">&lt;!-- HTML --&gt;</span>
+&lt;<span class="tag-name">nav</span> <span class="attr">class</span>=<span class="str">"navbar"</span>&gt;
+  &lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/"</span> <span class="attr">class</span>=<span class="str">"logo"</span>&gt;MyBrand&lt;/<span class="tag-name">a</span>&gt;
+  &lt;<span class="tag-name">button</span> <span class="attr">class</span>=<span class="str">"hamburger"</span> <span class="attr">aria-label</span>=<span class="str">"Toggle menu"</span>
+          <span class="attr">aria-expanded</span>=<span class="str">"false"</span> <span class="attr">onclick</span>=<span class="str">"toggleNav(this)"</span>&gt;☰&lt;/<span class="tag-name">button</span>&gt;
+  &lt;<span class="tag-name">ul</span> <span class="attr">class</span>=<span class="str">"nav-links"</span>&gt;
+    &lt;<span class="tag-name">li</span>&gt;&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/"</span>&gt;Home&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">li</span>&gt;
+    &lt;<span class="tag-name">li</span>&gt;&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/about"</span>&gt;About&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">li</span>&gt;
+    &lt;<span class="tag-name">li</span>&gt;&lt;<span class="tag-name">a</span> <span class="attr">href</span>=<span class="str">"/contact"</span>&gt;Contact&lt;/<span class="tag-name">a</span>&gt;&lt;/<span class="tag-name">li</span>&gt;
+  &lt;/<span class="tag-name">ul</span>&gt;
+&lt;/<span class="tag-name">nav</span>&gt;
+
+<span class="cmt">/* CSS */</span>
+<span class="prop">.hamburger</span> { <span class="attr">display</span>: <span class="val">block</span>; }   <span class="cmt">/* visible on mobile */</span>
+<span class="prop">.nav-links</span>  { <span class="attr">display</span>: <span class="val">none</span>; }    <span class="cmt">/* hidden on mobile */</span>
+<span class="prop">.nav-links.open</span> { <span class="attr">display</span>: <span class="val">flex</span>; <span class="attr">flex-direction</span>: <span class="val">column</span>; }
+
+@<span class="kw">media</span> (<span class="attr">min-width</span>: <span class="val">768px</span>) {
+  <span class="prop">.hamburger</span> { <span class="attr">display</span>: <span class="val">none</span>; }   <span class="cmt">/* hide on tablet+ */</span>
+  <span class="prop">.nav-links</span>  { <span class="attr">display</span>: <span class="val">flex</span>; <span class="attr">gap</span>: <span class="val">24px</span>; }
+}</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Testing -->
+  <div class="section-header">
+    <span class="section-icon">🔬</span>
+    <div>
+      <h3
+        data-en="Testing Responsive Layouts"
+        data-es="Prueba de Diseños Responsivos">
+        Testing Responsive Layouts
+      </h3>
+      <p
+        data-en="Use DevTools to simulate any device without a physical phone."
+        data-es="Usa las DevTools para simular cualquier dispositivo sin necesitar un teléfono físico.">
+        Use DevTools to simulate any device without a physical phone.
+      </p>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+      data-en="Browser DevTools — Device Emulator"
+      data-es="DevTools del Navegador — Emulador de Dispositivos">
+      Browser DevTools — Device Emulator
+    </h3>
+    <ul class="step-list">
+      <li
+        data-en="Press <strong>F12</strong> (or right-click → Inspect) to open DevTools."
+        data-es="Presiona <strong>F12</strong> (o clic derecho → Inspeccionar) para abrir DevTools.">
+        Press <strong>F12</strong> (or right-click → Inspect) to open DevTools.
+      </li>
+      <li
+        data-en="Click the <strong>Toggle Device Toolbar</strong> icon (📱) or press <kbd>Ctrl+Shift+M</kbd>."
+        data-es="Haz clic en el ícono de <strong>Alternar Barra de Dispositivos</strong> (📱) o presiona <kbd>Ctrl+Shift+M</kbd>.">
+        Click the <strong>Toggle Device Toolbar</strong> icon (📱) or press <kbd>Ctrl+Shift+M</kbd>.
+      </li>
+      <li
+        data-en="Select a preset device (iPhone, Pixel, iPad) or enter a custom width."
+        data-es="Selecciona un dispositivo preestablecido (iPhone, Pixel, iPad) o ingresa un ancho personalizado.">
+        Select a preset device (iPhone, Pixel, iPad) or enter a custom width.
+      </li>
+      <li
+        data-en="Drag the viewport edge to test different widths and find where your layout breaks."
+        data-es="Arrastra el borde del viewport para probar diferentes anchos y encontrar dónde se rompe tu diseño.">
+        Drag the viewport edge to test different widths and find where your layout breaks.
+      </li>
+    </ul>
+    <div class="info-box tip">
+      <span class="info-icon">💡</span>
+      <p
+        data-en="<strong>Progressive Enhancement:</strong> Start with a base experience that works everywhere, then add features for larger or more capable screens. This ensures everyone gets a functional site."
+        data-es="<strong>Mejora Progresiva:</strong> Comienza con una experiencia base que funcione en todas partes, luego añade funciones para pantallas más grandes o más capaces. Esto garantiza que todos accedan a un sitio funcional.">
+        <strong>Progressive Enhancement:</strong> Start with a base experience that works everywhere, then add features for larger screens.
+      </p>
+    </div>
+  </div>
+
+  <!-- SANDBOX -->
+  <div class="section-header">
+    <span class="section-icon">✏️</span>
+    <div>
+      <h3
+        data-en="Live Sandbox — Responsive Layout"
+        data-es="Laboratorio Interactivo — Diseño Responsivo">
+        Live Sandbox — Responsive Layout
+      </h3>
+      <p
+        data-en="Edit the CSS and resize the preview to see responsiveness in action."
+        data-es="Edita el CSS y redimensiona la vista previa para ver el diseño responsivo en acción.">
+        Edit the CSS and resize the preview to see responsiveness in action.
+      </p>
+    </div>
+  </div>
+
+  <div class="sandbox">
+    <h4
+      data-en="✏️ Responsive Grid — Try It!"
+      data-es="✏️ Cuadrícula Responsiva — ¡Pruébalo!">
+      ✏️ Responsive Grid — Try It!
+    </h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;">
+          <span class="ed-dot" style="background:#ff5f56"></span>
+          <span class="ed-dot" style="background:#ffbd2e"></span>
+          <span class="ed-dot" style="background:#27c93f"></span>
+          <span style="margin-left:8px">HTML</span>
+        </div>
+        <textarea class="sandbox-textarea" id="m9-html" rows="10" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">&lt;div class="container"&gt;
+  &lt;header class="site-header"&gt;
+    &lt;span class="logo"&gt;🌐 MySite&lt;/span&gt;
+    &lt;nav&gt;
+      &lt;a href="#"&gt;Home&lt;/a&gt;
+      &lt;a href="#"&gt;About&lt;/a&gt;
+      &lt;a href="#"&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;div class="cards"&gt;
+    &lt;div class="card"&gt;Card 1&lt;/div&gt;
+    &lt;div class="card"&gt;Card 2&lt;/div&gt;
+    &lt;div class="card"&gt;Card 3&lt;/div&gt;
+    &lt;div class="card"&gt;Card 4&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+      </div>
+      <div>
+        <div class="sandbox-editor-header" style="border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;">
+          <span class="ed-dot" style="background:#ff5f56"></span>
+          <span class="ed-dot" style="background:#ffbd2e"></span>
+          <span class="ed-dot" style="background:#27c93f"></span>
+          <span style="margin-left:8px">CSS</span>
+        </div>
+        <textarea class="sandbox-textarea" id="m9-css" rows="10" style="border:1px solid var(--border);border-radius:0 0 8px 8px;">* { box-sizing: border-box; margin: 0; }
+body { font-family: sans-serif; }
+.container { max-width: 900px; margin: auto; padding: 16px; }
+.site-header {
+  display: flex; justify-content: space-between;
+  align-items: center; background: #1e293b;
+  color: white; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px;
+}
+nav { display: flex; gap: 16px; }
+nav a { color: #94a3b8; text-decoration: none; }
+nav a:hover { color: white; }
+.logo { font-weight: 700; font-size: 1.1rem; }
+/* Mobile: 1 column */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.card {
+  background: #eff6ff; border: 2px solid #bfdbfe;
+  border-radius: 10px; padding: 32px;
+  text-align: center; font-weight: 700; color: #1d4ed8;
+}
+/* Tablet: 2 columns */
+@media (min-width: 600px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+/* Desktop: 4 columns */
+@media (min-width: 860px) {
+  .cards { grid-template-columns: repeat(4, 1fr); }
+}</textarea>
+      </div>
+    </div>
+    <div class="sandbox-actions" style="margin-top:12px;">
+      <button class="run-btn" onclick="cssPreview('m9-html','m9-css','m9-preview')"
+        data-en="▶ Preview" data-es="▶ Vista previa">▶ Preview</button>
+    </div>
+    <div class="preview-box" id="m9-preview">
+      <em style="color:var(--muted);font-size:.85rem"
+        data-en="Click ▶ Preview to render."
+        data-es="Haz clic en ▶ Vista previa para renderizar.">
+        Click ▶ Preview to render.
+      </em>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section-header">
+    <span class="section-icon">🧩</span>
+    <div>
+      <h3
+        data-en="Exercises &amp; Quiz"
+        data-es="Ejercicios y Cuestionario">
+        Exercises &amp; Quiz
+      </h3>
+      <p
+        data-en="Test your responsive design knowledge."
+        data-es="Pon a prueba tus conocimientos de diseño responsivo.">
+        Test your responsive design knowledge.
+      </p>
+    </div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+      data-en="Q1 — Which approach is recommended: mobile-first or desktop-first?"
+      data-es="P1 — ¿Qué enfoque se recomienda: mobile-first o desktop-first?">
+      Q1 — Which approach is recommended: mobile-first or desktop-first?
+    </h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m9q1" data-val="a"
+        onclick="checkMC('m9q1','a','b','Desktop-first uses max-width queries — you start large and try to compress, which is harder to maintain.')">
+        <span class="option-icon">○</span>
+        <span data-en="Desktop-first — start with the full layout" data-es="Desktop-first — empezar con el diseño completo">Desktop-first — start with the full layout</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m9q1" data-val="b"
+        onclick="checkMC('m9q1','b','b','Correct! Mobile-first uses min-width queries. You write base CSS for mobile, then layer on complexity for larger screens. It results in leaner, faster CSS.')">
+        <span class="option-icon">○</span>
+        <span data-en="Mobile-first — start small, scale up with min-width" data-es="Mobile-first — empezar pequeño, escalar con min-width">Mobile-first — start small, scale up with min-width</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m9q1" data-val="c"
+        onclick="checkMC('m9q1','c','b','Tablet-first is not a standard approach.')">
+        <span class="option-icon">○</span>
+        <span data-en="Tablet-first" data-es="Tablet-first">Tablet-first</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m9q1" data-val="d"
+        onclick="checkMC('m9q1','d','b','Print-first makes no sense for web layouts.')">
+        <span class="option-icon">○</span>
+        <span data-en="Print-first" data-es="Print-first">Print-first</span>
+      </button></li>
+    </ul>
+    <div id="m9q1-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+      data-en="Q2 — What does the viewport meta tag's &lt;code&gt;width=device-width&lt;/code&gt; do?"
+      data-es="P2 — ¿Qué hace &lt;code&gt;width=device-width&lt;/code&gt; en el meta tag viewport?">
+      Q2 — What does <code>width=device-width</code> in the viewport meta tag do?
+    </h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m9q2" data-val="a"
+        onclick="checkMC('m9q2','a','c','It does not set width to 100px.')">
+        <span class="option-icon">○</span>
+        <span data-en="Sets the page width to 100px" data-es="Establece el ancho de la página en 100px">Sets the page width to 100px</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m9q2" data-val="b"
+        onclick="checkMC('m9q2','b','c','It does not force a desktop layout.')">
+        <span class="option-icon">○</span>
+        <span data-en="Forces a desktop layout on all devices" data-es="Fuerza un diseño de escritorio en todos los dispositivos">Forces a desktop layout on all devices</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m9q2" data-val="c"
+        onclick="checkMC('m9q2','c','c','Correct! width=device-width tells the browser to use the actual screen width instead of a virtual 980px wide viewport that mobile browsers use by default.')">
+        <span class="option-icon">○</span>
+        <span data-en="Tells the browser to use the actual screen width as the viewport" data-es="Le indica al navegador que use el ancho real de la pantalla como viewport">Tells the browser to use the actual screen width as the viewport</span>
+      </button></li>
+      <li><button class="option-btn" data-q="m9q2" data-val="d"
+        onclick="checkMC('m9q2','d','c','It does not set font-size.')">
+        <span class="option-icon">○</span>
+        <span data-en="Sets the default font size" data-es="Establece el tamaño de fuente predeterminado">Sets the default font size</span>
+      </button></li>
+    </ul>
+    <div id="m9q2-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="quiz-card">
+    <h4
+      data-en="Q3 — Which CSS function creates a fluid value between a minimum and maximum based on viewport width — without media queries?"
+      data-es="P3 — ¿Qué función CSS crea un valor fluido entre un mínimo y un máximo según el ancho del viewport, sin necesitar media queries?">
+      Q3 — Which CSS function creates a fluid value between a minimum and maximum?
+    </h4>
+    <ul class="options-list">
+      <li><button class="option-btn" data-q="m9q3" data-val="a"
+        onclick="checkMC('m9q3','a','d','min() returns the smallest of its arguments — not a fluid range.')">
+        <span class="option-icon">○</span> min()
+      </button></li>
+      <li><button class="option-btn" data-q="m9q3" data-val="b"
+        onclick="checkMC('m9q3','b','d','max() returns the largest — not a fluid range.')">
+        <span class="option-icon">○</span> max()
+      </button></li>
+      <li><button class="option-btn" data-q="m9q3" data-val="c"
+        onclick="checkMC('m9q3','c','d','calc() performs math but does not clamp between min and max.')">
+        <span class="option-icon">○</span> calc()
+      </button></li>
+      <li><button class="option-btn" data-q="m9q3" data-val="d"
+        onclick="checkMC('m9q3','d','d','Correct! clamp(min, preferred, max) — e.g. clamp(1rem, 3vw, 2rem) — grows with the viewport but never exceeds the max or falls below the min.')">
+        <span class="option-icon">○</span> clamp()
+      </button></li>
+    </ul>
+    <div id="m9q3-feedback" class="feedback-box" role="alert"></div>
+  </div>
+
+  <div class="concept-card">
+    <h3
+      data-en="🧩 Fill-in Exercises"
+      data-es="🧩 Ejercicios para completar">
+      🧩 Fill-in Exercises
+    </h3>
+
+    <div class="fill-exercise">
+      <h4
+        data-en="Q4 — What CSS unit represents a percentage of the viewport WIDTH?"
+        data-es="P4 — ¿Qué unidad CSS representa un porcentaje del ANCHO del viewport?">
+        Q4 — What CSS unit represents a percentage of the viewport WIDTH?
+      </h4>
+      <div class="attempts-info" id="m9q4-att"
+        data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m9q4-in" placeholder="unit">
+      <button class="fill-btn"
+        onclick="checkFill('m9q4','vw','vw = viewport width. 1vw = 1% of the viewport width. Similarly vh = viewport height. Use them for full-width sections and fluid sizing.','Hint: it is 2 letters. v_ where _ stands for width.')"
+        data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m9q4-feedback" class="feedback-box" role="alert"></div>
+    </div>
+
+    <div class="fill-exercise">
+      <h4
+        data-en="Q5 — In mobile-first CSS, do you use min-width or max-width in media queries to scale UP to larger screens?"
+        data-es="P5 — En CSS mobile-first, ¿se usa min-width o max-width en las media queries para escalar a pantallas más grandes?">
+        Q5 — In mobile-first CSS, do you use <code>min-width</code> or <code>max-width</code>?
+      </h4>
+      <div class="attempts-info" id="m9q5-att"
+        data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m9q5-in" placeholder="min-width or max-width">
+      <button class="fill-btn"
+        onclick="checkFill('m9q5','min-width','min-width — in mobile-first, you write base CSS for small screens, then use @media (min-width: Xpx) to add styles for screens that are AT LEAST that wide (i.e., larger devices).','Hint: you are scaling UP, adding styles for screens that are at least a certain size.')"
+        data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m9q5-feedback" class="feedback-box" role="alert"></div>
+    </div>
+
+    <div class="fill-exercise">
+      <h4
+        data-en="Q6 — What grid value automatically creates as many columns as fit, each at least 200px wide?"
+        data-es="P6 — ¿Qué valor de grid crea automáticamente tantas columnas como quepan, cada una de al menos 200px?">
+        Q6 — What grid value creates columns automatically, each at least 200px?
+      </h4>
+      <div class="attempts-info" id="m9q6-att"
+        data-en="Attempts: 2" data-es="Intentos: 2">Attempts: 2</div>
+      <input class="fill-input" id="m9q6-in" placeholder="repeat(...)">
+      <button class="fill-btn"
+        onclick="checkFill('m9q6','repeat(auto-fill, minmax(200px, 1fr))','repeat(auto-fill, minmax(200px, 1fr)) is the most powerful responsive grid trick — no media queries needed! The browser creates as many columns as can fit, each between 200px and 1fr.','Hint: use repeat() with auto-fill and minmax().')"
+        data-en="Submit" data-es="Enviar">Submit</button>
+      <div id="m9q6-feedback" class="feedback-box" role="alert"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 20px;">
+    <a class="back-btn" href="../html-css-course/module08.html" style="margin-right:12px"
+      data-en="← Module 8" data-es="← Módulo 8">← Module 8</a>
+    <a class="back-btn" href="../html-css-course/module10.html"
+      style="background:var(--accent);color:#fff;border-color:var(--accent)"
+      data-en="Module 10 →" data-es="Módulo 10 →">Module 10 →</a>
+  </div>
+
+</div>
+</main>
+<script src="../js/shared.js"></script>
+</body>
+</html>
