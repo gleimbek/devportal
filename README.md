@@ -8,8 +8,7 @@ A bilingual (English / Spanish) web development learning portal offering structu
 
 ## 🚀 Live Demo
 
-<!-- Replace with your GitHub Pages URL -->
-[gleimbek.github.io/weblearn-academy](https://gleimbek.github.io/weblearn-academy)
+https://gleimbek.github.io/Devportal/
 
 ---
 
