@@ -2,14 +2,13 @@
 
 A bilingual (English / Spanish) web development learning portal offering structured courses, interactive exercises, module quizzes, and certification exams in HTML5, CSS3, and JavaScript.
 
-> Built as part of the **WebLearn Academy** educational ecosystem.
+> Built as part of the **Devportal** educational ecosystem.
 
 ---
 
 ## 🚀 Live Demo
 
-<!-- Replace with your GitHub Pages URL -->
-[gleimbek.github.io/weblearn-academy](https://gleimbek.github.io/weblearn-academy)
+(https://github.com/gleimbek/Devportal)
 
 ---
 
@@ -70,7 +69,7 @@ Students who score **80% or higher** on any final exam receive a downloadable ce
 
 ## 🏫 Context
 
-This platform was developed for use in a web development curriculum at the **College of Southern Nevada (CSN)**, supporting students from beginner to intermediate level.
+This platform was developed to support students from beginner to intermediate levels.
 
 ---
 
