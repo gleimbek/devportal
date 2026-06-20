@@ -8,7 +8,7 @@ A bilingual (English / Spanish) web development learning portal offering structu
 
 ## 🚀 Live Demo
 
-(https://github.com/gleimbek/Devportal)
+https://github.com/gleimbek/Devportal
 
 ---
 
